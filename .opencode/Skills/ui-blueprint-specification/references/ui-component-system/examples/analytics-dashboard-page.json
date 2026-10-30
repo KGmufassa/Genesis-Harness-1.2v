@@ -1,0 +1,39 @@
+{
+  "page_name": "Analytics Dashboard",
+  "primary_template": "analytics-platform",
+  "selected_extensions": ["analytics"],
+  "page_archetype": "analytics",
+  "navigation_pattern": "sidebar-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "dashboard-grid",
+    "rejected_patterns": [
+      {
+        "pattern": "data-table",
+        "reason": "tabular drilldown is secondary to metric overview and chart comparison"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "high",
+      "comparison_need": "medium",
+      "scan_behavior": "scan KPI cards, charts, date ranges, and anomaly panels",
+      "primary_user_task": "monitor metrics and investigate changes",
+      "record_count": "mixed",
+      "bulk_actions_required": false,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "page centers on metrics and chart panels",
+      "users need saved views, date filtering, and drilldowns"
+    ],
+    "source_refs": ["FEATURE-ANALYTICS", "WORKFLOW-METRIC-MONITORING"],
+    "responsive_transformation": {
+      "desktop": "multi-panel dashboard grid with date and saved-view controls",
+      "tablet": "two-column chart layout with prioritized KPI cards",
+      "mobile": "single-column metric cards and chart summaries with drilldown links"
+    }
+  },
+  "required_interactions": ["filtering", "search", "sorting", "notifications"],
+  "required_states": ["loading", "empty", "error", "success"],
+  "template_deviations": []
+}
+

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-6-output.schema.json",
+  "title": "Stage 6 Output",
+  "allOf": [{ "$ref": "stage-output-common.schema.json" }],
+  "properties": {
+    "visual_reference_validation_results": { "type": "array", "default": [] },
+    "visual_reference_compliance": { "type": "object", "default": {} },
+    "visual_drift_source": { "type": "string", "default": "" },
+    "workflow_evidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/workflow_evidence" },
+      "default": []
+    },
+    "dead_control_validation": {
+      "type": "object",
+      "properties": {
+        "checked": { "type": "boolean", "default": false },
+        "dead_controls_detected": { "type": "array", "default": [] },
+        "disabled_with_reason": { "type": "array", "default": [] },
+        "blocking": { "type": "boolean", "default": true }
+      },
+      "additionalProperties": true
+    },
+    "runtime_data_source_validation": {
+      "type": "object",
+      "properties": {
+        "checked": { "type": "boolean", "default": false },
+        "fixture_runtime_dependencies": { "type": "array", "default": [] },
+        "live_data_paths_verified": { "type": "array", "default": [] },
+        "blocking": { "type": "boolean", "default": true }
+      },
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "workflow_evidence": {
+      "type": "object",
+      "required": ["workflow_id", "status"],
+      "properties": {
+        "workflow_id": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "contract_only",
+            "api_exists_not_wired",
+            "ui_wired_not_validated",
+            "runtime_persistence_failed",
+            "runtime_persistence_verified",
+            "local_e2e_passed",
+            "staging_e2e_passed",
+            "deferred_with_approval",
+            "blocked"
+          ]
+        },
+        "ticket_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "route_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "ui_element_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "action_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "api_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "persistence_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "worker_or_service_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "verified_user_outcome": { "type": "string", "default": "" },
+        "evidence_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "approval_ref": { "type": "string", "default": "" },
+        "accepted_risk_ref": { "type": "string", "default": "" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

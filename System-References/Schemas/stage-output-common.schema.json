@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-output-common.schema.json",
+  "title": "Common Stage Output",
+  "type": "object",
+  "required": ["stage", "status", "completion_status", "stage_contract_profile", "guidance_policy", "schema_validation", "reference_integrity", "risk_acceptance_ledger", "revision_loops"],
+  "properties": {
+    "stage": { "type": "string" },
+    "status": { "type": "string" },
+    "completion_status": { "type": ["object", "string"] },
+    "stage_contract_profile": {
+      "type": "object",
+      "required": ["profile_id"],
+      "properties": {
+        "profile_id": { "type": "string" },
+        "requirements_checked": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "guidance_policy": {
+      "type": "object",
+      "required": ["complexity_level", "guidance_depth", "ask_threshold", "default_inference_allowed", "approval_required_for", "max_questions_per_turn"],
+      "properties": {
+        "complexity_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "guidance_depth": { "type": "string", "enum": ["minimal", "standard", "detailed", "exhaustive"] },
+        "ask_threshold": { "type": "string", "enum": ["only_blockers", "material_decisions", "important_tradeoffs", "all_uncertainties"] },
+        "default_inference_allowed": { "type": "boolean" },
+        "approval_required_for": { "type": "array" },
+        "max_questions_per_turn": { "type": "integer" }
+      },
+      "additionalProperties": true
+    },
+    "stage_2_handoff": { "type": "object" },
+    "stage_3_handoff": { "type": "object" },
+    "stage_4_handoff": { "type": "object" },
+    "stage_5_handoff": { "type": "object" },
+    "stage_6_handoff": { "type": "object" },
+    "stage_7_handoff": { "type": "object" },
+    "stage_8_handoff": { "type": "object" },
+    "prior_stage_feedback": { "type": "array" },
+    "complete_app_blueprint_markdown_path": { "type": "string" },
+    "selected_stack": {
+      "type": "object",
+      "properties": {
+        "stack_decision_id": { "type": "string" },
+        "frontend": { "type": "object" },
+        "backend": { "type": "object" },
+        "database": { "type": "object" },
+        "storage": { "type": "object" },
+        "authentication": { "type": "object" },
+        "hosting_and_deployment": { "type": "object" },
+        "testing_stack": { "type": "object" },
+        "package_manager": { "type": "string" },
+        "ai_and_external_services": { "type": "array" },
+        "rationale": { "type": "string" },
+        "stack_evaluation": {
+          "type": "object",
+          "properties": {
+            "overall_grade": { "type": "string", "enum": ["", "A", "B", "C", "D", "F"] },
+            "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "strength_grade": { "type": "string", "enum": ["", "A", "B", "C", "D", "F"] },
+            "strength_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "compatibility_grade": { "type": "string", "enum": ["", "A", "B", "C", "D", "F"] },
+            "compatibility_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "evaluated_against": { "type": "array" },
+            "strengths": { "type": "array" },
+            "weaknesses": { "type": "array" },
+            "decision": { "type": "string", "enum": ["", "proceed", "revise", "blocked"] }
+          },
+          "required": ["overall_grade", "overall_score", "strength_grade", "strength_score", "compatibility_grade", "compatibility_score", "evaluated_against", "strengths", "weaknesses", "decision"],
+          "additionalProperties": true
+        },
+        "component_rationales": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["component", "choice", "why_chosen", "app_fit", "tradeoffs"],
+            "properties": {
+              "component": { "type": "string" },
+              "choice": { "type": "string" },
+              "why_chosen": { "type": "string" },
+              "app_fit": { "type": "string" },
+              "tradeoffs": { "type": "array" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "rejected_alternatives": { "type": "array" },
+        "risks": { "type": "array" },
+        "stage_4_implications": { "type": "array" },
+        "stage_5_implications": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "stage_decision_brief": {
+      "type": "object",
+      "properties": {
+        "brief_id": { "type": "string" },
+        "stage": { "type": "string" },
+        "brief_path": { "type": "string" },
+        "recommended_direction": { "type": ["object", "string"] },
+        "stack_evaluation": {
+          "type": "object",
+          "properties": {
+            "overall_grade": { "type": "string" },
+            "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "strength_grade": { "type": "string" },
+            "strength_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "compatibility_grade": { "type": "string" },
+            "compatibility_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "evaluated_against": { "type": "array" },
+            "strengths": { "type": "array" },
+            "weaknesses": { "type": "array" },
+            "decision": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "component_rationales": { "type": "array" },
+        "alternatives_considered": { "type": "array" },
+        "key_decisions": { "type": "array" },
+        "assumptions": { "type": "array" },
+        "risks": { "type": "array" },
+        "downstream_impact": { "type": ["object", "array", "string"] },
+        "user_decision_required": { "type": "boolean" },
+        "approval_status": {
+          "type": "string",
+          "enum": ["pending", "approved", "revision_requested", "blocked"]
+        },
+        "approved_by": { "type": "string" },
+        "approved_at": { "type": "string" },
+        "revision_notes": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "source_trace": { "type": "array" },
+    "evidence_refs": { "type": "array" },
+    "schema_validation": { "type": "object" },
+    "reference_integrity": { "type": "object" },
+    "risk_acceptance_ledger": { "type": "object" },
+    "revision_loops": { "type": "array" },
+    "artifact_refs": { "type": "array" }
+  },
+  "additionalProperties": true
+}

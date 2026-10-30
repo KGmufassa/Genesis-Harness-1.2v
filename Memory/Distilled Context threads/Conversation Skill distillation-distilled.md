@@ -1,0 +1,560 @@
+# Distilled Conversation
+
+## Metadata
+
+**Source File**: Conversation Skill distillation.md
+**Processed**: 2026-07-12T17:29:33
+**Conversation Date**: 2026-07-12T17:26:49
+
+---
+
+## Conversation Summary
+
+## User
+
+I want to build a skill that scans the markdown files in the  [@Context Threads](file:///Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Memory/Context%20Threads/) folder. This folder will have the context from coversations consisting of changes made, errors, fixes and other information. I want to convert this info into a readable knowledge base what the agent can use a memory in so when a new converstion is created the agent can either start where we left without losing any context. Create a plan on how this skill should be generated.
+
+## Assistant
+
+---
+
+## State Changes
+
+- Line 1119:       "description": "Use this dynamic agent skill when code changes touch authentication, authorization, API routes, database access, user input, file uploads, payments, webhooks, secrets, AI endpoints, sensitive data, logging, or deployment configuration. It scans changed security surfaces, selects context-aware checks, ranks findings by severity, patches safe issues when permitted, and reports verification and residual risk.",
+- Line 3: description: Use this dynamic agent skill when code changes touch authentication, authorization, API routes, database access, user input, file uploads, payments, webhooks, secrets, AI endpoints, sensitive data, logging, or deployment configuration. It scans changed security surfaces, selects context-aware checks, ranks findings by severity, patches safe issues when permitted, and reports verification and residual risk.
+- Line 93: Adds dynamic security review behavior with changed-file scanning, contextual checks, severity reporting, permission-aware fixes, and updated registry routing metadata.
+- | `changelog.md` | Human-readable "what changed since last run" |
+- → update knowledge-index.json with new/changed/deleted entries
+- Anything that permanently changed.
+- Architecture updated
+- Workflow changed
+- Stack changed
+- ✔ processed-files.json updated
+- ✔ processing-log.md updated
+- File name changed but hash matches	Skip
+- | Filename changed, hash matches | Skip, log "SKIPPED: renamed" |
+- | State Changes | Lines matching `changed|updated|migrated|switched|replaced` |
+- | State Changes | `changed\|updated\|migrated\|switched\|replaced` |
+- 2. state_changes        → regex: changed|updated|migrated|switched|replaced
+- ### Updated File Structure
+- Updated. Output goes to `Memory/Distilled Context threads/`.
+- | State Changes | `changed\|updated\|migrated\|switched\|replaced` |
+- Updated paths:
+- "state_changes": grep(text, r"changed|updated|migrated|switched|replaced"),
+- ### Updated Pipeline (7 stages)
+- This is still plan mode - I should present the updated complete plan with Stage 7 added.
+- Updated plan with **Stage 7: Project State Synthesis**.
+- ### Updated 7-Stage Pipeline
+- ### Updated Skill Structure
+- ### Updated `run()` Signature
+- | State Changes | Regex: `changed\|updated\|migrated\|switched\|replaced` |
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- | `- We switched from Python to Go for performance reasons. This is a locked decision.` | Bullet list from regex matches, or `None captured` |
+- - We switched from Python to Go for performance reasons. This is a locked decision.` | Bullet list from regex matches, or `None captured` |
+- The template is being used but the template variables are not being replaced - the template file content is being output directly. This is because I'm using `str.format()` but the template has the template variables documented at the bottom, not the actual placeholders. Let me fix the template to use proper placeholders.
+- The template looks correct - it has the placeholders. The issue is that the load_template function is reading the file but there's an issue with how the placeholders are being replaced. Let me check the load_template function and the code in distill.py.
+- "state_changes": re.compile(r"(?i)\b(changed|updated|migrated|switched|replaced)\b"),
+- Actually no - `.format()` only replaces once. The issue is that there are `{source_filename}` in the markdown table that aren't meant to be replaced but are being replaced anyway. But they should be replaced with the same value...
+- Wait, let me test this. If the template has `{source_filename}` in two places, both should be replaced with the same value. So that's not the issue.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- Architecture: ['---', '# State Changes', '- We switched from Python to Go for performance reasons. This is a locked decision.']
+- Now I see the parsing logic. It only looks for `## ` headings and ignores lines starting with `#`. With the updated template, all sections use `## ` headings, but there are also `---` separator lines that will be added to the current section. I need to update the parser to skip `---` lines.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - - We switched from Python to Go for performance reasons. This is a locked decision.
+- - - We switched from Python to Go for performance reasons. This is a locked decision.
+- The architecture is now being captured. The stack is still not captured because the "switched from Python to Go" is in State Changes but the keyword matching in the synthesis is looking for "stack", "language", "framework", "database" - "switched" isn't matching. Let me also notice that the priorities and next steps have double bullets because the fmt function is adding bullets to items that already have bullets. Let me fix these issues.
+- State Changes: ['- We switched from Python to Go for performance reasons. This is a locked decision.']
+- Locked Decisions: ['- We decided to use microservices architecture. The team agreed this is the final decision.', '- We switched from Python to Go for performance reasons. This is a locked decision.']
+- 1. "Current Stack" - the state change "We switched from Python to Go" contains "switched" but the synthesis looks for "stack", "language", "framework", "database". "switched" isn't in those keywords. Need to add "switched" or "language" to the keywords.
+- 2. Stack detection: Need to add "switched" and "language" to the keywords.
+- if any(k in clean.lower() for k in ["stack", "language", "framework", "database", "switched", "go", "python", "rust", "node", "java"]):
+- if any(k in clean.lower() for k in ["stack", "language", "framework", "database", "switched", "go", "python", "rust", "node", "java"]):
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- 3. Project state was updated with both conversations
+- 6. Priorities and next steps updated from second conversation's locked decisions
+
+---
+
+## Locked Decisions
+
+- Locked Decisions
+- Final decisions only.
+- # Locked Decisions
+- | Locked Decisions | Final decisions only (no brainstorming) | LLM with "final/decided/locked" filter |
+- # Locked Decisions
+- # Locked Decisions
+- Now I have all the information needed to create a final, complete plan. Let me verify the folder exists and then present the final plan.
+- The folder exists but is empty. That's fine - the skill will handle empty directories gracefully. Now I have all the information needed to present the final plan.
+- Folder exists (currently empty). Final plan ready.
+- ## Final Plan: `distill-conversation-context` Skill
+- ## Final Plan: `distill-conversation-context` Skill
+- ## Final Plan: `distill-conversation-context` Skill
+- "locked_decisions": grep(text, r"decided|final|locked|approved"),
+- There should be a final pass that generates a "Current Project State" snapshot. Rather than simply listing extracted memories, it synthesizes the latest understanding:
+- The user wants to add a final synthesis pass that generates a "Current Project State" snapshot. This would be a Stage 7 that synthesizes all the distilled conversations into a unified project state.
+- - Ignore brainstorming; only use locked decisions and resolved problems
+- So the **final synthesized project state** ends up in `Memory/project-state.md`, authored by the agent, not the script.
+- We decided to use microservices architecture. The team agreed this is the final decision.
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- # Locked Decisions
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- | `- We switched from Python to Go for performance reasons. This is a locked decision.` | Bullet list from regex matches, or `None captured` |
+- | `- We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.` | Bullet list from regex matches, or `None captured` |
+- # Locked Decisions
+- "locked_decisions": re.compile(r"(?i)\b(decided|final|locked|approved)\b"),
+- for item in sec.get('Locked Decisions', []):
+- print(f'  Locked Decision: {item}')
+- if sec.get('Locked Decisions'):
+- merged['current_priorities'] = sec['Locked Decisions']
+- if sec.get('Locked Decisions'):
+- merged['next_recommended_steps'] = sec['Locked Decisions']
+- # Locked Decisions
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- # Locked Decisions
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- # Locked Decisions
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- Architecture: ['---', '# State Changes', '- We switched from Python to Go for performance reasons. This is a locked decision.']
+- # Locked Decisions
+- # Locked Decisions -> Architecture/Stack/Features
+- for item in sec.get("Locked Decisions", []):
+- if sec.get("Locked Decisions"):
+- merged["current_priorities"] = sec["Locked Decisions"]
+- if sec.get("Locked Decisions"):
+- merged["next_recommended_steps"] = sec["Locked Decisions"]
+- # Locked Decisions -> Architecture/Stack/Features
+- for item in sec.get("Locked Decisions", []):
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- ## Locked Decisions
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - - We decided to use microservices architecture. The team agreed this is the final decision.
+- - - We switched from Python to Go for performance reasons. This is a locked decision.
+- - - We decided to use microservices architecture. The team agreed this is the final decision.
+- - - We switched from Python to Go for performance reasons. This is a locked decision.
+- State Changes: ['- We switched from Python to Go for performance reasons. This is a locked decision.']
+- Locked Decisions: ['- We decided to use microservices architecture. The team agreed this is the final decision.', '- We switched from Python to Go for performance reasons. This is a locked decision.']
+- # Locked Decisions -> Architecture/Stack/Features
+- for item in sec.get("Locked Decisions", []):
+- if sec.get("Locked Decisions"):
+- merged["current_priorities"] = sec["Locked Decisions"]
+- if sec.get("Locked Decisions"):
+- merged["next_recommended_steps"] = sec["Locked Decisions"]
+- 1. Double bullet issue: The items in `sec.get("Locked Decisions")` etc. already have "- " prefix from the report generation. When we do `fmt("current_priorities")`, it adds another "- ". I need to strip the leading "- " from items when storing in merged.
+- # Locked Decisions -> Architecture/Stack/Features
+- for item in sec.get("Locked Decisions", []):
+- if sec.get("Locked Decisions"):
+- merged["current_priorities"] = [strip_bullet(x) for x in sec["Locked Decisions"]]
+- if sec.get("Locked Decisions"):
+- merged["next_recommended_steps"] = [strip_bullet(x) for x in sec["Locked Decisions"]]
+- We decided to use microservices architecture. The team agreed this is the final decision.
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - Current Architecture: extracted from Locked Decisions
+- - Current Stack: extracted from Locked Decisions
+- - Current Priorities: from Locked Decisions
+- - Next Recommended Steps: from Locked Decisions
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- ## Locked Decisions
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- The --no-synthesize flag works - no project-state.md or synthesis-prompt.md was created. Now let me run a final comprehensive test to make sure everything works together.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- ## Locked Decisions
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- We decided to use microservices architecture. The team agreed this is the final decision.
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- - We decided to use microservices architecture. The team agreed this is the final decision.
+- - We switched from Python to Go for performance reasons. This is a locked decision.
+- We decided to use JWT for authentication. Final decision.
+- ## Locked Decisions
+- - We decided to use JWT for authentication. Final decision.
+- We decided to use microservices architecture. The team agreed this is the final decision.
+- We switched from Python to Go for performance reasons. This is a locked decision.
+- - We decided to use JWT for authentication. Final decision.
+- - We decided to use JWT for authentication. Final decision.
+- 6. Priorities and next steps updated from second conversation's locked decisions
+- All tasks completed. Let me provide a final summary to the user.
+
+---
+
+## New Knowledge
+
+- | New Knowledge | Reusable discoveries (not opinions) | LLM + "learned/discovered/found that" |
+- | New Knowledge | Lines with `learned|discovered|found that|realized` |
+- | New Knowledge | `learned\|discovered\|found that\|realized` |
+- 4. new_knowledge        → regex: learned|discovered|found that|realized
+- | New Knowledge | `learned\|discovered\|found that\|realized` |
+- "new_knowledge": grep(text, r"learned|discovered|found that|realized"),
+- | New Knowledge | Regex: `learned\|discovered\|found that\|realized` |
+- We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- | `- We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.` | Bullet list from regex matches, or `None captured` |
+- "new_knowledge": re.compile(r"(?i)\b(learned|discovered|found that|realized)\b"),
+- Actually, I just realized - I need to check if the template path is correct. The code uses `REPORT_TEMPLATE_PATH` which is set in `run()`. Let me check the run function.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- New Knowledge: ['- We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.']
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- We learned that JWT tokens need refresh rotation.
+- - We learned that JWT tokens need refresh rotation.
+- - We learned that Redis caching improves response times significantly. Discovered that connection pooling is critical.
+- - We learned that JWT tokens need refresh rotation.
+
+---
+
+## Resolved Problems
+
+- | Resolved Problems | Blocks: `error|failed|issue` → `fixed|resolved|solved` | → | Resolved Problems | Blocks: `error|failed|issue` → `fixed|resolved|solved` |
+- | Resolved Problems | `error\|failed\|issue` → `fixed\|resolved\|solved` | → | Resolved Problems | `error\|failed\|issue` → `fixed\|resolved\|solved` |
+- | Repeated Mistakes | Duplicate error substrings (count ≥2) | → Fixed 10-section markdown (metadata + 9 categories) in `references/report-template.md`.
+- 5. resolved_problems    → paired: error/failed/issue → fixed/resolved/solved → 5. resolved_problems    → paired: error/failed/issue → fixed/resolved/solved
+- | Resolved Problems | `error\|failed\|issue` → `fixed\|resolved\|solved` | → | Resolved Problems | `error\|failed\|issue` → `fixed\|resolved\|solved` |
+- | Repeated Mistakes | Duplicate error substrings (count ≥2) | → Fixed 10-section markdown in `references/report-template.md`.
+- "resolved_problems": pair_grep(text, r"error|failed|issue", r"fixed|resolved|solved"), → "resolved_problems": pair_grep(text, r"error|failed|issue", r"fixed|resolved|solved"),
+- | Resolved Problems | Paired: `error\|failed\|issue` → `fixed\|resolved\|solved` | → | Resolved Problems | Paired: `error\|failed\|issue` → `fixed\|resolved\|solved` |
+- Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup. → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- | `- Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → | `- Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.` | Bullet list of problem→resolution pairs, or `None captured` | → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.` | Bullet list of problem→resolution pairs, or `None captured` |
+- "problem_indicators": re.compile(r"(?i)\b(error|failed|issue|bug|broken)\b"), → "resolution_indicators": re.compile(r"(?i)\b(fixed|resolved|solved|workaround)\b"),
+- The template.format() is being called correctly with the placeholders. But the issue is that the template file has curly braces in the "Template Variables" section at the bottom - those curly braces are confusing the .format() method because they're not placeholders in the same format. → Actually, looking more carefully at the output - it seems like the template isn't being found and something else is happening. Let me check if the template path is being resolved correctly.
+- - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup. → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup. → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup. → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- Resolved Problems: ['- Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.', '- Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.'] → Resolved Problems: ['- Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.', '- Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.']
+- - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup. → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size. → - Error: database connection timeout. Fixed by increasing pool size. → Error: database connection timeout. Fixed by increasing pool size.
+- - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup. → - Issue: memory leak in service. Resolved by adding proper cleanup. → Issue: memory leak in service. Resolved by adding proper cleanup.
+- Error: token expiry too short. Fixed by increasing to 24 hours. → Error: token expiry too short. Fixed by increasing to 24 hours.
+- - Error: token expiry too short. Fixed by increasing to 24 hours. → Error: token expiry too short. Fixed by increasing to 24 hours. → - Error: token expiry too short. Fixed by increasing to 24 hours. → Error: token expiry too short. Fixed by increasing to 24 hours.
+
+---
+
+## Repeated Mistakes
+
+- stop and surface an error if: (x2)
+- | resolved problems | `error\|failed\|issue` → `fixed\|resolved\|solved` | (x2)
+- | repeated mistakes | duplicate error substrings (count ≥2) | (x3)
+- - error: database connection timeout. fixed by increasing pool size. → error: da (x6)
+- - issue: memory leak in service. resolved by adding proper cleanup. → issue: mem (x7)
+- print('success' if 'test.md' in result else 'failed') (x2)
+
+---
+
+## User Preferences
+
+- Line 95: Infer standard behavior only when feature purpose and workflow context are clear.
+- Line 1317: Infer standard behavior only when feature purpose and workflow context are clear.
+- Line 115:     // This always runs on main thread
+- - **Skill Name**: `memory-context-scanner` (kebab-case per convention)
+- | User Preferences | Persistent preferences (format, stack, style) | LLM + "prefer/always/never" patterns |
+- | User Preferences | Lines with `prefer|always|never|standard|convention` |
+- | User Preferences | `prefer\|always\|never\|standard\|convention` |
+- 7. user_preferences     → regex: prefer|always|never|standard|convention
+- Returns empty list [] for categories with no matches (never None).
+- | User Preferences | `prefer\|always\|never\|standard\|convention` |
+- "user_preferences": grep(text, r"prefer|always|never|standard|convention"),
+- For each field, prefer the most recent non-empty value unless explicitly contradicted.
+- | 1 | `stage_inventory()` | Always |
+- | 2 | `stage_duplicate_prevention()` | Always |
+- For each field below, prefer the MOST RECENT non-empty value unless explicitly contradicted.
+- | User Preferences | Regex: `prefer\|always\|never\|standard\|convention` |
+- We prefer REST over GraphQL. Always use structured logging.
+- - We prefer REST over GraphQL. Always use structured logging.
+- | `- We prefer REST over GraphQL. Always use structured logging.` | Bullet list from regex matches, or `None captured` |
+- - Each section always appears (even if empty)
+- - Each section always appears (even if empty)
+- "user_preferences": re.compile(r"(?i)\b(prefer|always|never|standard|convention)\b"),
+- - Each section always appears (even if empty)
+- For each field below, prefer the most recent non-empty value unless explicitly contradicted later.
+- | active_features | Union, prefer recent mentions |
+- | deprecated_features | Union, prefer recent mentions |
+- - We prefer REST over GraphQL. Always use structured logging.
+- - We prefer REST over GraphQL. Always use structured logging.
+- - We prefer REST over GraphQL. Always use structured logging.
+- User Preferences: ['- We prefer REST over GraphQL. Always use structured logging.']
+- - We prefer REST over GraphQL. Always use structured logging.
+- - We prefer REST over GraphQL. Always use structured logging.
+- Prefer short-lived access tokens with refresh tokens.
+- - Prefer short-lived access tokens with refresh tokens.
+
+---
+
+## Important Entities
+
+- AuthService
+- UserModel
+
+---
+
+## Important Files
+
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/Global-workflow-state.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/Validation-state.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/UX-state.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/Risk-acceptance-ledger.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/Artifact-evidence-registry.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/Architecture-state.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Build-Plans/Build-status/Planning-state.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/AGENTS.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/skill-regisry/skill-registry.json
+- schema.json
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Global-Stage-Workflow-Contract.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-7-launch-operationalization-draft.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-2-architect.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/frontend-developer-agent-review.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Global-Stage-Readiness-Audit.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-1-8-A-Grade-Improvement-Patch-Plan.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-1-product-initialization-draft.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-2-command-skill-task-list.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-4-ux-interaction-architecture-draft.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-5-development-orchestration-draft.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-Architect.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Dynamic-Security-Review-Agent-Skill.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-Command-Skill-Diagnostic-Report.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-8-post-launch-evolution-draft.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-6-implementation-validation-draft.md
+- Report.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Docs/Stage-3-system-architecture-draft.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/plans/stage-4-button-route-granularity.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Misc/Design-Transcript.txt
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Misc/Ponytail-skill-tree.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/System-References/Misc/skill-tree.md
+- blueprint.md
+- example.md
+- design.txt
+- opencode/Skills/launch-readiness-validation/skill.md
+- opencode/Skills/product-synthesis/skill.md
+- opencode/Skills/feature-behavior-specification/skill.md
+- opencode/Skills/security-review/skill.md
+- opencode/Skills/integration-and-infrastructure-architecture/skill.md
+- opencode/Skills/validation-synthesis/skill.md
+- opencode/Skills/service-boundary-architecture/skill.md
+- opencode/Skills/operational-optimization/skill.md
+- opencode/Skills/user-journey-design/skill.md
+- opencode/Skills/engineering-dependency-planning/skill.md
+- opencode/Skills/monitoring-systems-planning/skill.md
+- opencode/Skills/data-and-api-architecture/skill.md
+- opencode/Skills/lazy-mode/skill.md
+- opencode/Skills/implementation-sequence-planning/skill.md
+- opencode/Skills/frontend-design/skill.md
+- opencode/Skills/frontend-design/references/accessibility-checklist.md
+- opencode/Skills/frontend-design/references/visual-directions.md
+- opencode/Skills/frontend-design/references/design-tokens.md
+- opencode/Skills/frontend-design/references/motion-guidelines.md
+- opencode/Skills/frontend-design/references/component-architecture.md
+- opencode/Skills/frontend-design/references/loading-and-transitions.md
+- opencode/Skills/frontend-design/references/layout-composition.md
+- opencode/Skills/frontend-design/references/responsive-implementation.md
+- opencode/Skills/frontend-design/references/responsive-behavior.md
+- opencode/Skills/frontend-design/references/production-ui-rules.md
+- opencode/Skills/frontend-design/references/state-management.md
+- opencode/Skills/frontend-design/references/responsive-surface-patterns.md
+- opencode/Skills/frontend-design/references/frontend-anti-patterns.md
+- opencode/Skills/frontend-design/references/implementation-modes.md
+- opencode/Skills/frontend-design/references/surface-types.md
+- opencode/Skills/frontend-design/references/component-patterns.md
+- opencode/Skills/frontend-design/references/layout-patterns.md
+- opencode/Skills/implementation-execution/skill.md
+- opencode/Skills/build-ticket-generation/skill.md
+- opencode/Skills/stage-4-ux-interaction-architecture/skill.md
+- opencode/Skills/repair-workflow/skill.md
+- opencode/Skills/development-roadmap-planning/skill.md
+- opencode/Skills/system-health-synthesis/skill.md
+- opencode/Skills/operational-tooling-planning/skill.md
+- opencode/Skills/stage-7-launch-operationalization/skill.md
+- opencode/Skills/dynamic-wireframe-mapper/skill.md
+- opencode/Skills/stage-8-post-launch-evolution/skill.md
+- opencode/Skills/technical-and-operational-validation/skill.md
+- opencode/Skills/ux-enforcement/skill.md
+- opencode/Skills/dynamic-wireframe-mapper/references/UX-full-flow-example.md
+- opencode/Skills/lazy-mode-audit/skill.md
+- opencode/Skills/market-and-competitive-validation/skill.md
+- opencode/Skills/design-system-foundation/skill.md
+- opencode/Skills/stage-summary/skill.md
+- opencode/Skills/dependency-and-risk-analysis/skill.md
+- opencode/Skills/assumption-analysis/skill.md
+- AGENTS.md
+- opencode/skills/stage-summary/skill.md
+- Build-Plans/Stage-N/Stage-N-summary.md
+- Stage-N-summary.md
+- opencode/Skills/stage-summary/scripts/generate_stage_summaries.py
+- opencode/skills/document-to-skill-package/skill.md
+- SKILL.md
+- backend-api-design.md
+- backend-architecture.md
+- opencode/skills/document-to-skill-package/scripts/convert_doc_to_skill.py
+- skill.md
+- generate_stage_summaries.py
+- test_generate_stage_summaries.py
+- -summary.md
+- opencode/Skills/backend-development/skill.md
+- references/backend-mindset.md
+- opencode/Skills/Mapping-Ux-flows/skill.md
+- opencode/Skills/swift-expert/references/memory-performance.md
+- opencode/Skills/backend-development/references/backend-debugging.md
+- opencode/Skills/backend-development/references/backend-technologies.md
+- opencode/Skills/backend-development/references/backend-authentication.md
+- opencode/Skills/backend-development/references/backend-mindset.md
+- opencode/Skills/backend-development/references/backend-devops.md
+- opencode/Skills/backend-development/references/backend-performance.md
+- opencode/Skills/ui-blueprint-specification/skill.md
+- opencode/Skills/swift-expert/skill.md
+- references/memory-performance.md
+- opencode/Skills/stage-1-product-initialization/skill.md
+- opencode/Skills/debugging-wizard/skill.md
+- opencode/Skills/debugging-wizard/references/common-patterns.md
+- opencode/Skills/swift-expert/references/async-concurrency.md
+- opencode/Skills/swift-expert/references/protocol-oriented.md
+- opencode/Skills/Wireframe-generator/skill.md
+- opencode/Skills/commit-summary/skill.md
+- opencode/Skills/systematic-debugger/references/root-cause-tracing.md
+- opencode/skills/skill-registry-builder/skill.md
+- System-References/skill-regisry/skill-registry.json
+- opencode/Skills/stage-summary/tests/test_generate_stage_summaries.py
+- plan.json
+- Stage-1-summary.md
+- artifacts/plan.json
+- Stage-2-summary.md
+- broken.json
+- Stage-3-summary.md
+- memory-config.json
+- knowledge-index.json
+- entities.json
+- changelog.md
+- agent-context.md
+- memory-schema.md
+- entity-extraction.md
+- embedding-config.md
+- scan_memory.py
+- parse_markdown.py
+- extract_entities.py
+- summarize_thread.py
+- build_embeddings.py
+- update_index.py
+- test_scan_memory.py
+- test_parse_markdown.py
+- test_incremental_update.py
+- Memory/Knowledge-Base/agent-context.md
+- conversation1.md
+- conversation2.md
+- conversation3.md
+- conversation1-distilled.md
+- conversation2-distilled.md
+- conversation3-distilled.md
+- processed-files.json
+- processing-log.md
+- 001.md
+- conversation001-distilled.md
+- roadmap.md
+- architecture.md
+- stage4.md
+- 001-distilled.md
+- 002-distilled.md
+- 31.md
+- Conversation31-distilled.md
+- project-state.md
+- conversationXXX-distilled.md
+- distilled-report-schema.md
+- processed-files-schema.json
+- extraction-rules.md
+- hash-algorithm.md
+- distill_conversations.py
+- inventory.py
+- registry.py
+- extract_context.py
+- generate_report.py
+- write_log.py
+- test_inventory.py
+- test_registry_incremental.py
+- test_extraction_categories.py
+- test_report_template.py
+- test_full_pipeline.py
+- -distilled.md
+- opencode/Skills/distill-conversation-context/scripts/distill_conversations.py
+- metadata/processed-files.json
+- consolidated-memory.json
+- report-template.md
+- distill.py
+- logs/processing-log.md
+- opencode/Skills/distill-conversation-context/scripts/distill.py
+- x.md
+- x-distilled.md
+- references/report-template.md
+- test_distill.py
+- archive/metadata/processed-files.json
+- archive/logs/processing-log.md
+- tests/test_distill.py
+- Memory/processed-files.json
+- Memory/processing-log.md
+- Memory/project-state.json
+- project-state.json
+- Memory/project-state.md
+- references/project-state-template.md
+- project-state-template.md
+- conversation-001-distilled.md
+- conversation-002-distilled.md
+- Memory/synthesis-prompt.md
+- conversation-001.md
+- conversation-002.md
+- synthesis-prompt.md
+- opencode/Skills/distill-conversation-context/skill.md
+- opencode/Skills/distill-conversation-context/references/report-template.md
+- opencode/Skills/distill-conversation-context/references/project-state-template.md
+- -context/skill.md
+- -template.md
+- -context/scripts/distill.py
+- archive/test-conversation.md
+- config.yaml
+- main.py
+- test-conversation.md
+- test-conversation-distilled.md
+- threads/test-conversation-distilled.md
+- test.md
+- threads/conversation-001-distilled.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Memory/project-state.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Memory/processing-log.md
+- /Users/wislemleger/Desktop/GitHub/Genesis-App-Building-Harness/Memory/processed-files.json
+- archive/conversation-002.md
+- threads/conversation-002-distilled.md

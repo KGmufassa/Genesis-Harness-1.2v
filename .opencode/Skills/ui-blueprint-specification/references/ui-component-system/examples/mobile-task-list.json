@@ -1,0 +1,43 @@
+{
+  "page_name": "Today",
+  "primary_template": "mobile-utility",
+  "selected_extensions": [],
+  "page_archetype": "primary-task",
+  "navigation_pattern": "bottom-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "content-list",
+    "rejected_patterns": [
+      {
+        "pattern": "data-table",
+        "reason": "mobile task completion needs compact sequential scanning, not dense column comparison"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "low",
+      "comparison_need": "low",
+      "scan_behavior": "quick scan and complete one task at a time",
+      "primary_user_task": "complete repeated mobile tasks",
+      "record_count": "moderate",
+      "bulk_actions_required": false,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "content-list supports one-handed mobile scanning",
+      "tasks share compact repeated structure"
+    ],
+    "source_refs": ["WORKFLOW-DAILY-TASKS"],
+    "responsive_transformation": {
+      "desktop": "centered list with optional detail side panel",
+      "tablet": "single-column list",
+      "mobile": "single-column touch-optimized list"
+    }
+  },
+  "component_family_decisions": [
+    {
+      "family": "actions",
+      "components": ["complete task checkbox", "task row action"]
+    }
+  ],
+  "template_deviations": []
+}
+

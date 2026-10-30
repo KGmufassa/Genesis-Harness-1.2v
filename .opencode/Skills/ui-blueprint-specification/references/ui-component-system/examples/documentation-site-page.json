@@ -1,0 +1,39 @@
+{
+  "page_name": "API Reference",
+  "primary_template": "documentation-site",
+  "selected_extensions": [],
+  "page_archetype": "detail",
+  "navigation_pattern": "sidebar-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "two-column",
+    "rejected_patterns": [
+      {
+        "pattern": "card-grid",
+        "reason": "documentation detail pages require linear reading and local navigation rather than visual browsing"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "high",
+      "comparison_need": "low",
+      "scan_behavior": "scan docs sidebar, section headings, code/reference blocks, and local table of contents",
+      "primary_user_task": "find and apply technical documentation",
+      "record_count": "many sections",
+      "bulk_actions_required": false,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "documentation pages need persistent navigation and readable content structure",
+      "users need search, breadcrumbs, and section-level scanning"
+    ],
+    "source_refs": ["FEATURE-DOCUMENTATION", "WORKFLOW-DOCS-DISCOVERY"],
+    "responsive_transformation": {
+      "desktop": "docs sidebar, content column, and local table of contents",
+      "tablet": "collapsible docs sidebar with content-first layout",
+      "mobile": "single-column content with drawer navigation and in-page jump links"
+    }
+  },
+  "required_interactions": ["search", "filtering"],
+  "required_states": ["loading", "empty", "error"],
+  "template_deviations": []
+}
+

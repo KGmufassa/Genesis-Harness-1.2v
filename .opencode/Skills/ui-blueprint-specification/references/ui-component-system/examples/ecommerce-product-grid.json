@@ -1,0 +1,47 @@
+{
+  "page_name": "Product Catalog",
+  "primary_template": "ecommerce-storefront",
+  "selected_extensions": [],
+  "page_archetype": "collection",
+  "navigation_pattern": "top-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "card-grid",
+    "rejected_patterns": [
+      {
+        "pattern": "data-table",
+        "reason": "product discovery depends on image recognition and summary browsing more than field comparison"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "medium",
+      "comparison_need": "medium",
+      "scan_behavior": "visual browsing by product image, title, price, and category",
+      "primary_user_task": "discover and open products",
+      "record_count": "many",
+      "bulk_actions_required": false,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "products are visually distinct",
+      "users browse before selecting a detail page"
+    ],
+    "source_refs": ["FEATURE-PRODUCT-CATALOG"],
+    "responsive_transformation": {
+      "desktop": "multi-column product card grid",
+      "tablet": "two-column card grid",
+      "mobile": "single-column or two-column compact grid"
+    }
+  },
+  "component_family_decisions": [
+    {
+      "family": "commerce",
+      "components": ["product card", "price display", "add-to-cart action"]
+    },
+    {
+      "family": "search-and-filtering",
+      "components": ["category filter", "sort control"]
+    }
+  ],
+  "template_deviations": []
+}
+

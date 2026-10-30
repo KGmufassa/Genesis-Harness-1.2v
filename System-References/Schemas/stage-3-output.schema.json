@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-3-output.schema.json",
+  "title": "Stage 3 Output",
+  "allOf": [{ "$ref": "stage-output-common.schema.json" }]
+}

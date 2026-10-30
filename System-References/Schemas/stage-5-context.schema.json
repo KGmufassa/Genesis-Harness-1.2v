@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-5-context.schema.json",
+  "title": "Stage 5 Context",
+  "type": "object",
+  "required": [
+    "format_version",
+    "artifact_id",
+    "artifact_type",
+    "stage",
+    "status",
+    "selected_stack",
+    "stage_contract_profile",
+    "guidance_policy",
+    "source_inputs",
+    "execution_decision_refs",
+    "assumptions",
+    "risks",
+    "unresolved_questions",
+    "reference_integrity",
+    "risk_acceptance",
+    "revision_loops"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "format_version": { "const": "2.0" },
+    "artifact_id": { "const": "ARTIFACT-S5-STAGE-CONTEXT" },
+    "artifact_type": { "const": "stage_context" },
+    "stage": { "const": "Stage 5" },
+    "status": { "type": "string", "default": "" },
+    "selected_stack": { "type": "object", "default": {} },
+    "stage_contract_profile": { "type": "object", "default": {} },
+    "guidance_policy": { "type": "object", "default": {} },
+    "source_inputs": {
+      "type": "object",
+      "required": ["stage_1", "stage_2", "stage_3", "stage_4"],
+      "properties": {
+        "stage_1": { "type": "array", "default": [] },
+        "stage_2": { "type": "array", "default": [] },
+        "stage_3": { "type": "array", "default": [] },
+        "stage_4": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "execution_decision_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "assumptions": { "type": "array", "default": [] },
+    "risks": { "type": "array", "default": [] },
+    "unresolved_questions": { "type": "array", "default": [] },
+    "reference_integrity": { "type": "object", "default": {} },
+    "risk_acceptance": { "type": "object", "default": {} },
+    "revision_loops": { "type": "array", "default": [] }
+  },
+  "additionalProperties": true
+}

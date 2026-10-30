@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-7-output.schema.json",
+  "title": "Stage 7 Output",
+  "allOf": [{ "$ref": "stage-output-common.schema.json" }],
+  "properties": {
+    "workflow_evidence_review": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean", "default": false },
+        "workflow_evidence_present": { "type": "boolean", "default": false },
+        "launch_critical_workflows_passed": { "type": "boolean", "default": false },
+        "missing_workflow_evidence": { "type": "array", "default": [] },
+        "accepted_workflow_risks": { "type": "array", "default": [] },
+        "blocking_workflow_gaps": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "workflow_evidence": {
+      "type": "array",
+      "items": { "$ref": "stage-6-output.schema.json#/$defs/workflow_evidence" },
+      "default": []
+    }
+  },
+  "additionalProperties": true
+}

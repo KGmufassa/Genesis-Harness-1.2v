@@ -1,0 +1,1733 @@
+{
+  "registry_version": "1.0.0",
+  "generated_for": "agent-task-builder",
+  "source_root": ".opencode/Skills",
+  "output_path": "System-References/skill-regisry/skill-registry.json",
+  "scope": {
+    "included_scope": "non-stage skills only",
+    "excluded_scope": "Stage 1 through Stage 8 command skills and stage-associated subskills",
+    "non_skill_artifacts_ignored": [
+      ".DS_Store"
+    ]
+  },
+  "rule_engine": {
+    "matching_fields": [
+      "skill_id",
+      "name",
+      "aliases",
+      "description",
+      "domains",
+      "capabilities",
+      "task_triggers",
+      "input_requirements",
+      "outputs",
+      "constraints",
+      "risk_flags",
+      "rule_engine_tags"
+    ],
+    "selection_strategy": "Match task intent against task_triggers first, then capabilities and domains. Use input_requirements and outputs to confirm fit. Prefer high-priority skills when multiple skills match the same implementation or validation task.",
+    "compatibility_notes": [
+      "Every included skill is represented as a rule-addressable object.",
+      "Inferred metadata is marked per skill.",
+      "Stage-associated skills are excluded from active agent-task-builder routing in this registry.",
+      "The registry preserves source paths so agents can load full skill instructions when selected."
+    ]
+  },
+  "statistics": {
+    "skills_scanned": 87,
+    "skills_included": 27,
+    "stage_associated_skills_excluded": 60,
+    "non_skill_artifacts_ignored": 1
+  },
+  "excluded_stage_skills": [
+    {
+      "folder": "agent-assignment-planning",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "ai-improvement-planning",
+      "reason": "Stage 8 subskill"
+    },
+    {
+      "folder": "analytics-framework-planning",
+      "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "architecture-synthesis",
+      "reason": "Stage 3 subskill"
+    },
+    {
+      "folder": "assumption-analysis",
+      "reason": "Stage 2 subskill"
+    },
+    {
+      "folder": "build-ticket-generation",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "business-and-scalability-validation",
+      "reason": "Stage 2 subskill"
+    },
+    {
+      "folder": "data-and-api-architecture",
+      "reason": "Stage 3 subskill"
+    },
+    {
+      "folder": "dependency-and-risk-analysis",
+      "reason": "Stage 1 subskill"
+    },
+    {
+      "folder": "deployment-framework-planning",
+      "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "design-system-foundation",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "development-orchestration-synthesis",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "development-roadmap-planning",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "engineering-dependency-planning",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "feature-behavior-specification",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "global-stage-readiness-audit",
+      "reason": "Global workflow audit skill"
+    },
+    {
+      "folder": "implementation-execution",
+      "reason": "Stage 6 subskill"
+    },
+    {
+      "folder": "implementation-sequence-planning",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "integration-and-infrastructure-architecture",
+      "reason": "Stage 3 subskill"
+    },
+    {
+      "folder": "interaction-architecture-design",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "launch-operationalization-synthesis",
+      "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "launch-readiness-validation",
+      "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "market-and-competitive-validation",
+      "reason": "Stage 2 subskill"
+    },
+    {
+      "folder": "monitoring-systems-planning",
+      "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "mvp-and-optimization",
+      "reason": "Stage 1 subskill"
+    },
+    {
+      "folder": "operational-optimization",
+      "reason": "Stage 8 subskill"
+    },
+    {
+      "folder": "operational-tooling-planning",
+      "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "parallel-execution-planning",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "post-launch-evolution-synthesis",
+      "reason": "Stage 8 subskill"
+    },
+    {
+      "folder": "product-intelligence",
+      "reason": "Stage 1 subskill"
+    },
+    {
+      "folder": "product-synthesis",
+      "reason": "Stage 1 subskill"
+    },
+    {
+      "folder": "regression-analysis",
+      "reason": "Stage 6 subskill"
+    },
+    {
+      "folder": "release-plan-orchestration",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "repair-workflow",
+      "reason": "Stage 6 subskill"
+    },
+    {
+      "folder": "roadmap-evolution-planning",
+      "reason": "Stage 8 subskill"
+    },
+    {
+      "folder": "scalability-evolution-planning",
+      "reason": "Stage 8 subskill"
+    },
+    {
+      "folder": "screen-system-design",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "security-and-scalability-architecture",
+      "reason": "Stage 3 subskill"
+    },
+    {
+      "folder": "service-boundary-architecture",
+      "reason": "Stage 3 subskill"
+    },
+    {
+      "folder": "stage-1-product-initialization",
+      "reason": "Stage 1 command skill"
+    },
+    {
+      "folder": "stage-2-research-and-validation",
+      "reason": "Stage 2 command skill"
+    },
+    {
+      "folder": "stage-3-system-architecture",
+      "reason": "Stage 3 command skill"
+    },
+    {
+      "folder": "stage-4-ux-interaction-architecture",
+      "reason": "Stage 4 command skill"
+    },
+    {
+      "folder": "stage-5-development-orchestration",
+      "reason": "Stage 5 command skill"
+    },
+    {
+      "folder": "stage-6-implementation-validation",
+      "reason": "Stage 6 command skill"
+    },
+    {
+      "folder": "stage-7-launch-operationalization",
+      "reason": "Stage 7 command skill"
+    },
+    {
+      "folder": "stage-8-post-launch-evolution",
+      "reason": "Stage 8 command skill"
+    },
+    {
+      "folder": "state-transition-and-accessibility-design",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "system-health-synthesis",
+      "reason": "Stage 6 subskill"
+    },
+    {
+      "folder": "system-topology-design",
+      "reason": "Stage 3 subskill"
+    },
+    {
+      "folder": "technical-and-operational-validation",
+      "reason": "Stage 2 subskill"
+    },
+    {
+      "folder": "telemetry-analysis",
+      "reason": "Stage 8 subskill"
+    },
+    {
+      "folder": "testing-strategy-planning",
+      "reason": "Stage 5 subskill"
+    },
+    {
+      "folder": "ui-architecture-template-selection",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "ui-blueprint-specification",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "user-journey-design",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "ux-interaction-synthesis",
+      "reason": "Stage 4 subskill"
+    },
+    {
+      "folder": "validation-execution",
+      "reason": "Stage 6 subskill"
+    },
+    {
+      "folder": "validation-synthesis",
+      "reason": "Stage 2 subskill"
+    },
+    {
+      "folder": "workflow-and-capability-synthesis",
+      "reason": "Stage 1 subskill"
+    }
+  ],
+  "skills": [
+    {
+      "skill_id": "Mapping-Ux-flows",
+      "name": "mapping-user-flow-progression",
+      "aliases": [
+        "Mapping-Ux-flows",
+        "mapping-user-flow-progression"
+      ],
+      "folder": "Mapping-Ux-flows",
+      "source_path": ".opencode/Skills/Mapping-Ux-flows/skill.md",
+      "stage_associated": false,
+      "description": "Maps detailed user experience progression and trigger-level interaction flows for an application. Use when defining page-by-page UX behavior, click triggers, state transitions, and navigation progression before implementation.",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "format findings",
+        "generate report"
+      ],
+      "task_triggers": [
+        "and navigation progression before implementation.",
+        "click triggers",
+        "define page progression",
+        "map user flows",
+        "maps detailed user experience progression and trigger-level interaction flows for an application. use when defining page-by-page ux behavior",
+        "state transitions"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "general",
+        "mapping-user-flow-progression"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "Test-driven-development",
+      "name": "test-driven-development",
+      "aliases": [
+        "Test-driven-development",
+        "test-driven-development"
+      ],
+      "folder": "Test-driven-development",
+      "source_path": ".opencode/Skills/Test-driven-development/skill.md",
+      "stage_associated": false,
+      "description": "Use when implementing any feature or bugfix, before writing implementation code",
+      "domains": [
+        "code quality"
+      ],
+      "capabilities": [
+        "process skill"
+      ],
+      "task_triggers": [
+        "Behavior changes",
+        "Bug fixes",
+        "Configuration files",
+        "Generated code",
+        "New features",
+        "Refactoring",
+        "Throwaway prototypes",
+        "before writing implementation code",
+        "debug error",
+        "find root cause",
+        "fix bug",
+        "use when implementing any feature or bugfix"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "findings"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/Test-driven-development/references/Testing-Anti-Patterns.md"
+      ],
+      "constraints": [
+        "You never saw it catch the bug",
+        "[ ] Tests use real code (mocks only if unavoidable)",
+        "Adding test-only methods to production classes"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "test-driven-development"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "Vibe-security",
+      "name": "vibe-security",
+      "aliases": [
+        "Vibe-security",
+        "vibe-security"
+      ],
+      "folder": "Vibe-security",
+      "source_path": ".opencode/Skills/Vibe-security/skill.md",
+      "stage_associated": false,
+      "description": "This skill helps Claude write secure web applications. Use this when working on any web application or when a user requests a scan or audit to ensure security best practices are followed.",
+      "domains": [
+        "code audit",
+        "code quality",
+        "documentation"
+      ],
+      "capabilities": [
+        "review code"
+      ],
+      "task_triggers": [
+        "audit codebase for bloat",
+        "document technology guidance",
+        "find vulnerabilities",
+        "find what to delete",
+        "list commands",
+        "research best practices",
+        "security review",
+        "show help card"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "Defense in depth: Never rely on a single security control",
+        "Input validation: Never trust user input, validate everything server-side",
+        "Each user must only access/modify their own data",
+        "Exception: Only use sequential IDs if explicitly requested by user",
+        "**Privilege Escalation**: Validate role changes server-side; never trust role info from client",
+        "`Strict`: Cookie never sent cross-site (best security)",
+        "**Token presence check**: CSRF validation must NOT depend on whether the token is present, always require it",
+        "**Subdomains**: CSRF tokens should be scoped because subdomain takeover can lead to CSRF",
+        "**GET requests with side effects**: Never perform state changes on GET",
+        "[ ] Secure and HttpOnly flags on session cookies",
+        "Only accept paths (e.g., `/dashboard`) not full URLs",
+        "Never MD5, SHA1, or plain SHA256",
+        "Only allow requests to pre-approved domains",
+        "Never rely on just one check",
+        "ORDER BY clauses (often overlooked—can't use parameters, must whitelist)",
+        "Table and column names (can't parameterize—must whitelist)",
+        "**Error handling**: Never expose SQL errors to users",
+        "[ ] Never use user input directly in file paths",
+        "[ ] Algorithm explicitly specified on verification (never trust token header)",
+        "[ ] Tokens stored in httpOnly cookies (not localStorage/sessionStorage)"
+      ],
+      "rule_engine_tags": [
+        "code audit",
+        "code quality",
+        "documentation",
+        "vibe-security"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "Wireframe-generator",
+      "name": "creating-dynamic-wireframes",
+      "aliases": [
+        "Wireframe-generator",
+        "creating-dynamic-wireframes"
+      ],
+      "folder": "Wireframe-generator",
+      "source_path": ".opencode/Skills/Wireframe-generator/skill.md",
+      "stage_associated": false,
+      "description": "Reads product documentation or PRD files and generates structured, low-fidelity wireframes with deterministic page architecture, state definitions, trigger mapping, and annotated ASCII layouts. Supports dynamic workflow detection and safe update mode.",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report"
+      ],
+      "task_triggers": [
+        "generate component graph",
+        "generate wireframes",
+        "map component dependencies",
+        "map pages from prd"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "creating-dynamic-wireframes",
+        "general"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "backend-development",
+      "name": "backend-development",
+      "aliases": [
+        "backend-development"
+      ],
+      "folder": "backend-development",
+      "source_path": ".opencode/Skills/backend-development/skill.md",
+      "stage_associated": false,
+      "description": "Backend engineering guidance for designing, implementing, reviewing, debugging, securing, scaling, testing, or operating server-side systems. Use for backend API contracts, service architecture, authentication and authorization, security hardening, performance, technology selection, test strategy, deployment, observability, production debugging, and maintainability work.",
+      "domains": [
+        "code review",
+        "documentation"
+      ],
+      "capabilities": [
+        "generate report",
+        "review code"
+      ],
+      "task_triggers": [
+        "debug error",
+        "document technology guidance",
+        "find root cause",
+        "find unnecessary complexity",
+        "find vulnerabilities",
+        "fix bug",
+        "research best practices",
+        "review for over-engineering",
+        "security review"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card",
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/backend-development/references/backend-api-design.md",
+        ".opencode/Skills/backend-development/references/backend-api-graphql.md",
+        ".opencode/Skills/backend-development/references/backend-api-grpc.md",
+        ".opencode/Skills/backend-development/references/backend-api-rest.md",
+        ".opencode/Skills/backend-development/references/backend-architecture-events.md",
+        ".opencode/Skills/backend-development/references/backend-architecture-scaling.md",
+        ".opencode/Skills/backend-development/references/backend-architecture-services.md",
+        ".opencode/Skills/backend-development/references/backend-architecture.md",
+        ".opencode/Skills/backend-development/references/backend-authentication.md",
+        ".opencode/Skills/backend-development/references/backend-code-patterns.md",
+        ".opencode/Skills/backend-development/references/backend-code-practices.md",
+        ".opencode/Skills/backend-development/references/backend-code-principles.md",
+        ".opencode/Skills/backend-development/references/backend-code-quality.md",
+        ".opencode/Skills/backend-development/references/backend-debugging.md",
+        ".opencode/Skills/backend-development/references/backend-devops.md",
+        ".opencode/Skills/backend-development/references/backend-maintenance.md",
+        ".opencode/Skills/backend-development/references/backend-mindset.md",
+        ".opencode/Skills/backend-development/references/backend-performance.md",
+        ".opencode/Skills/backend-development/references/backend-security.md",
+        ".opencode/Skills/backend-development/references/backend-technologies.md",
+        ".opencode/Skills/backend-development/references/backend-testing.md"
+      ],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "backend-development",
+        "code review",
+        "documentation"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "change-intake-router",
+      "name": "change-intake-router",
+      "aliases": [
+        "change-intake-router"
+      ],
+      "folder": "change-intake-router",
+      "source_path": ".opencode/Skills/change-intake-router/skill.md",
+      "stage_associated": false,
+      "description": "Route approved-product changes to the earliest affected Genesis stage, create compact CHANGE records after approval, enforce single-writer ID locks, and audit scoped changes before merge.",
+      "domains": [
+        "code audit"
+      ],
+      "capabilities": [
+        "generate report"
+      ],
+      "task_triggers": [
+        "audit codebase for bloat",
+        "find what to delete"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "distinguish an active-stage refinement from a change to approved scope",
+        "create one compact change record only after approval"
+      ],
+      "rule_engine_tags": [
+        "change-intake-router",
+        "code audit"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "commit-summary",
+      "name": "commit-summary",
+      "aliases": [
+        "commit-summary"
+      ],
+      "folder": "commit-summary",
+      "source_path": ".opencode/Skills/commit-summary/skill.md",
+      "stage_associated": false,
+      "description": "Creates a concise commit title and brief 20-30 word description summarizing codebase changes from git diff, git status, changed files, or user-provided change notes.",
+      "domains": [
+        "code quality",
+        "code review"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "format findings",
+        "generate report"
+      ],
+      "task_triggers": [
+        "a commit summary",
+        "a commit title",
+        "a short commit description",
+        "a title and 20-30 word description of codebase changes",
+        "create commit summary",
+        "release-style summary from current changes",
+        "write commit message"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "code review",
+        "commit-summary"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "debugging-wizard",
+      "name": "debugging-wizard",
+      "aliases": [
+        "debugging-wizard"
+      ],
+      "folder": "debugging-wizard",
+      "source_path": ".opencode/Skills/debugging-wizard/skill.md",
+      "stage_associated": false,
+      "description": "Parses error messages, traces execution flow through stack traces, correlates log entries to identify failure points, and applies systematic hypothesis-driven methodology to isolate and resolve bugs. Use when investigating errors, analyzing stack traces, finding root causes of unexpected behavior, troubleshooting crashes, or performing log analysis, error investigation, or root cause analysis.",
+      "domains": [
+        "documentation"
+      ],
+      "capabilities": [
+        "generate report"
+      ],
+      "task_triggers": [
+        "analyzing stack traces",
+        "and applies systematic hypothesis-driven methodology to isolate and resolve bugs. use when investigating errors",
+        "correlates log entries to identify failure points",
+        "debug error",
+        "document technology guidance",
+        "error investigation",
+        "find root cause",
+        "finding root causes of unexpected behavior",
+        "fix bug",
+        "or performing log analysis",
+        "or root cause analysis.",
+        "output-format: analysis",
+        "parses error messages",
+        "research best practices",
+        "role: specialist",
+        "scope: analysis",
+        "traces execution flow through stack traces",
+        "troubleshooting crashes"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card",
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/debugging-wizard/references/common-patterns.md",
+        ".opencode/Skills/debugging-wizard/references/debugging-tools.md",
+        ".opencode/Skills/debugging-wizard/references/quick-fixes.md",
+        ".opencode/Skills/debugging-wizard/references/strategies.md",
+        ".opencode/Skills/debugging-wizard/references/systematic-debugging.md"
+      ],
+      "constraints": [
+        "scope: analysis"
+      ],
+      "rule_engine_tags": [
+        "debugging-wizard",
+        "documentation"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "defined-best-practices",
+      "name": "researching-tech-stack-best-practices",
+      "aliases": [
+        "defined-best-practices",
+        "researching-tech-stack-best-practices"
+      ],
+      "folder": "defined-best-practices",
+      "source_path": ".opencode/Skills/defined-best-practices/skill.md",
+      "stage_associated": false,
+      "description": "Reads stack-definition.md, extracts each technology in the stack, researches best practices using an MCP server (e.g., Context7), and generates structured best-practice documentation per technology.",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "generate report"
+      ],
+      "task_triggers": [
+        "document technology guidance",
+        "research best practices"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "The file `Tech-Stack-Decision-Plan.md` must exist."
+      ],
+      "rule_engine_tags": [
+        "general",
+        "researching-tech-stack-best-practices"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "distill-conversation-context",
+      "name": "distill-conversation-context",
+      "aliases": [
+        "distill-conversation-context"
+      ],
+      "folder": "distill-conversation-context",
+      "source_path": ".opencode/Skills/distill-conversation-context/skill.md",
+      "stage_associated": false,
+      "description": "Converts archived AI conversations into structured distilled reports with duplicate prevention via content hashing, then synthesizes project state using a reusable prompt template.",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report",
+        "tag findings"
+      ],
+      "task_triggers": [
+        "You have raw conversation files in `Memory/Context Thread archive/`",
+        "You need a synthesized project state for agent onboarding",
+        "You want deduplicated, structured summaries of each conversation",
+        "You want to prevent re-processing unchanged files"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/distill-conversation-context/references/project-state-template.md",
+        ".opencode/Skills/distill-conversation-context/references/report-template.md",
+        ".opencode/Skills/distill-conversation-context/references/synthesis-prompt.md"
+      ],
+      "constraints": [
+        "Only new/changed files produced distilled reports"
+      ],
+      "rule_engine_tags": [
+        "distill-conversation-context",
+        "general"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "document-to-skill-package",
+      "name": "document-to-skill-package",
+      "aliases": [
+        "document-to-skill-package"
+      ],
+      "folder": "document-to-skill-package",
+      "source_path": ".opencode/Skills/document-to-skill-package/skill.md",
+      "stage_associated": false,
+      "description": "Use when converting a structured markdown document plus a mapping file into a Codex skill package under .opencode/skills. Creates SKILL.md and mapped reference files by splitting the source document on top-level headings in deterministic order.",
+      "domains": [
+        "code quality",
+        "documentation"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "format findings",
+        "generate report"
+      ],
+      "task_triggers": [
+        "Mapping file path",
+        "Remaining top-level sections map in order to the mapped reference files.",
+        "Source markdown document path",
+        "Target skill root, usually `.opencode/skills`",
+        "The first top-level section becomes the content basis for `SKILL.md`.",
+        "The source document uses top-level markdown headings (`# `) as section boundaries.",
+        "The split should be deterministic and based on document structure, not freeform rewriting.",
+        "The user has a mapping file that defines the target skill folder and reference file names.",
+        "The user has a source markdown document containing multiple top-level sections.",
+        "The user wants the content separated into a real skill package under `.opencode/skills/`.",
+        "list commands",
+        "show help card",
+        "use when converting a structured markdown document plus a mapping file into a codex skill package under .opencode/skills. creates skill.md and mapped reference files by splitting the source document on top-level headings in deterministic order."
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "document-to-skill-package",
+        "documentation"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "dynamic-wireframe-mapper",
+      "name": "dynamic-wireframe-mapper",
+      "aliases": [
+        "dynamic-wireframe-mapper"
+      ],
+      "folder": "dynamic-wireframe-mapper",
+      "source_path": ".opencode/Skills/dynamic-wireframe-mapper/skill.md",
+      "stage_associated": false,
+      "description": "|",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "format findings",
+        "generate report"
+      ],
+      "task_triggers": [
+        "Creating wireframe-style system diagrams",
+        "Data flow points:",
+        "Mapping UI interactions before development",
+        "Understanding dependencies between components",
+        "Visualizing system behavior from documentation",
+        "destination: /docs/frontend/references/wireframes.md",
+        "format: markdown",
+        "generate component graph",
+        "generate wireframes",
+        "map component dependencies",
+        "map pages from prd"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/dynamic-wireframe-mapper/references/Component-Build-Structure-example.md",
+        ".opencode/Skills/dynamic-wireframe-mapper/references/UX-full-flow-example.md"
+      ],
+      "constraints": [
+        "ONLY include relationships supported by the document",
+        "Output must be saved to `/docs/wireframes`"
+      ],
+      "rule_engine_tags": [
+        "dynamic-wireframe-mapper",
+        "general"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "frontend-design",
+      "name": "frontend-design",
+      "aliases": [
+        "frontend-design"
+      ],
+      "folder": "frontend-design",
+      "source_path": ".opencode/Skills/frontend-design/skill.md",
+      "stage_associated": false,
+      "description": "Create distinctive, production-grade frontend interfaces with a clear aesthetic direction and high design quality. Routes layout, token systems, responsive behavior, motion, anti-pattern avoidance, and stack-specific implementation across a wide range of app surface types.",
+      "domains": [
+        "code quality",
+        "documentation"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report"
+      ],
+      "task_triggers": [
+        "PRD-to-page architecture planning",
+        "adding interaction polish or motion",
+        "applying or correcting a design system",
+        "build frontend",
+        "building UI components, pages, or full interfaces",
+        "creating landing pages, dashboards, app shells, workspaces, or settings surfaces",
+        "design user interface",
+        "document technology guidance",
+        "full user-flow mapping",
+        "improving or redesigning an existing frontend",
+        "making responsive layout decisions",
+        "research best practices",
+        "wireframing before the product surface is known"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card",
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/frontend-design/references/accessibility-checklist.md",
+        ".opencode/Skills/frontend-design/references/component-architecture.md",
+        ".opencode/Skills/frontend-design/references/component-patterns.md",
+        ".opencode/Skills/frontend-design/references/design-tokens.md",
+        ".opencode/Skills/frontend-design/references/frontend-anti-patterns.md",
+        ".opencode/Skills/frontend-design/references/implementation-modes.md",
+        ".opencode/Skills/frontend-design/references/layout-composition.md",
+        ".opencode/Skills/frontend-design/references/layout-patterns.md",
+        ".opencode/Skills/frontend-design/references/loading-and-transitions.md",
+        ".opencode/Skills/frontend-design/references/motion-guidelines.md",
+        ".opencode/Skills/frontend-design/references/production-ui-rules.md",
+        ".opencode/Skills/frontend-design/references/responsive-behavior.md",
+        ".opencode/Skills/frontend-design/references/responsive-implementation.md",
+        ".opencode/Skills/frontend-design/references/responsive-surface-patterns.md",
+        ".opencode/Skills/frontend-design/references/state-management.md",
+        ".opencode/Skills/frontend-design/references/surface-types.md",
+        ".opencode/Skills/frontend-design/references/visual-directions.md"
+      ],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "documentation",
+        "frontend-design"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "lazy-mode",
+      "name": "lazy-mode",
+      "aliases": [
+        "lazy-mode"
+      ],
+      "folder": "lazy-mode",
+      "source_path": ".opencode/Skills/lazy-mode/skill.md",
+      "stage_associated": false,
+      "description": "",
+      "domains": [
+        "code efficiency"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "follow decision ladder",
+        "generate report"
+      ],
+      "task_triggers": [
+        "apply lazy mode",
+        "reduce complexity",
+        "write simpler code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "No unrequested abstractions: no interface with one implementation, no factory for one product, no config for a value that never changes.",
+        "Fewest files possible. Shortest working diff wins — but only once you understand the problem. The smallest change in the wrong place isn't lazy, it's a second bug.",
+        "Complex request? Ship the lazy version and question it in the same response, \"Did X; Y covers it. Need full X? Say so.\" Never stall on an answer you can default."
+      ],
+      "rule_engine_tags": [
+        "code efficiency",
+        "lazy-mode"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "lazy-mode-audit",
+      "name": "lazy-mode-audit",
+      "aliases": [
+        "lazy-mode-audit"
+      ],
+      "folder": "lazy-mode-audit",
+      "source_path": ".opencode/Skills/lazy-mode-audit/skill.md",
+      "stage_associated": false,
+      "description": "",
+      "domains": [
+        "code audit",
+        "code efficiency"
+      ],
+      "capabilities": [
+        "generate report",
+        "identify patterns",
+        "tag findings"
+      ],
+      "task_triggers": [
+        "apply lazy mode",
+        "audit codebase for bloat",
+        "find what to delete",
+        "reduce complexity",
+        "write simpler code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code audit",
+        "code efficiency",
+        "lazy-mode-audit"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "lazy-mode-debt",
+      "name": "lazy-mode-debt",
+      "aliases": [
+        "lazy-mode-debt"
+      ],
+      "folder": "lazy-mode-debt",
+      "source_path": ".opencode/Skills/lazy-mode-debt/skill.md",
+      "stage_associated": false,
+      "description": "",
+      "domains": [
+        "code efficiency",
+        "technical debt"
+      ],
+      "capabilities": [
+        "generate report",
+        "scan codebase"
+      ],
+      "task_triggers": [
+        "apply lazy mode",
+        "harvest debt markers",
+        "list shortcuts",
+        "reduce complexity",
+        "track deferrals",
+        "write simpler code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code efficiency",
+        "lazy-mode-debt",
+        "technical debt"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "lazy-mode-gain",
+      "name": "lazy-mode-gain",
+      "aliases": [
+        "lazy-mode-gain"
+      ],
+      "folder": "lazy-mode-gain",
+      "source_path": ".opencode/Skills/lazy-mode-gain/skill.md",
+      "stage_associated": false,
+      "description": "",
+      "domains": [
+        "code efficiency",
+        "metrics"
+      ],
+      "capabilities": [
+        "score results"
+      ],
+      "task_triggers": [
+        "apply lazy mode",
+        "display scoreboard",
+        "reduce complexity",
+        "show lazy-mode impact",
+        "write simpler code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "scoreboard display"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code efficiency",
+        "lazy-mode-gain",
+        "metrics"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "lazy-mode-help",
+      "name": "lazy-mode-help",
+      "aliases": [
+        "lazy-mode-help"
+      ],
+      "folder": "lazy-mode-help",
+      "source_path": ".opencode/Skills/lazy-mode-help/skill.md",
+      "stage_associated": false,
+      "description": "",
+      "domains": [
+        "code efficiency",
+        "documentation"
+      ],
+      "capabilities": [
+        "process skill"
+      ],
+      "task_triggers": [
+        "apply lazy mode",
+        "list commands",
+        "reduce complexity",
+        "show help card",
+        "write simpler code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code efficiency",
+        "documentation",
+        "lazy-mode-help"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "lazy-mode-review",
+      "name": "lazy-mode-review",
+      "aliases": [
+        "lazy-mode-review"
+      ],
+      "folder": "lazy-mode-review",
+      "source_path": ".opencode/Skills/lazy-mode-review/skill.md",
+      "stage_associated": false,
+      "description": "",
+      "domains": [
+        "code efficiency",
+        "code review"
+      ],
+      "capabilities": [
+        "format findings"
+      ],
+      "task_triggers": [
+        "apply lazy mode",
+        "find unnecessary complexity",
+        "reduce complexity",
+        "review for over-engineering",
+        "write simpler code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "findings"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code efficiency",
+        "code review",
+        "lazy-mode-review"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "security-review",
+      "name": "security-review",
+      "aliases": [
+        "security-review"
+      ],
+      "folder": "security-review",
+      "source_path": ".opencode/Skills/security-review/skill.md",
+      "stage_associated": false,
+      "description": "Use this dynamic agent skill when code changes touch authentication, authorization, API routes, database access, user input, file uploads, payments, webhooks, secrets, AI endpoints, sensitive data, logging, or deployment configuration. It scans changed security surfaces, selects context-aware checks, ranks findings by severity, patches safe issues when permitted, and reports verification and residual risk.",
+      "domains": [
+        "code quality",
+        "code review"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "format findings",
+        "generate report"
+      ],
+      "task_triggers": [
+        "AI endpoints",
+        "API routes",
+        "admin features",
+        "authentication",
+        "authorization",
+        "cookies",
+        "database reads or writes",
+        "deployment configuration",
+        "environment variables",
+        "file uploads",
+        "find unnecessary complexity",
+        "find vulnerabilities",
+        "logging or error handling",
+        "payments",
+        "review for over-engineering",
+        "secrets",
+        "security review",
+        "sensitive user data",
+        "server actions",
+        "sessions",
+        "third-party APIs",
+        "user input",
+        "webhooks"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "code review",
+        "security-review"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "skill-registry-builder",
+      "name": "skill-registry-builder",
+      "aliases": [
+        "skill-registry-builder"
+      ],
+      "folder": "skill-registry-builder",
+      "source_path": ".opencode/Skills/skill-registry-builder/skill.md",
+      "stage_associated": false,
+      "description": "Scans non-stage skills in .opencode/Skills, extracts structured metadata, infers missing capability data, and generates a standardized JSON registry optimized for agent-task-builder and rule-engine compatibility.",
+      "domains": [
+        "code quality"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report",
+        "scan codebase"
+      ],
+      "task_triggers": [
+        "\"Outputs\" sections to infer output types",
+        "\"Required inputs\" and examples to infer input requirements",
+        "constraints and prohibited actions to infer risk flags",
+        "every included skill has rule-engine tags",
+        "input requirements",
+        "output path exists",
+        "output types",
+        "references and scripts to infer dependencies",
+        "registry JSON is valid",
+        "risk flags",
+        "rule-engine tags"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "skill-registry-builder"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "stage-summary",
+      "name": "stage-summary",
+      "aliases": [
+        "stage-summary"
+      ],
+      "folder": "stage-summary",
+      "source_path": ".opencode/Skills/stage-summary/skill.md",
+      "stage_associated": false,
+      "description": "Generate local Stage 5-8 markdown assessment summaries from canonical stage JSON outputs.",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report",
+        "review code",
+        "tag findings"
+      ],
+      "task_triggers": [
+        "A Stage 5-8 command is assembling final outputs for ready, blocked, or",
+        "The summary must be deterministic and grounded only in the canonical JSON",
+        "The user needs a clear local markdown artifact to assess what the stage did"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "The summary must be deterministic and grounded only in the canonical JSON",
+        "scan only top-level `*.json` files in the selected stage folder",
+        "read only the matching `Build-Plans/Build-status/Stage-N-readiness-audit.json`",
+        "only populated Stage 5-8 folders produced markdown files"
+      ],
+      "rule_engine_tags": [
+        "general",
+        "stage-summary"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [
+        "read-only"
+      ],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "swift-expert",
+      "name": "swift-expert",
+      "aliases": [
+        "swift-expert"
+      ],
+      "folder": "swift-expert",
+      "source_path": ".opencode/Skills/swift-expert/skill.md",
+      "stage_associated": false,
+      "description": "Builds iOS/macOS/watchOS/tvOS applications, implements SwiftUI views and state management, designs protocol-oriented architectures, handles async/await concurrency, implements actors for thread safety, and debugs Swift-specific issues. Use when building iOS/macOS applications with Swift 5.9+, SwiftUI, or async/await concurrency. Invoke for protocol-oriented programming, SwiftUI state management, actors, server-side Swift, UIKit integration, Combine, or Vapor.",
+      "domains": [
+        "code quality",
+        "documentation"
+      ],
+      "capabilities": [
+        "generate report"
+      ],
+      "task_triggers": [
+        "actors",
+        "and debugs swift-specific issues. use when building ios/macos applications with swift 5.9+",
+        "async/await swift",
+        "build ios app",
+        "builds ios/macos/watchos/tvos applications",
+        "combine",
+        "debug error",
+        "designs protocol-oriented architectures",
+        "find root cause",
+        "fix bug",
+        "handles async/await concurrency",
+        "implements actors for thread safety",
+        "implements swiftui views and state management",
+        "ios development",
+        "macos development",
+        "or async/await concurrency. invoke for protocol-oriented programming",
+        "or vapor.",
+        "server-side swift",
+        "swift",
+        "swiftui",
+        "swiftui state management",
+        "uikit",
+        "uikit integration",
+        "vapor",
+        "write swift code"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card",
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/swift-expert/references/async-concurrency.md",
+        ".opencode/Skills/swift-expert/references/memory-performance.md",
+        ".opencode/Skills/swift-expert/references/protocol-oriented.md",
+        ".opencode/Skills/swift-expert/references/swiftui-patterns.md",
+        ".opencode/Skills/swift-expert/references/testing-patterns.md"
+      ],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "code quality",
+        "documentation",
+        "swift-expert"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "systematic-debugger",
+      "name": "systematic-debugger",
+      "aliases": [
+        "systematic-debugger"
+      ],
+      "folder": "systematic-debugger",
+      "source_path": ".opencode/Skills/systematic-debugger/skill.md",
+      "stage_associated": false,
+      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+      "domains": [
+        "documentation",
+        "metrics"
+      ],
+      "capabilities": [
+        "process skill"
+      ],
+      "task_triggers": [
+        "\"Just one quick fix\" seems obvious",
+        "Bugs in production",
+        "Build failures",
+        "Integration issues",
+        "Issue seems simple (simple bugs have root causes too)",
+        "Performance problems",
+        "Previous fix didn't work",
+        "Test failures",
+        "Under time pressure (emergencies make guessing tempting)",
+        "Unexpected behavior",
+        "You don't fully understand the issue",
+        "You're in a hurry (rushing guarantees rework)",
+        "You've already tried multiple fixes",
+        "before proposing fixes",
+        "debug error",
+        "find root cause",
+        "fix bug",
+        "or unexpected behavior",
+        "test failure",
+        "use when encountering any bug"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "help card"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/systematic-debugger/references/condition-based-waiting.md",
+        ".opencode/Skills/systematic-debugger/references/defense-in-depth.md",
+        ".opencode/Skills/systematic-debugger/references/root-cause-tracing.md"
+      ],
+      "constraints": [
+        "MUST have before fixing"
+      ],
+      "rule_engine_tags": [
+        "documentation",
+        "metrics",
+        "systematic-debugger"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "using-git-worktrees",
+      "name": "git-worktree-orchestrator",
+      "aliases": [
+        "git-worktree-orchestrator",
+        "using-git-worktrees"
+      ],
+      "folder": "using-git-worktrees",
+      "source_path": ".opencode/Skills/using-git-worktrees/skill.md",
+      "stage_associated": false,
+      "description": "|",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report"
+      ],
+      "task_triggers": [
+        "Avoiding branch switching conflicts",
+        "Executing tasks in isolation",
+        "Running implementation plans",
+        "Starting new feature development",
+        "create worktree",
+        "manage git worktree"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "NEVER proceed if baseline tests fail without explicit confirmation",
+        "NEVER assume directory location"
+      ],
+      "rule_engine_tags": [
+        "general",
+        "git-worktree-orchestrator"
+      ],
+      "selection_priority": "high",
+      "risk_flags": [
+        "requires-confirmation"
+      ],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "ux-enforcement",
+      "name": "ux-enforcement",
+      "aliases": [
+        "ux-enforcement"
+      ],
+      "folder": "ux-enforcement",
+      "source_path": ".opencode/Skills/ux-enforcement/skill.md",
+      "stage_associated": false,
+      "description": "Validate and enforce that implemented interfaces correctly follow the planned UX. This skill ensures that user flows, interactions, and states are implemented as intended, with no missing steps, hidden actions, or usability regressions.",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report",
+        "review code"
+      ],
+      "task_triggers": [
+        "build frontend",
+        "debugging usability issues",
+        "define page progression",
+        "design user interface",
+        "ensuring no UX steps are missing",
+        "implemented UI (code, components, or description)",
+        "map user flows",
+        "planned UX (flows, steps, or description)",
+        "refining flows after implementation",
+        "reviewing frontend implementations",
+        "validating interaction logic before deployment",
+        "verifying a built UI against a defined UX flow"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "follow skill instructions"
+      ],
+      "rule_engine_tags": [
+        "general",
+        "ux-enforcement"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "worktree-manager",
+      "name": "worktree-merge-manager",
+      "aliases": [
+        "worktree-manager",
+        "worktree-merge-manager"
+      ],
+      "folder": "worktree-manager",
+      "source_path": ".opencode/Skills/worktree-manager/skill.md",
+      "stage_associated": false,
+      "description": "|",
+      "domains": [
+        "general"
+      ],
+      "capabilities": [
+        "enforce rules",
+        "generate report"
+      ],
+      "task_triggers": [
+        "Cleaning up isolated environments",
+        "Discarding failed or unwanted worktrees",
+        "Finishing feature development in a worktree",
+        "Merging completed work into main branch",
+        "create worktree",
+        "manage git worktree"
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [],
+      "constraints": [
+        "NEVER execute merge or delete without confirmation"
+      ],
+      "rule_engine_tags": [
+        "general",
+        "worktree-merge-manager"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [
+        "requires-confirmation"
+      ],
+      "inferred_metadata": true
+    }
+  ],
+  "validation": {
+    "all_skill_folders_considered": true,
+    "stage_skills_excluded": true,
+    "non_stage_skills_included": true,
+    "all_included_skills_have_capabilities": true,
+    "all_included_skills_have_task_triggers": true,
+    "all_included_skills_have_rule_engine_tags": true,
+    "json_validated": true
+  }
+}

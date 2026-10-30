@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "artifact-evidence-registry.schema.json",
+  "title": "Artifact Evidence Registry",
+  "type": "object",
+  "required": ["registry_version", "artifacts"],
+  "properties": {
+    "registry_version": { "type": "string" },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact_id", "type", "related_stage", "status"],
+        "properties": {
+          "artifact_id": { "type": "string" },
+          "type": { "type": "string" },
+          "related_stage": { "type": "string" },
+          "related_stage_output": { "type": "string" },
+          "related_stage_data_path": {
+            "type": "string",
+            "description": "JSON Pointer to the canonical collection in a normalized stage output."
+          },
+          "related_ticket_ids": { "type": "array" },
+          "related_workflow_ids": { "type": "array" },
+          "related_validation_ids": { "type": "array" },
+          "related_agent_ids": { "type": "array" },
+          "related_visual_reference_refs": { "type": "array" },
+          "path_or_url": { "type": "string" },
+          "status": { "type": "string" },
+          "workflow_status": {
+            "type": "string",
+            "enum": [
+              "",
+              "contract_only",
+              "api_exists_not_wired",
+              "ui_wired_not_validated",
+              "runtime_persistence_failed",
+              "runtime_persistence_verified",
+              "local_e2e_passed",
+              "staging_e2e_passed",
+              "deferred_with_approval",
+              "blocked"
+            ],
+            "default": ""
+          },
+          "verified_user_outcome": { "type": "string" },
+          "confidence": { "type": "string" },
+          "created_by": { "type": "string" },
+          "created_at": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "related_stage_output": {
+                  "const": "Build-Plans/Stage-5/05-build-tickets.json"
+                }
+              },
+              "required": ["related_stage_output"]
+            },
+            "then": {
+              "required": ["related_stage_data_path"],
+              "properties": {
+                "related_stage_data_path": {
+                  "const": "/data/tickets"
+                }
+              }
+            }
+          }
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

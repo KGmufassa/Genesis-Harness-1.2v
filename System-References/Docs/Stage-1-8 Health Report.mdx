@@ -1,0 +1,386 @@
+---
+title: Stage 1-8 Health Report
+description: Current workflow health assessment for the eight-stage app planning, implementation, launch, and evolution harness.
+---
+
+# Stage 1-8 Health Report
+
+## Executive Grade
+
+Latest check date: **2026-08-17**
+
+Overall harness health: **94 / 100 — A**
+
+Design and contract health: **97 / 100 — A+**
+
+Executable enforcement health: **92 / 100 — A-**
+
+Current rating: **operationally hardened and ready for a supervised production pilot; not yet field-proven for unattended operation**
+
+The 2026-08-17 remediation pass closed every item in the prior Priority Remediation Order without adding a new workflow stage, external runtime dependency, schema framework, semantic merge engine, or automatic Git mutation layer.
+
+The harness now includes:
+
+- an executable global Stage 1-8 readiness-audit runner
+- dependency-free validation for every JSON Schema keyword currently used by the repository
+- shared stable-ID and file-plus-JSON-Pointer reference validation
+- durable failed-audit output, revision loops, and global-state updates
+- a minimal golden-path Stage 1-8 fixture plus schema, reference, evidence, risk, and missing-output failure tests
+- compliant `name`, `description`, and `compatibility: opencode` metadata across all 87 skill packages
+- aligned Stage 1-4 seed-state control fields and stronger common schema requirements
+- explicit user or delegated-policy authority for high and critical risk acceptance
+- an approved, minimally implemented `change-intake-router`
+- compact `CHANGE-` records, a lock-only change ledger, deterministic routing, and scoped completion auditing
+- Stage 6 compatibility for approved one-ticket scoped changes without false Stage 5 completion
+- reconciled readiness-audit documentation, schema, skill, and executable command
+- mirrored Stage 6-7 visual-reference compliance and drift-source fields
+- measurable UI template draft-to-stable graduation criteria
+- a read-only Stage 4 Stitch MCP capability preflight
+
+The previous **86 / 100** report correctly identified an enforcement gap. That gap is now materially reduced. The remaining deductions reflect unproven real-project execution and deliberate scope ceilings rather than missing core architecture.
+
+Recommended posture:
+
+```text
+Begin a supervised real-app pilot.
+Keep audit failures fail-closed.
+Promote to unattended operation only after real Stage 1-8 evidence is reviewed.
+```
+
+---
+
+## Diagnostic Scope
+
+### Reviewed Contracts And Plans
+
+```text
+System-References/Docs/Stage-1-product-initialization-draft.md
+System-References/Docs/Stage-2-architect.md
+System-References/Docs/Stage-3-system-architecture-draft.md
+System-References/Docs/Stage-4-ux-interaction-architecture-draft.md
+System-References/Docs/Stage-5-development-orchestration-draft.md
+System-References/Docs/Stage-6-implementation-validation-draft.md
+System-References/Docs/Stage-7-launch-operationalization-draft.md
+System-References/Docs/Stage-8-post-launch-evolution-draft.md
+System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Global-Stage-Readiness-Audit.md
+System-References/plans/lean-change-layer-plan.md
+```
+
+### Reviewed Executable Controls
+
+```text
+.opencode/Skills/global-stage-readiness-audit/scripts/workflow_validation.py
+.opencode/Skills/global-stage-readiness-audit/scripts/run_readiness_audit.py
+.opencode/Skills/stage-5-development-orchestration/scripts/stage5_contract.py
+.opencode/Skills/stage-5-development-orchestration/scripts/resolve_stage5.py
+.opencode/Skills/stage-summary/scripts/generate_stage_summaries.py
+.opencode/Skills/change-intake-router/scripts/route_change.py
+.opencode/Skills/skill-registry-builder/scripts/normalize_skill_frontmatter.py
+.opencode/Skills/skill-registry-builder/scripts/build_registry.py
+```
+
+### Verification Results
+
+| Check | Result |
+| --- | --- |
+| Repository Python tests | **48 passed** |
+| Stage readiness and shared validation | **12 passed** |
+| Stage 5 contract and resolver | **18 passed** |
+| Stage 5-8 assessment summaries | **6 passed** |
+| Scoped change routing and audit | **4 passed** |
+| Stage 4 Stitch contract | **3 passed** |
+| Skill package compliance | **1 repository-wide test passed** |
+| Conversation distillation | **4 passed** |
+| Stage 1-8 golden-path readiness fixture | **Passed for all eight stages** |
+| Failure fixtures | **Missing output, unresolved reference, high-risk authority, conditional schema, and deferred change work blocked correctly** |
+| Python compilation | **Passed for all executable workflow scripts** |
+| Repository JSON parse check | **Passed** |
+| Executable seed/registry schema checks | **6 passed** |
+| Skill metadata scan | **87 checked, 0 errors** |
+| Skill registry rebuild | **87 scanned, 27 included, 60 stage-associated excluded** |
+| Whitespace and patch integrity | **Passed** |
+
+This was a harness health audit, not a real stage finalization. The readiness runner was exercised in isolated fixtures so the repository's baseline `not_started` workflow state remained intact.
+
+---
+
+## Score Summary
+
+| Area | Score | Grade | Assessment |
+| --- | ---: | --- | --- |
+| Workflow contract design | 97 | A+ | Stage ownership, approval, handoff, evidence, risk, and revision rules are comprehensive. |
+| Planning clarity | 96 | A | Stages 1-4 preserve proposal-first planning and explicit approval gates. |
+| Cross-stage handoff quality | 95 | A | Handoff design is strong; executable reference checks now cover stable IDs and JSON Pointers. |
+| Implementation readiness | 95 | A | Stage 5 contracts and Stage 6 workflow-outcome gates are executable and tested. |
+| User guidance quality | 95 | A | Decision briefs, local summaries, and scoped-change previews support informed review. |
+| Visual and UI governance | 96 | A | UI architecture, Stitch boundaries, visual references, responsive checks, and launch continuity align. |
+| Launch readiness | 94 | A | Deployment and launch evidence remain fail-closed, now backed by an executable global audit. |
+| Post-launch evolution | 92 | A- | Stage 8 routing and scoped change intake are implemented; real-cycle evidence is still pending. |
+| Executable control enforcement | 92 | A- | Core schema, reference, file, handoff, approval, risk, and revision checks execute with stdlib only. |
+| Test maturity | 91 | A- | Forty-eight tests include a full eight-stage fixture and focused failure paths. |
+| Skill packaging compliance | 100 | A+ | All 87 packages pass required metadata validation. |
+| Maintenance consistency | 94 | A | Readiness docs, schemas, seed states, visual fields, and template governance are aligned and tested. |
+
+---
+
+## Per-Stage Health
+
+| Stage | Score | Grade | Health |
+| --- | ---: | --- | --- |
+| Stage 1 — Product Initialization | 92 | A- | Product, MVP, risk, approval, schema, state, and readiness controls align and execute. |
+| Stage 2 — Research & Validation | 92 | A- | Assumption and evidence design is strong; seed controls and audit enforcement now align. |
+| Stage 3 — System Architecture | 93 | A | Concrete stack selection, approval evidence, references, and schema controls are operational. |
+| Stage 4 — UX & Interaction Architecture | 95 | A | Strong UI, interaction, Stitch preflight, visual governance, accessibility, and approval enforcement. |
+| Stage 5 — Development Orchestration | 97 | A+ | Strongest operational stage: normalized package, manifest, resolver, workflow obligations, and deep tests. |
+| Stage 6 — Implementation & Validation | 95 | A | Outcome evidence, live-data checks, dead-control checks, repair, visual QA, and scoped-change input align. |
+| Stage 7 — Launch & Operationalization | 93 | A | Launch proof, workflow evidence review, risk authority, and visual-reference launch gates align. |
+| Stage 8 — Post-Launch Evolution | 92 | A- | Feedback routes and change intake are connected; real production-cycle evidence remains the next proof point. |
+
+---
+
+## Remediation Completion
+
+| Priority | Status | Implemented Result |
+| --- | --- | --- |
+| Executable global readiness audit | Complete | `run_readiness_audit.py` validates and writes audits plus global state. |
+| Skill frontmatter normalization | Complete | 87 packages pass metadata validation; reusable validator added. |
+| Seed state and schema alignment | Complete | Stage 1-4 states contain shared controls; common and audit schemas require them. |
+| Shared schema and reference utilities | Complete | `workflow_validation.py` covers the schema keywords used in this repository and validates stable/file-pointer refs. |
+| End-to-end and failure fixtures | Complete | All eight stages pass the minimal golden path; critical failure cases fail closed. |
+| Readiness document reconciliation | Complete | Standalone doc, global contract, live skill, schema, and executable command align. |
+| High/critical risk authority | Complete | User or delegated-policy authority, approver, and approval evidence are required. |
+| Lean change layer decision | Complete | Plan approved; minimal router, schema, ledger, lock checks, and completion audit implemented. |
+| Visual mirroring and template graduation | Complete | Stage 6-7 fields mirror live skills; draft promotion has evidence thresholds. |
+| Stage 4 Stitch preflight | Complete | Required capability categories and partial/unavailable fallback behavior are documented and tested. |
+
+---
+
+## Executable Readiness Model
+
+Run a stage finalization audit with:
+
+```sh
+python3 .opencode/Skills/global-stage-readiness-audit/scripts/run_readiness_audit.py \
+  --stage 6 \
+  --proposed-status ready_for_stage_7
+```
+
+The runner:
+
+1. verifies the stage's required files
+1. parses all applicable JSON
+1. validates files against repository schemas
+1. resolves stable IDs and file-plus-JSON-Pointer references
+1. checks canonical completion and handoff data
+1. enforces Stage 1-4 decision approval
+1. checks assumption and risk recording
+1. checks high and critical risk authority
+1. checks artifact-registry presence where required
+1. checks launch-critical workflow, dead-control, and fixture-runtime gaps
+1. checks applicable visual and design continuity
+1. writes revision loops for every blocking gap
+1. writes `Stage-X-readiness-audit.json`
+1. updates `Global-workflow-state.json`
+
+Ready results exit zero. Non-ready results preserve the failed audit and exit nonzero.
+
+---
+
+## Scoped Change Layer
+
+Preview a change route with:
+
+```sh
+python3 .opencode/Skills/change-intake-router/scripts/route_change.py \
+  "Redesign the project list page without changing behavior"
+```
+
+The minimal implementation supports:
+
+- active-stage refinement detection
+- deterministic earliest-stage routing
+- proportional validation levels
+- explicit approval before durable record creation
+- clean-worktree preflight before recording
+- compact `CHANGE-NNN` records
+- a ledger containing only record references, status, base commit, and affected-ID locks
+- single-writer stable-ID conflict detection
+- completion auditing for schema, approval, locks, unresolved impact, deferred work, and high-risk evidence
+- `ready_to_merge` only after a passed audit
+- Stage 6 one-ticket scoped input without false full Stage 5 completion
+
+Deliberately excluded:
+
+- automatic branches, worktrees, commits, pushes, or merges
+- semantic JSON merging
+- automatic rebasing
+- parallel writes to the same stable ID
+- a second baseline or snapshot store
+- Stage 9
+
+These exclusions keep the implementation inside the approved lean scope.
+
+---
+
+## Current Control Coverage
+
+| Control | Contracted | Executable | Assessment |
+| --- | --- | --- | --- |
+| Stage contract profile | All stages | Yes | Common schema and seed state require the profile; audit records evaluation. |
+| Guidance policy | All stages | Yes | Common schema and seed state require the policy shape. |
+| Stage 1-4 decision brief | Yes | Yes | Ready status requires approved canonical state. |
+| Schema validation | All stages | Yes | Shared validator executes the schema vocabulary currently used by the repository. |
+| Reference integrity | All stages | Yes | Stable-ID and file-pointer references resolve across loaded stage sources. |
+| Artifact evidence registry | Yes | Yes | Required registry presence is enforced for implementation and later stages. |
+| Risk acceptance ledger | Yes | Yes | Referenced risks and high/critical acceptance authority are checked. |
+| Revision loops | All stages | Yes | Failed checks produce owned revision-loop records. |
+| Readiness audit | All stages | Yes | Executable runner writes success or failure audits for every attempted finalization. |
+| Local assessment summaries | Stages 5-8 | Yes | Generator and audit presence/structure checks are tested. |
+| Workflow outcome evidence | Stages 5-7 | Yes | Missing launch-critical evidence, dead controls, and fixture gaps block. |
+| Visual continuity | Stages 4-7 | Yes | Blueprint, visual spec/reference, design system, QA, and drift controls align. |
+| Stage 8 feedback routing | Yes | Yes | Route ownership, action, and high/critical evidence are checked. |
+| Scoped approved changes | Yes | Yes | Routing, records, locks, approval, audit, and Stage 6 scoped input exist. |
+| Skill package discovery metadata | All skills | Yes | 87 packages pass a repository-wide test. |
+
+---
+
+## Strongest Workflow Elements
+
+1. **Contract and enforcement now share one path**
+
+   The global audit is no longer only prose. It produces durable machine-readable pass and failure results.
+
+1. **Outcome evidence beats artifact presence**
+
+   Launch-critical workflows must work through UI, route/action, persistence/service, visible result, and evidence.
+
+1. **Stage 5 remains a strong executable model**
+
+   Its normalized package, canonical collections, manifest, resolver, scope checks, wave checks, and workflow obligations remain the deepest stage contract.
+
+1. **Frontend continuity is unusually complete**
+
+   Stage 4 through Stage 7 preserve interaction IDs, page structure, design rules, visual references, evidence, responsive behavior, accessibility, and launch risk.
+
+1. **Risk acceptance is no longer ambiguous**
+
+   Agents may propose or escalate high and critical risks but cannot silently accept them.
+
+1. **Change handling avoids full-pipeline waste**
+
+   Approved changes route to the earliest affected owner, lock only affected IDs, and preserve unrelated canonical outputs.
+
+1. **Packaging is mechanically enforceable**
+
+   Future skill additions now fail a repository test if required metadata is missing.
+
+---
+
+## Remaining Limitations
+
+### 1. Real-App Stage 1-8 Evidence Is Still Pending
+
+Impact: **medium**
+
+The isolated golden path proves the executable contracts compose, but it does not replace a real application run with actual research, architecture, previews, implementation, deployment, monitoring, and feedback.
+
+Next action:
+
+```text
+Run one supervised application through all eight stages and retain the generated readiness evidence.
+```
+
+### 2. The Schema Validator Intentionally Implements The Used Subset
+
+Impact: **low to medium**
+
+The stdlib validator supports the schema features currently present: references, pointers, types, required properties, enums, constants, `allOf`, `anyOf`, `oneOf`, conditional `if/then/else`, item counts, string patterns, and numeric bounds.
+
+It is not a general replacement for every Draft 2020-12 keyword.
+
+Upgrade condition:
+
+```text
+Adopt a standards-complete validator only when a repository schema introduces an unsupported keyword.
+```
+
+### 3. Summary Matching Is Structural
+
+Impact: **low**
+
+The readiness runner verifies Stage 5-8 summary presence, stage identity, and canonical JSON validity. The summary generator remains the source for detailed canonical-content rendering; the audit does not perform semantic natural-language equivalence.
+
+### 4. The Change Router Does Not Mutate Git Automatically
+
+Impact: **low**
+
+This is deliberate. The router performs clean-worktree and base-commit checks but leaves branch, worktree, commit, push, merge, and post-merge operations to the approved Git workflow.
+
+### 5. Stitch Remains An External Capability
+
+Impact: **low**
+
+Stage 4 now performs and records a capability preflight and handles partial or unavailable tools through explicit fallback approval. Repository code cannot guarantee external service availability or authentication.
+
+### 6. Draft Templates Need Real Usage Evidence
+
+Impact: **low**
+
+Graduation criteria now exist, but draft templates should remain draft until they accumulate three completed Stage 4 uses across two products with responsive, accessibility, routing, and gap-resolution evidence.
+
+---
+
+## Command Layer Verdict
+
+The eight command skills and their final synthesis skills remain cognitively aligned. The material command-layer weakness from the prior report—missing required skill metadata—is resolved.
+
+Key confirmations:
+
+- all 87 skill folders have a canonical instruction file and valid required metadata
+- Stage 1-4 ready statuses remain blocked until their decision brief is approved
+- Stage 5 normalized orchestration and legacy compatibility remain tested
+- Stage 6 supports normal Stage 5 packages and approved scoped one-ticket changes without mixing the two completion models
+- Stage 6-7 enforce workflow evidence, live runtime data, dead-control, visual-reference, visual-drift, and accepted-risk rules
+- Stage 8 feedback routes connect to the scoped change router without silently authorizing product modification
+- every stage finalization can now call the executable readiness runner
+- failed readiness attempts create actionable revision loops and update shared state
+
+---
+
+## Final Health Verdict
+
+The Genesis Stage 1-8 workflow is now **A-grade, operationally hardened, and ready for a supervised production pilot**.
+
+It can guide a product through:
+
+```text
+raw idea
+-> approved product direction
+-> validated assumptions
+-> approved architecture
+-> approved UX, interaction, and visual direction
+-> normalized implementation planning
+-> implementation and outcome validation
+-> launch proof
+-> post-launch evidence and routed evolution
+```
+
+It can also route bounded approved-product changes without restarting unrelated work:
+
+```text
+change request
+-> preview and approval
+-> earliest owning stage
+-> affected-ID locks
+-> scoped execution and validation
+-> completion audit
+-> approved Git workflow
+```
+
+Current recommended status:
+
+```text
+Ready for a supervised real-app Stage 1-8 pilot.
+Retain fail-closed audits and review the first complete evidence set before unattended use.
+```

@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "global-readiness-audit.schema.json",
+  "title": "Global Stage Readiness Audit",
+  "type": "object",
+  "required": [
+    "stage",
+    "command",
+    "audit_status",
+    "finalization_attempt",
+    "proposed_completion_status",
+    "evaluated_completion_status",
+    "handoff_mode",
+    "global_workflow_contract",
+    "required_files_present",
+    "local_assessment_summary",
+    "workflow_outcome_evidence",
+    "schemas_valid",
+    "completion_status_present",
+    "global_status_mapped",
+    "handoff_present",
+    "handoff_usable",
+    "feedback_routes_present",
+    "feedback_routes_usable",
+    "risks_recorded",
+    "assumptions_recorded",
+    "traceability_present",
+    "artifacts_recorded",
+    "stage_contract_profile",
+    "schema_validation",
+    "reference_integrity",
+    "artifact_evidence_registry",
+    "risk_acceptance_ledger",
+    "revision_loops",
+    "feedback_route_audit",
+    "visual_design_continuity",
+    "blocking_gaps",
+    "warnings",
+    "next_actions",
+    "ready_for_next_stage"
+  ],
+  "properties": {
+    "stage": { "type": "string" },
+    "command": { "type": "string" },
+    "global_workflow_contract": { "type": "string" },
+    "audit_status": {
+      "type": "string",
+      "enum": ["pending", "passed", "passed_with_warnings", "failed", "blocked"]
+    },
+    "finalization_attempt": { "type": "boolean" },
+    "proposed_completion_status": { "type": "string" },
+    "evaluated_completion_status": { "type": "string" },
+    "handoff_mode": {
+      "type": "string",
+      "enum": ["next_stage", "feedback_routes", "terminal"]
+    },
+    "required_files_present": { "type": "boolean" },
+    "local_assessment_summary": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean", "default": false },
+        "path": { "type": "string", "default": "" },
+        "present": { "type": "boolean", "default": false },
+        "matches_canonical_outputs": { "type": "boolean", "default": false },
+        "assessment": { "type": "string", "default": "" },
+        "blocking_gaps": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "workflow_outcome_evidence": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean", "default": false },
+        "workflow_evidence_present": { "type": "boolean", "default": false },
+        "launch_critical_workflows_checked": { "type": "array", "default": [] },
+        "launch_critical_workflows_passed": { "type": "boolean", "default": false },
+        "dead_controls_detected": { "type": "array", "default": [] },
+        "fixture_runtime_dependencies": { "type": "array", "default": [] },
+        "blocking_workflow_gaps": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "schemas_valid": { "type": "boolean" },
+    "completion_status_present": { "type": "boolean" },
+    "global_status_mapped": { "type": "boolean" },
+    "handoff_present": { "type": "boolean" },
+    "handoff_usable": { "type": "boolean" },
+    "feedback_routes_present": { "type": "boolean" },
+    "feedback_routes_usable": { "type": "boolean" },
+    "risks_recorded": { "type": "boolean" },
+    "assumptions_recorded": { "type": "boolean" },
+    "traceability_present": { "type": "boolean" },
+    "artifacts_recorded": { "type": "boolean" },
+    "stage_contract_profile": {
+      "type": "object",
+      "required": ["profile_id", "profile_requirements_checked", "missing_profile_requirements"],
+      "additionalProperties": true
+    },
+    "schema_validation": {
+      "type": "object",
+      "required": ["schema_refs", "validated_files", "schema_errors", "schemas_valid", "validated_at", "validator", "blocking"],
+      "additionalProperties": true
+    },
+    "artifact_evidence_registry": {
+      "type": "object",
+      "required": ["registry_path", "required", "required_artifacts_present", "missing_artifacts"],
+      "additionalProperties": true
+    },
+    "risk_acceptance_ledger": {
+      "type": "object",
+      "required": ["ledger_path", "required", "accepted_risks_present", "missing_risk_acceptance_entries", "expired_or_unowned_risks"],
+      "additionalProperties": true
+    },
+    "reference_integrity": {
+      "type": "object",
+      "required": ["checked_refs", "missing_refs", "orphaned_refs", "stale_refs", "duplicate_ids", "integrity_status", "blocking_ref_errors"],
+      "additionalProperties": true
+    },
+    "feedback_route_audit": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" },
+        "routes_checked": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/feedback_route" }
+        },
+        "missing_route_owners": { "type": "array" },
+        "missing_route_actions": { "type": "array" },
+        "missing_route_evidence": { "type": "array" },
+        "critical_routes_blocking": { "type": "array" },
+        "creates_new_stage_cycle": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "visual_design_continuity": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" },
+        "ui_blueprint_refs_present": { "type": "boolean" },
+        "visual_spec_refs_present": { "type": "boolean" },
+        "visual_reference_refs_present": { "type": "boolean" },
+        "design_system_refs_present": { "type": "boolean" },
+        "visual_acceptance_criteria_mapped": { "type": "boolean" },
+        "visual_reference_compliance_recorded": { "type": "boolean" },
+        "preview_or_visual_qa_evidence_present": { "type": "boolean" },
+        "design_system_compliance_recorded": { "type": "boolean" },
+        "visual_drift_status_recorded": { "type": "boolean" },
+        "blocking_visual_gaps": { "type": "array" }
+      },
+      "required": ["required", "ui_blueprint_refs_present", "visual_spec_refs_present", "visual_reference_refs_present", "design_system_refs_present", "visual_acceptance_criteria_mapped", "visual_reference_compliance_recorded", "preview_or_visual_qa_evidence_present", "design_system_compliance_recorded", "visual_drift_status_recorded", "blocking_visual_gaps"],
+      "additionalProperties": true
+    },
+    "revision_loops": { "type": "array" },
+    "blocking_gaps": { "type": "array" },
+    "warnings": { "type": "array" },
+    "next_actions": { "type": "array" },
+    "ready_for_next_stage": { "type": "boolean" }
+  },
+  "$defs": {
+    "feedback_route": {
+      "type": "object",
+      "properties": {
+        "feedback_route_id": { "type": "string" },
+        "source_signal_ids": { "type": "array" },
+        "ui_element_refs": { "type": "array" },
+        "route_refs": { "type": "array" },
+        "action_refs": { "type": "array" },
+        "stage_5_ticket_refs": { "type": "array" },
+        "stage_6_validation_refs": { "type": "array" },
+        "finding": { "type": "string" },
+        "recommended_target_stage": { "type": "string" },
+        "owner": { "type": "string" },
+        "severity": { "type": "string" },
+        "evidence_refs": { "type": "array" },
+        "recommended_action": { "type": "string" },
+        "blocks_current_evolution": { "type": "boolean" },
+        "creates_new_stage_cycle": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

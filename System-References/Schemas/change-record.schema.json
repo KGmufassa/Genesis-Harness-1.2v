@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "change-record.schema.json",
+  "title": "Genesis Scoped Change Record",
+  "type": "object",
+  "required": [
+    "change_id",
+    "title",
+    "requested_outcome",
+    "change_class",
+    "base_commit",
+    "owner",
+    "affected_ids",
+    "preserved_behavior",
+    "risk_level",
+    "risk_refs",
+    "evidence_refs",
+    "validation_level",
+    "impact_confidence",
+    "unresolved_impacts",
+    "entry_stage",
+    "required_stages",
+    "stage_dispositions",
+    "approval",
+    "deferred_items",
+    "completion_disposition",
+    "status"
+  ],
+  "properties": {
+    "change_id": { "type": "string", "pattern": "^CHANGE-[0-9]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "requested_outcome": { "type": "string", "minLength": 1 },
+    "change_class": { "type": "string", "enum": ["trivial", "bounded", "cross_cutting", "emergency"] },
+    "base_commit": { "type": "string", "minLength": 1 },
+    "owner": { "type": "string", "minLength": 1 },
+    "affected_ids": { "type": "array", "default": [] },
+    "preserved_behavior": { "type": "array", "default": [] },
+    "risk_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+    "risk_refs": { "type": "array", "default": [] },
+    "evidence_refs": { "type": "array", "default": [] },
+    "validation_level": { "type": "string", "enum": ["local", "workflow", "system", "critical"] },
+    "impact_confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+    "unresolved_impacts": { "type": "array", "default": [] },
+    "entry_stage": { "type": "string", "enum": ["stage_1", "stage_2", "stage_3", "stage_4", "stage_5", "stage_6", "stage_7", "stage_8"] },
+    "required_stages": { "type": "array", "minItems": 1 },
+    "stage_dispositions": { "type": "object", "default": {} },
+    "approval": {
+      "type": "object",
+      "required": ["required_types", "status", "evidence_refs", "approved_by", "approved_at"],
+      "properties": {
+        "required_types": { "type": "array" },
+        "status": { "type": "string", "enum": ["pending", "approved", "revision_requested", "blocked", "rejected"] },
+        "evidence_refs": { "type": "array" },
+        "approved_by": { "type": "string" },
+        "approved_at": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "deferred_items": { "type": "array", "default": [] },
+    "completion_disposition": { "type": "string" },
+    "status": { "type": "string", "enum": ["active", "validating", "ready_to_merge", "completed", "blocked", "rejected", "cancelled"] }
+  },
+  "additionalProperties": true
+}
+

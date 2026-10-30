@@ -1,0 +1,47 @@
+{
+  "page_name": "Inventory",
+  "primary_template": "saas-dashboard",
+  "selected_extensions": ["role-based-access"],
+  "page_archetype": "collection",
+  "navigation_pattern": "sidebar-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "data-table",
+    "rejected_patterns": [
+      {
+        "pattern": "card-grid",
+        "reason": "weaker for dense comparison, sorting, filtering, and bulk inventory updates"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "high",
+      "comparison_need": "high",
+      "scan_behavior": "row scanning by SKU, quantity, status, and location",
+      "primary_user_task": "monitor and update inventory records",
+      "record_count": "many",
+      "bulk_actions_required": true,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "inventory items use consistent comparable fields",
+      "users need sorting, filtering, and bulk update actions"
+    ],
+    "source_refs": ["FEATURE-INVENTORY", "WORKFLOW-STOCK-MANAGEMENT"],
+    "responsive_transformation": {
+      "desktop": "full data table with visible high-priority columns",
+      "tablet": "reduced columns with row actions in overflow",
+      "mobile": "stacked record cards preserving sort/filter and primary row actions"
+    }
+  },
+  "component_family_decisions": [
+    {
+      "family": "data-display",
+      "components": ["inventory table", "status badge", "pagination"]
+    },
+    {
+      "family": "search-and-filtering",
+      "components": ["search input", "status filter", "location filter"]
+    }
+  ],
+  "template_deviations": []
+}
+

@@ -1,0 +1,324 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-4-output.schema.json",
+  "title": "Stage 4 Output",
+  "allOf": [{ "$ref": "stage-output-common.schema.json" }],
+  "$defs": {
+    "interactive_element": {
+      "type": "object",
+      "properties": {
+        "element_id": { "type": "string", "pattern": "^UI-ELEMENT-" },
+        "element_type": { "type": "string", "default": "" },
+        "label": { "type": "string", "default": "" },
+        "accessible_name": { "type": "string", "default": "" },
+        "route_id": { "type": "string", "pattern": "^(ROUTE-.*)?$", "default": "" },
+        "route_target": { "type": "string", "default": "" },
+        "route_type": { "type": "string", "default": "" },
+        "action_id": { "type": "string", "pattern": "^(ACTION-.*)?$", "default": "" },
+        "behavior": { "type": "string", "default": "" },
+        "behavior_target": { "type": "string", "default": "" },
+        "states": { "type": "object", "default": {} },
+        "responsive_behavior": { "type": "object", "default": {} },
+        "accessibility_behavior": { "type": "object", "default": {} },
+        "source_trace": { "type": "array", "default": [] }
+      },
+      "required": ["element_id", "element_type", "behavior"],
+      "anyOf": [
+        { "required": ["route_id"], "properties": { "route_id": { "minLength": 7 } } },
+        { "required": ["action_id"], "properties": { "action_id": { "minLength": 8 } } },
+        { "properties": { "behavior": { "const": "no_navigation" } }, "required": ["behavior"] }
+      ],
+      "additionalProperties": true
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "route_id": { "type": "string", "pattern": "^ROUTE-" },
+        "path": { "type": "string", "default": "" },
+        "page_ref": { "type": "string", "default": "" },
+        "role_access": { "type": "array", "default": [] },
+        "source_trace": { "type": "array", "default": [] }
+      },
+      "required": ["route_id", "path"],
+      "additionalProperties": true
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "action_id": { "type": "string", "pattern": "^ACTION-" },
+        "name": { "type": "string", "default": "" },
+        "owning_page_refs": { "type": "array", "default": [] },
+        "owning_component_refs": { "type": "array", "default": [] },
+        "triggering_element_refs": { "type": "array", "default": [] },
+        "success_destination": { "type": "string", "default": "" },
+        "failure_destination": { "type": "string", "default": "" },
+        "loading_state": { "type": "string", "default": "" },
+        "permission_denied_behavior": { "type": "string", "default": "" },
+        "undo_or_recovery_path": { "type": "string", "default": "" },
+        "source_trace": { "type": "array", "default": [] }
+      },
+      "required": ["action_id", "name", "owning_page_refs", "triggering_element_refs"],
+      "additionalProperties": true
+    },
+    "interaction_contract": {
+      "type": "object",
+      "properties": {
+        "page_ref": { "type": "string", "default": "" },
+        "ui_blueprint_id": { "type": "string", "default": "" },
+        "route_id": { "type": "string", "default": "" },
+        "criticality": { "enum": ["launch_critical", "standard", "supporting", "deferred"], "default": "standard" },
+        "interactive_element_count": { "type": "integer", "minimum": 0, "default": 0 },
+        "interactive_element_refs": { "type": "array", "default": [] },
+        "unresolved_element_refs": { "type": "array", "default": [] },
+        "assumptions": { "type": "array", "default": [] },
+        "approval_status": { "enum": ["approved", "assumed_low_risk", "needs_user_review", "blocked"], "default": "needs_user_review" },
+        "mermaid_map_required": { "type": "boolean", "default": false }
+      },
+      "required": ["page_ref", "ui_blueprint_id", "criticality", "interactive_element_count", "interactive_element_refs", "approval_status"],
+      "additionalProperties": true
+    },
+    "layout_pattern_decision": {
+      "type": "object",
+      "properties": {
+        "selected_pattern": {
+          "type": "string",
+          "enum": [
+            "",
+            "single-column",
+            "two-column",
+            "responsive-grid",
+            "dashboard-grid",
+            "card-grid",
+            "data-table",
+            "content-list",
+            "master-detail",
+            "split-pane",
+            "form-layout",
+            "settings-layout",
+            "custom"
+          ],
+          "default": ""
+        },
+        "rejected_patterns": { "type": "array", "default": [] },
+        "decision_factors": {
+          "type": "object",
+          "properties": {
+            "information_density": { "type": "string", "default": "" },
+            "comparison_need": { "type": "string", "default": "" },
+            "scan_behavior": { "type": "string", "default": "" },
+            "primary_user_task": { "type": "string", "default": "" },
+            "record_count": { "type": "string", "default": "" },
+            "bulk_actions_required": { "type": "boolean", "default": false },
+            "mobile_behavior_required": { "type": "boolean", "default": true }
+          },
+          "additionalProperties": true
+        },
+        "reasons": { "type": "array", "default": [] },
+        "source_refs": { "type": "array", "default": [] },
+        "responsive_transformation": {
+          "type": "object",
+          "properties": {
+            "desktop": { "type": "string", "default": "" },
+            "tablet": { "type": "string", "default": "" },
+            "mobile": { "type": "string", "default": "" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "ui_architecture": {
+      "type": "object",
+      "properties": {
+        "primary_template": { "type": "string", "default": "" },
+        "selected_extensions": { "type": "array", "default": [] },
+        "page_archetype": { "type": "string", "default": "" },
+        "navigation_pattern": { "type": "string", "default": "" },
+        "layout_pattern_decision": { "$ref": "#/$defs/layout_pattern_decision" },
+        "component_family_decisions": { "type": "array", "default": [] },
+        "template_deviations": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "ui_architecture_template_selection": {
+      "type": "object",
+      "properties": {
+        "primary_template": { "type": "string", "default": "" },
+        "confidence": { "type": "string", "default": "" },
+        "alternative_templates": { "type": "array", "default": [] },
+        "selected_extensions": { "type": "array", "default": [] },
+        "reasons": { "type": "array", "default": [] },
+        "unresolved_questions": { "type": "array", "default": [] },
+        "template_deviations": { "type": "array", "default": [] },
+        "template_gaps": { "type": "array", "default": [] },
+        "source_refs": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "stitch_visual_source_control": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "mode": { "type": "string", "default": "stitch_visual_source_of_truth" },
+        "scope": { "type": "string", "const": "visual_only" },
+        "suggestion_review_required": { "type": "boolean", "default": true },
+        "approval_status": {
+          "type": "string",
+          "enum": ["pending", "approved", "rejected", "disabled", "blocked"],
+          "default": "pending"
+        },
+        "approved_by": { "type": "string", "default": "" },
+        "approved_at": { "type": ["string", "null"], "default": null },
+        "locked_screenshot_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "locked_stitch_screen_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "applies_to": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "excluded_from": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "rationale": { "type": "string", "default": "" }
+      },
+      "additionalProperties": true
+    },
+    "stitch_suggestion_review": {
+      "type": "object",
+      "properties": {
+        "suggestion_id": { "type": "string", "default": "" },
+        "prototype_page_ref": { "type": "string", "default": "" },
+        "stitch_screen_ref": { "type": "string", "default": "" },
+        "screenshot_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "suggestion_type": {
+          "type": "string",
+          "enum": [
+            "",
+            "visual_pattern",
+            "component",
+            "data_display",
+            "interaction",
+            "feature_extension",
+            "navigation",
+            "workflow_change"
+          ],
+          "default": ""
+        },
+        "suggestion": { "type": "string", "default": "" },
+        "prd_alignment": {
+          "type": "string",
+          "enum": ["", "direct", "adjacent", "unsupported", "conflicts"],
+          "default": ""
+        },
+        "canonical_alignment_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "decision": {
+          "type": "string",
+          "enum": ["", "include", "exclude", "revise", "defer", "route_to_prior_stage"],
+          "default": ""
+        },
+        "decision_reason": { "type": "string", "default": "" },
+        "canonical_refs_created_or_updated": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "approval_status": {
+          "type": "string",
+          "enum": ["pending", "approved", "rejected"],
+          "default": "pending"
+        },
+        "source_refs": { "type": "array", "items": { "type": "string" }, "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "stitch_screenshot_evidence": {
+      "type": "object",
+      "properties": {
+        "screenshot_id": { "type": "string", "default": "" },
+        "prototype_page_ref": { "type": "string", "default": "" },
+        "stitch_screen_ref": { "type": "string", "default": "" },
+        "canonical_page_ref": { "type": "string", "default": "" },
+        "screenshot_path": { "type": "string", "default": "Build-Plans/Stage-4/Screen-shots/" },
+        "viewport": {
+          "type": "string",
+          "enum": ["", "desktop", "tablet", "mobile", "state_detail"],
+          "default": ""
+        },
+        "captured_state": { "type": "string", "default": "" },
+        "captured_at": { "type": ["string", "null"], "default": null },
+        "notes": { "type": "string", "default": "" }
+      },
+      "additionalProperties": true
+    },
+    "stitch_prototyping": {
+      "type": "object",
+      "properties": {
+        "availability": { "type": "string", "default": "unchecked" },
+        "visual_source_control": { "$ref": "#/$defs/stitch_visual_source_control" },
+        "project_id": { "type": "string", "default": "" },
+        "project_name": { "type": "string", "default": "" },
+        "screen_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "prototype_constraints": { "type": "object", "default": {} },
+        "proposed_pages": { "type": "array", "default": [] },
+        "page_approval_ledger": { "type": "array", "default": [] },
+        "approved_page_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "rejected_page_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "screenshot_evidence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/stitch_screenshot_evidence" },
+          "default": []
+        },
+        "suggestion_review_ledger": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/stitch_suggestion_review" },
+          "default": []
+        },
+        "component_extraction": { "type": "array", "default": [] },
+        "divergence_log": { "type": "array", "default": [] },
+        "responsive_review": { "type": "array", "default": [] },
+        "accessibility_review": { "type": "array", "default": [] },
+        "reconciliation_status": { "type": "string", "default": "not_started" },
+        "confidence_gaps": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "properties": {
+    "page_inventory": { "type": "array", "default": [] },
+    "ui_blueprints": { "type": "array", "default": [] },
+    "ui_architecture_template_selection": { "$ref": "#/$defs/ui_architecture_template_selection" },
+    "interaction_contracts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/interaction_contract" },
+      "default": []
+    },
+    "interactive_element_inventory": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/interactive_element" },
+      "default": []
+    },
+    "route_inventory": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/route" },
+      "default": []
+    },
+    "action_inventory": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/action" },
+      "default": []
+    },
+    "navigation_inventory": { "type": "array", "default": [] },
+    "visual_reference_selection": {
+      "type": "object",
+      "properties": {
+        "primary_reference": { "type": "object" },
+        "secondary_references": { "type": "array", "default": [] },
+        "rejected_references": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "visual_reference_refs": { "type": "array", "default": [] },
+    "stitch_prototyping": { "$ref": "#/$defs/stitch_prototyping" },
+    "design_system_alignment": {
+      "type": "object",
+      "properties": {
+        "aligned": { "type": "boolean", "default": false },
+        "alignment_notes": { "type": "array", "default": [] },
+        "intentional_deviations": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    },
+    "ui_components_markdown_path": { "type": "string", "default": "" }
+  },
+  "additionalProperties": true
+}

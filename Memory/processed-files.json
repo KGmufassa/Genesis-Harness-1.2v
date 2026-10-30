@@ -1,0 +1,28 @@
+{
+  "processed": [
+    {
+      "filename": "test-conversation.md",
+      "hash": "803facd7d59f7550700a507b04eb249f2f8f2300e6e1a2335cf6d67dd264b427",
+      "created": "2026-07-12T17:17:57",
+      "distilled": "test-conversation-distilled.md"
+    },
+    {
+      "filename": "conversation-002.md",
+      "hash": "b7c3bfd395f4350f2093209197a3a51d259a0d0773889b2a30ddf903d87e73f8",
+      "created": "2026-07-12T17:22:37",
+      "distilled": "conversation-002-distilled.md"
+    },
+    {
+      "filename": "Conversation Skill distillation.md",
+      "hash": "1e63c8cd5401052ac9fbd599af35e395c483323c020a34d8ca951545d3c9943a",
+      "created": "2026-07-12T17:26:49",
+      "distilled": "Conversation Skill distillation-distilled.md"
+    },
+    {
+      "filename": "Rebuilding Stage 4 commands skills.md",
+      "hash": "03b9a5e3122f2d51b7efc4f76c6b61e66556b9f2500817018e17297595a2ab49",
+      "created": "2026-08-02T11:54:39",
+      "distilled": "Rebuilding Stage 4 commands skills-distilled.md"
+    }
+  ]
+}

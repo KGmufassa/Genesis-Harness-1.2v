@@ -1,0 +1,39 @@
+{
+  "page_name": "Marketplace Listings",
+  "primary_template": "marketplace-platform",
+  "selected_extensions": ["messaging"],
+  "page_archetype": "collection",
+  "navigation_pattern": "top-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "card-grid",
+    "rejected_patterns": [
+      {
+        "pattern": "data-table",
+        "reason": "buyer discovery depends on visual listing recognition, trust signals, and lightweight comparison"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "medium",
+      "comparison_need": "medium",
+      "scan_behavior": "browse listing cards by image, title, price, rating, seller, availability, and trust signal",
+      "primary_user_task": "discover and evaluate marketplace listings",
+      "record_count": "many",
+      "bulk_actions_required": false,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "marketplace discovery is image and trust-signal driven",
+      "filters and search are more important than dense operational comparison"
+    ],
+    "source_refs": ["FEATURE-MARKETPLACE", "WORKFLOW-LISTING-DISCOVERY"],
+    "responsive_transformation": {
+      "desktop": "filter sidebar with responsive listing card grid",
+      "tablet": "collapsible filters with two-column cards",
+      "mobile": "single-column cards with filter drawer and sticky search"
+    }
+  },
+  "required_interactions": ["search", "filtering", "sorting", "notifications"],
+  "required_states": ["loading", "empty", "error", "permission-denied"],
+  "template_deviations": []
+}
+

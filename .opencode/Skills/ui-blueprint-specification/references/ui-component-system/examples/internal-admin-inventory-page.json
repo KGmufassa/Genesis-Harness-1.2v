@@ -1,0 +1,58 @@
+{
+  "page_name": "Inventory",
+  "primary_template": "internal-admin-tool",
+  "extends_template": "saas-dashboard",
+  "selected_extensions": ["role-based-access"],
+  "page_archetype": "collection",
+  "navigation_pattern": "sidebar-navigation",
+  "layout_pattern_decision": {
+    "selected_pattern": "data-table",
+    "rejected_patterns": [
+      {
+        "pattern": "card-grid",
+        "reason": "inventory management needs dense comparison, filters, row status, imports, and bulk operational actions"
+      },
+      {
+        "pattern": "master-detail",
+        "reason": "selected item inspection is secondary to scanning and managing the full inventory list"
+      }
+    ],
+    "decision_factors": {
+      "information_density": "high",
+      "comparison_need": "high",
+      "scan_behavior": "row scanning by item, SKU, category, price, vendor, status, source, and updated timestamp",
+      "primary_user_task": "manage inventory records across automated and manual sources",
+      "record_count": "many",
+      "bulk_actions_required": true,
+      "mobile_behavior_required": true
+    },
+    "reasons": [
+      "inventory records share consistent comparable fields",
+      "operators need filtering, import, creation, status review, and pagination"
+    ],
+    "source_refs": ["FEATURE-INVENTORY", "WORKFLOW-INVENTORY-MANAGEMENT"],
+    "responsive_transformation": {
+      "desktop": "sidebar shell with search header, filter toolbar, full inventory table, and pagination",
+      "tablet": "reduced table columns with row overflow actions and persistent filters",
+      "mobile": "stacked inventory record cards with search, filters, status, source, and primary actions preserved"
+    }
+  },
+  "sections": [
+    {
+      "section_id": "inventory-header",
+      "components": ["global search", "notifications", "profile menu", "product-service toggle", "import action", "add item action"]
+    },
+    {
+      "section_id": "inventory-filters",
+      "components": ["category filter", "vendor filter", "status filter", "source filter", "review filter", "clear filters", "result count"]
+    },
+    {
+      "section_id": "inventory-table",
+      "components": ["selection checkbox", "item identity cell", "type column", "category badge", "price column", "vendor column", "status badge", "source cell", "updated column", "pagination"]
+    }
+  ],
+  "required_interactions": ["search", "filtering", "sorting", "bulk-actions", "creation", "editing", "permissions"],
+  "required_states": ["loading", "empty", "error", "permission-denied", "success"],
+  "template_deviations": []
+}
+

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage-5-manifest.schema.json",
+  "title": "Stage 5 Manifest",
+  "type": "object",
+  "required": [
+    "format_version",
+    "artifact_id",
+    "artifact_type",
+    "stage",
+    "context_ref",
+    "artifacts",
+    "completion_status",
+    "stage_6_handoff",
+    "schema_validation"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "format_version": { "const": "2.0" },
+    "artifact_id": { "const": "ARTIFACT-S5-STAGE-MANIFEST" },
+    "artifact_type": { "const": "stage_manifest" },
+    "stage": { "const": "Stage 5" },
+    "context_ref": { "const": "Build-Plans/Stage-5/00-stage-context.json" },
+    "artifacts": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["artifact_id", "artifact_type", "path", "schema_ref", "data_path"],
+        "properties": {
+          "artifact_id": { "type": "string" },
+          "artifact_type": { "type": "string" },
+          "path": { "type": "string" },
+          "schema_ref": { "type": "string" },
+          "data_path": { "type": "string", "pattern": "^/data/" }
+        },
+        "additionalProperties": true
+      },
+      "default": []
+    },
+    "completion_status": { "type": "object", "default": {} },
+    "stage_6_handoff": { "type": "object", "default": {} },
+    "schema_validation": {
+      "type": "object",
+      "required": ["validation_executed", "schemas_valid"],
+      "properties": {
+        "validation_executed": { "type": "boolean", "default": false },
+        "schemas_valid": { "type": "boolean", "default": false },
+        "results": { "type": "array", "default": [] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_validation": {
+            "properties": {
+              "schemas_valid": { "const": true }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_validation": {
+            "properties": {
+              "validation_executed": { "const": true }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}
