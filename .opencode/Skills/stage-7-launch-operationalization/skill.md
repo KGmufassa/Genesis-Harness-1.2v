@@ -219,3 +219,18 @@ Build-Plans/Build-status/Risk-acceptance-ledger.json
 ```
 
 Failed readiness checks must become revision-loop actions with owning output, owning skill, required change, and next action.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume `deployment_strategy_ref` and `waitlist_validation_ref` from the Stage 6 handoff. Execute the approved per-platform methods and collect deployment proof. Route material deployment or platform changes back to Stage 3; retain both references in the Stage 8 handoff.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Require all six deployment-proof result objects, verified artifact references, current runtime/visual checks, and resolved release blockers. Any allowed deferral needs a valid Stage 7 accepted risk and proof of approval.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

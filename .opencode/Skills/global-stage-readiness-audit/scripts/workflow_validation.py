@@ -80,6 +80,24 @@ def _matches_type(value: Any, expected: str) -> bool:
     return True
 
 
+SCHEMA_KEYWORDS = frozenset({
+    "$schema", "$id", "$ref", "$defs", "title", "description", "default",
+    "type", "required", "properties", "additionalProperties", "enum", "const",
+    "allOf", "anyOf", "oneOf", "if", "then", "else", "items", "minItems",
+    "maxItems", "uniqueItems", "minLength", "pattern", "minimum", "maximum",
+})
+
+
+def _json_equal(left: Any, right: Any) -> bool:
+    if isinstance(left, bool) or isinstance(right, bool):
+        return type(left) is type(right) and left == right
+    if isinstance(left, Mapping) and isinstance(right, Mapping):
+        return left.keys() == right.keys() and all(_json_equal(left[k], right[k]) for k in left)
+    if isinstance(left, list) and isinstance(right, list):
+        return len(left) == len(right) and all(_json_equal(a, b) for a, b in zip(left, right))
+    return left == right
+
+
 def _validate(
     value: Any,
     schema: Mapping[str, Any],
@@ -88,16 +106,16 @@ def _validate(
     repository_root: Path,
     location: str,
 ) -> list[str]:
-    errors: list[str] = []
+    errors: list[str] = [f"{location}: unsupported schema keyword {key}" for key in schema if key not in SCHEMA_KEYWORDS]
     if "$ref" in schema:
         target, target_path = _schema_target(str(schema["$ref"]), schema_path, repository_root)
-        return _validate(
+        errors.extend(_validate(
             value,
             target,
             schema_path=target_path,
             repository_root=repository_root,
             location=location,
-        )
+        ))
     for branch in schema.get("allOf", []):
         errors.extend(
             _validate(
@@ -153,15 +171,14 @@ def _validate(
         ]
         if sum(not item for item in branch_errors) != 1:
             errors.append(f"{location}: expected exactly one matching schema")
-        return errors
     expected_type = schema.get("type")
     if expected_type:
         expected_types = [expected_type] if isinstance(expected_type, str) else expected_type
         if not any(_matches_type(value, item) for item in expected_types):
             return [f"{location}: expected type {' | '.join(expected_types)}"]
-    if "const" in schema and value != schema["const"]:
+    if "const" in schema and not _json_equal(value, schema["const"]):
         errors.append(f"{location}: expected constant {schema['const']!r}")
-    if "enum" in schema and value not in schema["enum"]:
+    if "enum" in schema and not any(_json_equal(value, item) for item in schema["enum"]):
         errors.append(f"{location}: value is not in the allowed enum")
     if isinstance(value, Mapping):
         required = schema.get("required", [])
@@ -181,6 +198,9 @@ def _validate(
             elif schema.get("additionalProperties") is False:
                 errors.append(f"{location}: unexpected property {key}")
     if isinstance(value, list):
+        # lazy: quadratic comparison preserves JSON equality for small workflow arrays; index large arrays if needed.
+        if schema.get("uniqueItems") and any(_json_equal(item, prior) for i, item in enumerate(value) for prior in value[:i]):
+            errors.append(f"{location}: array items must be unique")
         if len(value) < schema.get("minItems", 0):
             errors.append(f"{location}: too few items")
         if "maxItems" in schema and len(value) > schema["maxItems"]:
@@ -243,7 +263,10 @@ def validate_reference_integrity(
     for document_path, document in documents.items():
         for location, key, value in _walk(document, document_path):
             manifest_index_ref = key == "artifact_id" and "stage-manifest.json/artifacts/" in location
-            if not manifest_index_ref and (key == "id" or key.endswith("_id")) and isinstance(value, str) and ID_PATTERN.fullmatch(value):
+            linked_id = (key == "workflow_id" and any(part in location for part in ("/workflow_evidence/", "/workflow_smoke_tests/", "/smoke_tests/"))) or (key == "risk_id" and "Risk-acceptance-ledger.json/accepted_risks/" in location)
+            if linked_id and isinstance(value, str):
+                references.append((location, value))
+            if not manifest_index_ref and not linked_id and (key == "id" or key.endswith("_id")) and isinstance(value, str) and ID_PATTERN.fullmatch(value):
                 definitions.setdefault(value, []).append(location)
             if key.endswith("_ref") and isinstance(value, str):
                 references.append((location, value))

@@ -12,6 +12,18 @@ class Stage4StitchContractTests(unittest.TestCase):
     def _read(self, relative_path: str) -> str:
         return (REPOSITORY_ROOT / relative_path).read_text(encoding="utf-8")
 
+    def test_written_page_gate_precedes_stitch_in_command_and_draft(self) -> None:
+        for path in (
+            ".opencode/Skills/stage-4-ux-interaction-architecture/skill.md",
+            "System-References/Docs/Stage-4-ux-interaction-architecture-draft.md",
+        ):
+            with self.subTest(path=path):
+                content = self._read(path)
+                self.assertLess(content.index("8. Written page specifications"), content.index("9. Stitch MCP"))
+                self.assertIn("page_specifications.py --workspace-root .", content)
+                self.assertIn("Build-Plans/Stage-4/Pages/<screen_id>/page-spec.md", content)
+                self.assertIn("page_set_approval", content)
+
     def test_stage_4_schema_supports_stitch_visual_source_control(self) -> None:
         schema = json.loads(
             self._read("System-References/Schemas/stage-4-output.schema.json")

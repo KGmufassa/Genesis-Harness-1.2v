@@ -2,5 +2,26 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "stage-3-output.schema.json",
   "title": "Stage 3 Output",
-  "allOf": [{ "$ref": "stage-output-common.schema.json" }]
+  "allOf": [
+    {
+      "$ref": "stage-output-common.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "deployment_strategy_ref": {
+      "type": "string"
+    },
+    "deployment_targets": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "web",
+          "ios",
+          "android"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
 }

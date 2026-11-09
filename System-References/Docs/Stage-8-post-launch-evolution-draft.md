@@ -754,3 +754,10 @@ Stage 8 readiness must also record:
 ```
 
 Stage 8 may not use `evolution_plan_ready` until required schema validation passes, telemetry, support, incident, cost, feedback route, experiment, roadmap, artifact, and accepted-risk references resolve to upstream sources, accepted high and critical evolution risks are written to `Build-Plans/Build-status/Risk-acceptance-ledger.json`, and failed readiness checks are converted into revision-loop actions.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume waitlist evidence through `waitlist_validation_ref`. Compare observed demand with original assumptions and desired metrics, preserve observation dates and limitations, and route product implications to Stage 1/2. Unobserved metrics remain unknown.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.

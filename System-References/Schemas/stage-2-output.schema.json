@@ -2,5 +2,25 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "stage-2-output.schema.json",
   "title": "Stage 2 Output",
-  "allOf": [{ "$ref": "stage-output-common.schema.json" }]
+  "allOf": [
+    {
+      "$ref": "stage-output-common.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "assumption_registry": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "confidence_scores": {
+      "type": "object"
+    },
+    "research_accepted_risk_ref": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
 }

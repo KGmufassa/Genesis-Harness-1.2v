@@ -1458,3 +1458,10 @@ Stage 6 readiness must also record:
 ```
 
 Stage 6 may not use `ready_for_stage_7` until required schema validation passes, ticket, agent, batch, validation, artifact, UI blueprint, visual spec, design system, repair, and regression references resolve to upstream sources, accepted high and critical implementation or validation risks are written to `Build-Plans/Build-status/Risk-acceptance-ledger.json`, and failed readiness checks are converted into revision-loop actions.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Read `waitlist_validation_ref` and `deployment_strategy_ref` through the normalized Stage 5 context/handoff. Verify application builds against approved methods and carry both references into `stage_7_handoff`. Stage 4 permits only validation-site work before this stage, after core-feature, stack, and deployment approval.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.

@@ -721,3 +721,11 @@ Stage 1 readiness must also record:
 ```
 
 Stage 1 may not use `ready_for_stage_2` until required schema validation passes, blocking reference errors are resolved or accepted, accepted high and critical risks are written to `Build-Plans/Build-status/Risk-acceptance-ledger.json`, and failed readiness checks are converted into revision-loop actions.
+
+---
+
+# Waitlist Validation Intent
+
+- Define the waitlist audience, value proposition, signup offer, target assumptions, desired metrics, measurement window, and owner in the product boundaries and success framework.
+- Hand these inputs through Stage 2 research and Stage 3 approval to the Stage 4 opening checkpoint; waitlist launch is required, but reaching signup targets does not gate development.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for the cross-stage contract.

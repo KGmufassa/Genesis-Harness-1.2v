@@ -222,3 +222,18 @@ Before completing Stage 6, confirm:
 * completion_status includes completed_at and recorded_at timestamps
 * Global-workflow-state.json reflects the stage completion status
 * Stage 7 handoff is usable for launch and operationalization
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Read `waitlist_validation_ref` and `deployment_strategy_ref` through the normalized Stage 5 context/handoff. Verify application builds against approved methods and carry both references into `stage_7_handoff`. Stage 4 permits only validation-site work before this stage, after core-feature, stack, and deployment approval.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Do not synthesize successful readiness from record presence alone. Evaluate current workflow statuses, verified artifacts, checked live-data/dead-control checks, responsive visual QA, and design-system outcomes.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

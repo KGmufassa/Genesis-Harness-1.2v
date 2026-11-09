@@ -234,3 +234,18 @@ Build-Plans/Build-status/Risk-acceptance-ledger.json
 ```
 
 Failed readiness checks must become revision-loop actions with owning output, owning skill, required change, and next action.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume waitlist evidence through `waitlist_validation_ref`. Compare observed demand with original assumptions and desired metrics, preserve observation dates and limitations, and route product implications to Stage 1/2. Unobserved metrics remain unknown.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Validate feedback targets, optional issue-domain routing, ownership/action, and high/critical verified evidence. Audit route records and cycle flags must reflect actual routes rather than default success fields.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

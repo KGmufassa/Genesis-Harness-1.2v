@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import sys
@@ -22,6 +23,8 @@ from run_readiness_audit import (  # noqa: E402
     write_results,
 )
 from workflow_validation import validate_schema  # noqa: E402
+from precode_fixtures import seed_precode
+from enforcement_fixtures import seed_enforcement
 
 
 def write_json(path: Path, payload: Any) -> None:
@@ -51,8 +54,21 @@ class ReadinessRunnerTests(unittest.TestCase):
             if stage in STATE_FILES:
                 payload = self._payload(stage, 99)
                 payload[HANDOFF_KEYS[stage]] = self._handoff(stage)
-                payload["stage_decision_brief"] = {"approval_status": "approved"}
+                payload["stage_decision_brief"] = {"approval_status": "approved", "approved_by": "user", "approved_at": "2026-11-08T12:00:00Z"}
+                if stage == 4:
+                    spec_path = root / "Build-Plans/Stage-4/Pages/SCREEN-001/page-spec.md"
+                    spec_path.parent.mkdir(parents=True)
+                    spec_path.write_text("# Account settings\n\nWeb and mobile settings.\n", encoding="utf-8")
+                    (spec_path.parent.parent / "README.md").write_text("[Settings](SCREEN-001/page-spec.md)\n", encoding="utf-8")
+                    digest = hashlib.sha256(spec_path.read_bytes()).hexdigest()
+                    approval = {"approval_status": "approved", "approved_by": "user", "approved_at": "2026-10-30T12:00:00Z"}
+                    payload["screen_system"] = {"screen_inventory": [{"screen_id": "SCREEN-001"}]}
+                    payload["page_specifications"] = [{"screen_ref": "SCREEN-001", "document_path": str(spec_path.relative_to(root)), "content_hash": digest, "approved_hash": digest, **approval}]
+                    payload["page_set_approval"] = {"approved_screen_refs": ["SCREEN-001"], **approval}
                 write_json(status / STATE_FILES[stage], payload)
+
+        seed_precode(root)
+        seed_enforcement(root)
 
     def _payload(self, stage: int, index: int) -> dict[str, Any]:
         return {
@@ -72,7 +88,7 @@ class ReadinessRunnerTests(unittest.TestCase):
 
     def _handoff(self, stage: int) -> Any:
         if stage == 8:
-            return [{"feedback_route_id": "TELEMETRY-ROUTE-1", "owner": "user", "recommended_action": "Review"}]
+            return [{"feedback_route_id": "TELEMETRY-ROUTE-1", "owner": "user", "recommended_action": "Review", "recommended_target_stage": "Stage 1", "creates_new_stage_cycle": True}]
         return {"source_stage": f"Stage {stage}", "target_stage": f"Stage {stage + 1}", "readiness": "ready"}
 
     def test_minimal_stage_1_through_8_fixture_passes(self) -> None:
@@ -90,6 +106,17 @@ class ReadinessRunnerTests(unittest.TestCase):
                 write_results(root, stage, audit)
             state = json.loads((root / "Build-Plans/Build-status/Global-workflow-state.json").read_text(encoding="utf-8"))
             self.assertEqual(state["stages"]["stage_8"]["audit_status"], "passed")
+
+    def test_stage4_written_edit_blocks_only_stage4_readiness(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self._workspace(root)
+            path = root / "Build-Plans/Stage-4/Pages/SCREEN-001/page-spec.md"
+            path.write_text("# Changed user specification\n", encoding="utf-8")
+            audit = build_audit(root, 4, READY_STATUSES[4])
+            self.assertFalse(audit["ready_for_next_stage"])
+            self.assertIn("matching approved content hash", " ".join(audit["blocking_gaps"]))
+            self.assertTrue(build_audit(root, 5, READY_STATUSES[5])["ready_for_next_stage"])
 
     def test_missing_output_creates_blocking_revision_loop(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

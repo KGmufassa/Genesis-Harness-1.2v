@@ -2,5 +2,37 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "stage-8-output.schema.json",
   "title": "Stage 8 Output",
-  "allOf": [{ "$ref": "stage-output-common.schema.json" }]
+  "allOf": [
+    {
+      "$ref": "stage-output-common.schema.json"
+    }
+  ],
+  "properties": {
+    "prior_stage_feedback": {
+      "type": "array",
+      "items": {
+        "$ref": "global-readiness-audit.schema.json#/$defs/feedback_route",
+        "properties": {
+          "recommended_target_stage": {
+            "enum": [
+              "Stage 1",
+              "Stage 2",
+              "Stage 3",
+              "Stage 4",
+              "Stage 5",
+              "Stage 6",
+              "Stage 7",
+              "Stage 8"
+            ]
+          }
+        },
+        "required": [
+          "owner",
+          "recommended_action",
+          "recommended_target_stage"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
 }

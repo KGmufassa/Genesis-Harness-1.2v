@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stage 1–8 · Improvement Patch Plan</title><style>:root{--bg:#f5f7fb;--paper:#fff;--ink:#18263b;--muted:#5d6b80;--line:#dfe5ed;--accent:#14675b;--nav:#142337;--shadow:0 6px 25px #18263b06}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #e8b447;outline-offset:4px}.skip{position:fixed;top:-60px;left:20px;z-index:5;background:#fff;padding:10px}.skip:focus{top:10px}
+.sidebar{width:282px;position:fixed;inset:0 auto 0 0;overflow-y:auto;background:var(--nav);color:#c2cedc;padding:32px 22px}.brand{color:white;font-size:21px;font-weight:750;letter-spacing:-.5px}.brand small{display:block;font-size:11px;letter-spacing:2.6px;color:#a3b8cd;margin-top:4px}.nav-label{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#9cacc1;margin:29px 10px 9px}.sidebar a{display:flex;gap:11px;align-items:baseline;color:#d1dbe7;text-decoration:none;font-size:12px;line-height:1.45;padding:8px 10px;border-radius:6px}.sidebar a:hover,.sidebar a:focus{background:#23374e;color:#fff}.sidebar a span{font-size:10px;color:#91bcb7;min-width:16px}.sidebar details summary{cursor:pointer;font-size:12px;color:#d1dbe7;padding:10px}.sidebar details a{font-size:11px}.nav-footer{margin:30px 10px 4px;padding-top:20px;border-top:1px solid #324156;font-size:11px;color:#a9b8cb}
+main{margin-left:282px;max-width:1390px;padding:48px 56px 65px}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:750;color:var(--accent)}h1{font-size:clamp(30px,3.4vw,48px);line-height:1.12;letter-spacing:-1.6px;margin:15px 0 20px;max-width:850px}h1 span{display:block;font-weight:450;color:#53637a;font-size:.65em;letter-spacing:-.6px;margin-top:13px}.intro{max-width:740px;color:var(--muted);font-size:17px}.header-meta{display:flex;flex-wrap:wrap;gap:10px;margin:23px 0}.pill{font-size:11px;font-weight:650;background:#e4efec;color:#155d51;border:1px solid #c9e1db;border-radius:20px;padding:5px 12px}.pill.neutral{background:#eaf0f7;color:#465a74;border-color:#d5deeb}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:32px 0}.metric{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:21px;box-shadow:var(--shadow)}.metric span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}.metric strong{display:block;font-size:31px;line-height:1.3;letter-spacing:-1px;margin:8px 0 5px}.metric small{font-size:12px;color:var(--muted)}.metric:first-child{border-top:3px solid var(--accent)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:28px 0 8px}.search{flex:1;min-width:180px}.search label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px}.search input{width:100%;padding:10px 13px;border:1px solid #cbd6e1;border-radius:7px;background:white;color:var(--ink)}button{padding:10px 12px;border:1px solid #cbd6e1;border-radius:7px;background:white;color:var(--ink);font-size:12px;margin-top:20px}button:hover{border-color:var(--accent);color:var(--accent)}#search-status{font-size:12px;color:var(--muted);margin:5px 0 25px;min-height:20px}
+.section{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin:22px 0;padding:28px 30px;box-shadow:var(--shadow)}h2{font-size:23px;line-height:1.3;letter-spacing:-.5px;margin:0 0 18px}h3{font-size:16px;margin:27px 0 10px}p{margin:12px 0}ul,ol{padding-left:23px;margin:12px 0}li{margin:7px 0}strong{font-weight:680}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:7px;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.6;min-width:520px}th{text-align:left;background:#eef2f7;font-size:11px;letter-spacing:.3px;font-weight:700;padding:12px 14px;border-bottom:1px solid var(--line)}td{padding:12px 14px;border-bottom:1px solid #e8edf3;vertical-align:top}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#fafbfd}td:first-child{font-weight:550}code{font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:#eef2f7;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}.code-wrap{margin:18px 0;border:1px solid #dbe3ed;border-radius:7px;overflow:hidden;background:#f6f8fb}.code-label{display:block;border-bottom:1px solid #e3e9f1;padding:6px 15px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}pre{overflow-x:auto;margin:0;padding:16px;white-space:pre;font-size:12px}pre code{background:none;padding:0;overflow-wrap:normal}
+.group-heading{padding:30px 2px 10px}.group-heading h2{margin:8px 0}.group-heading p{color:var(--muted);font-size:14px}.patch{border:1px solid var(--line);border-radius:9px;background:var(--paper);margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:25px}.patch>summary{display:flex;align-items:center;gap:16px;padding:22px 25px;cursor:pointer;list-style:none}.patch>summary::-webkit-details-marker{display:none}.patch-number{align-self:flex-start;padding:5px 8px;border-radius:6px;background:#e9f3ef;color:#176354;font-size:12px;font-weight:750;letter-spacing:.4px}.patch-title{font-size:17px;font-weight:680;line-height:1.4;flex:1}.patch-meta{display:block;font-size:10px;letter-spacing:.6px;font-weight:550;color:var(--muted);margin-top:6px;text-transform:uppercase}.toggle{font-size:22px;font-weight:400;color:#61748b}.patch[open] .toggle{transform:rotate(45deg)}.patch-body{padding:0 30px 23px;border-top:1px solid #edf0f5}.history .patch-number{background:#eef1f6;color:#617086}.history>.section{box-shadow:none}.page-footer{border-top:1px solid var(--line);margin-top:45px;padding-top:20px;color:var(--muted);font-size:12px}.page-footer a{margin-right:16px}[hidden]{display:none!important}
+@media(min-width:1650px){main{margin-left:calc(282px + (100vw - 1650px)/3)}}@media(max-width:1100px){.sidebar{width:235px;padding:25px 15px}main{margin-left:235px;padding:35px 28px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){.sidebar{position:relative;width:100%;padding:20px}.sidebar nav{display:none}.nav-footer{display:none}main{margin:0;padding:26px 17px}.brand small{display:inline;margin-left:10px;font-size:9px}.section{padding:22px 19px}.patch>summary{padding:19px 16px;gap:12px}.patch-body{padding:0 19px 18px}.patch-title{font-size:15px}.metric{padding:16px}.metrics{gap:10px}.metric strong{font-size:27px}.toolbar button{margin-top:5px}.search{flex-basis:100%}h1{letter-spacing:-1px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{body{background:#fff;font-size:10pt}.sidebar,.toolbar,#search-status,.skip,.toggle{display:none!important}main{margin:0;padding:0;max-width:none}h1{font-size:27pt}.metrics{grid-template-columns:repeat(4,1fr)}.section,.patch{box-shadow:none;border-color:#ddd;break-inside:auto}.patch>summary{break-after:avoid}.patch-body{display:block}.patch::details-content{display:block}.patch[hidden]{display:block!important}pre{white-space:pre-wrap;overflow-wrap:anywhere}.table-wrap{overflow:visible}table{min-width:0}h2,h3{break-after:avoid}a{color:inherit;text-decoration:none}.page-footer{font-size:9pt}}
+</style></head>
+<body><a class="skip" href="#main">Skip to content</a><aside class="sidebar"><div class="brand">GENESIS<small>WORKFLOW HEALTH</small></div><nav aria-label="Plan navigation"><p class="nav-label">Assessment</p><a href="#purpose">Purpose</a><a href="#current-health-baseline">Current Health Baseline</a><a href="#latest-diagnostic-run">Latest Diagnostic Run</a><a href="#latest-health-check">Latest Health Check</a><a href="#patch-overview">Patch Overview</a><a href="#follow-up-patch-overview">Follow-Up Patch Overview</a><a href="#current-enforcement-backlog">Current Enforcement Backlog</a><a href="#implementation-strategy">Implementation Strategy</a><a href="#review-checklist-for-future-hardening">Review Checklist For Future Hardening</a><a href="#expected-result">Expected Result</a><p class="nav-label">Open and pending</p><a href="#patch-20">Patch 20 — Supervised Real-App Evidence Pilot</a><a href="#patch-21">Patch 21 — General Execution And Regression Completion</a><a href="#patch-22">Patch 22 — Substantive Feature And Workflow Planning Coverage</a><a href="#patch-23">Patch 23 — Complete Selected Stack Readiness</a><a href="#patch-24">Patch 24 — Downstream Approval And Evidence Freshness</a><details><summary>Implemented and historical</summary><a href="#patch-1">Patch 1 — Artifact Evidence Registry</a><a href="#patch-2">Patch 2 — Stage Contract Profiles</a><a href="#patch-3">Patch 3 — Machine-Checkable Schema Validation</a><a href="#patch-4">Patch 4 — Stage 2 Evidence Quality Upgrade</a><a href="#patch-5">Patch 5 — Stage 7 Deployment Proof Upgrade</a><a href="#patch-6">Patch 6 — Stage 8 Feedback Routing Upgrade</a><a href="#patch-7">Patch 7 — Complexity-Based Interactive Guidance</a><a href="#patch-8">Patch 8 — Stage-Level Schema Validation Results</a><a href="#patch-9">Patch 9 — Risk Acceptance Ledger</a><a href="#patch-10">Patch 10 — Cross-Stage Reference Integrity Audit</a><a href="#patch-11">Patch 11 — Readiness Failure Revision Loop</a><a href="#patch-12">Patch 12 — Artifact Field Standardization</a><a href="#patch-13">Patch 13 — Schema Coverage And Seed Parity</a><a href="#patch-14">Patch 14 — Active Profiles And Research Evidence Gates</a><a href="#patch-15">Patch 15 — Normalized Stage 5 Audit And Handoff Integration</a><a href="#patch-16">Patch 16 — Runtime Outcomes And Launch Proof Enforcement</a><a href="#patch-17">Patch 17 — Durable Diagnostics For Malformed Inputs</a><a href="#patch-18">Patch 18 — Feedback Destination And Audit Accuracy</a><a href="#patch-19">Patch 19 — Bind Pre-Code Decisions To Approved Scope</a></details></nav><div class="nav-footer">Stage 1–8 harness<br>2026-11-08 — refreshed with stage-health-report-check</div></aside>
+<main id="main"><header><span class="eyebrow">ENGINEERING IMPROVEMENT PLAN</span><h1>Stage 1–8<span>A-grade improvement patch plan</span></h1><p class="intro">Current findings, planned improvements, and verified implementation history in one reading edition.</p><div class="header-meta"><span class="pill">Reviewed health and patch status</span><span class="pill neutral">2026-11-08 — refreshed with stage-health-report-check</span></div></header><div class="metrics"><div class="metric"><span>Current health assessment</span><strong>88 / 100 — B</strong><small>Engineering judgment from the health report</small></div><div class="metric"><span>Repository tests</span><strong>115 passed; 0 failed</strong><small>Recorded checks, not proof of live operation</small></div><div class="metric"><span>Confirmed open findings</span><strong>4</strong><small>From the report&#x27;s open-findings section</small></div><div class="metric"><span>Open or pending patches</span><strong>5</strong><small>Derived from implementation status</small></div></div>
+<div class="toolbar"><div class="search"><label for="patch-search">Find a patch</label><input id="patch-search" type="search" placeholder="Search patches and acceptance criteria…"></div><button id="expand" type="button">Expand all</button><button id="collapse" type="button">Collapse all</button><button id="print" type="button">Print / save PDF</button></div><p id="search-status" role="status" aria-live="polite">Showing all 24 patches · Filter patches or browse the section navigation.</p><section class="section" id="purpose"><h2>Purpose</h2><p>This review document defines the planned patches needed to raise the full Stage 1-8 workflow from the current B-grade assessment to an A-grade workflow across planning, implementation, launch, and post-launch evolution.</p>
+<p>The goal is not to restructure the stage architecture. The current architecture is sound.</p>
+<p>The goal is to improve:</p>
+<ul><li>evidence quality</li><li>verification rigor</li><li>workflow adaptability</li><li>readiness audit reliability</li><li>launch proof</li><li>post-launch feedback routing</li><li>implementation traceability</li></ul></section><section class="section" id="current-health-baseline"><h2>Current Health Baseline</h2><p>Implementation update: <strong>2026-11-08</strong>.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Measure</th><th scope="col">Verified Status</th></tr></thead><tbody><tr><td>Original diagnostic assessment</td><td>84 / 100 — B, retained as the pre-patch baseline</td></tr><tr><td>Current health assessment</td><td><strong>88 / 100 — B</strong>; four further readiness gaps remain</td></tr><tr><td>Patches 13–19</td><td><strong>Implemented and regression-tested</strong></td></tr><tr><td>Patch 20</td><td><strong>Runbook prepared; real-app execution pending application selection/access</strong></td></tr><tr><td>Repository tests, latest health check</td><td><strong>115 passed; 0 failed</strong></td></tr><tr><td>Seed/registry schema checks</td><td><strong>6 passed; 0 failed</strong></td></tr><tr><td>Original confirmed findings</td><td><strong>8 addressed by executable controls and regression tests</strong></td></tr><tr><td>Skill packages</td><td><strong>90 compliant packages</strong></td></tr><tr><td>Actual application stages</td><td>Baseline remains <code>not_started</code>; no live pilot or production evidence claimed</td></tr></tbody></table></div>
+<p>See <code>Stage-1-8-Improvement-Implementation-Record.md</code> for the change inventory, exact contract additions, test evidence, and remaining work. The HTML edition mirrors this implementation status.</p>
+<p>The post-implementation health check assesses the harness at 88/B. The original eight findings remain addressed, while four further gaps are mapped to planned patches 21–24. A+ still requires stronger readiness enforcement and supervised real-app evidence; passing counts alone do not award a grade.</p></section><section class="section" id="latest-diagnostic-run"><h2>Latest Diagnostic Run</h2><ul><li>Preserved unrelated in-progress edits, the eight-stage architecture, and the approved Stage 4 waitlist placement.</li><li>Added regression coverage for the confirmed gaps and successful controls, then implemented the missing checks.</li><li>Replaced the generic Stage 5 integration fixture with an actual normalized v2 package and recorded runtime/launch evidence fixtures.</li><li>Verified all repository tests, schema vocabulary coverage, stage-specific seeds, metadata, script syntax, and patch whitespace.</li><li>Saved implementation details in <code>Stage-1-8-Improvement-Implementation-Record.md</code>; the original health report retains the pre-patch diagnostic as historical evidence.</li></ul>
+<h3>Verified Improvements</h3>
+<ul><li>Active profiles, current-stage decisions, Stage 2 research confidence/evidence, and supported approval gates are evaluated.</li><li>The global audit invokes normalized package, reference, scope, wave, and completion-definition validators.</li><li>Failed persistence, missing current-stage outcomes, incomplete visual checks, missing launch proof, and unverified artifacts block readiness.</li><li>Malformed canonical/registry/ledger/schema inputs produce failed audit diagnostics; damaged global state is preserved.</li><li>Feedback routes have valid destinations, owned actions, verified high/critical evidence, and accurate cycle reporting.</li><li>Feature/platform, selected-stack, and deployment fingerprints detect stale approvals and waitlist decisions.</li><li>Patch 20 has a separate supervised runbook; it has not been represented as a completed real-app run.</li></ul>
+<h3>Confirmed Findings Addressed</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Finding</th><th scope="col">Implemented Resolution</th><th scope="col">Patch</th><th scope="col">Status</th></tr></thead><tbody><tr><td>RISK-HEALTH-001</td><td>UX blueprint seed is an array; stage-specific seed regression checks pass.</td><td>13</td><td>Verified</td></tr><tr><td>RISK-HEALTH-002</td><td>Shared validator enforces JSON-aware uniqueness and used vocabulary, including reference siblings.</td><td>13</td><td>Verified</td></tr><tr><td>RISK-HEALTH-003</td><td>Actual profile requirements and Stage 2 evidence/confidence are checked.</td><td>14</td><td>Verified</td></tr><tr><td>RISK-HEALTH-004</td><td>Normalized manifest paths, IDs, schemas, pointers, package contracts, and handoffs are checked.</td><td>15</td><td>Verified</td></tr><tr><td>RISK-HEALTH-005</td><td>Failed persistence and missing required current-stage workflow evidence block.</td><td>16</td><td>Verified</td></tr><tr><td>RISK-HEALTH-006</td><td>All six launch-proof categories require passed, verified evidence or an expressly allowed scoped exception.</td><td>16</td><td>Verified</td></tr><tr><td>RISK-HEALTH-007</td><td>Malformed input produces durable failed audit/revision output; damaged source/global state is preserved.</td><td>17</td><td>Verified</td></tr><tr><td>RISK-HEALTH-008</td><td>Invalid feedback destinations and missing high/critical proof block; route audit fields reflect actual evaluation.</td><td>18</td><td>Verified</td></tr></tbody></table></div></section><section class="section" id="latest-health-check"><h2>Latest Health Check</h2><ul><li>Assessment date: <strong>2026-11-08</strong>; current result <strong>88/100 — B</strong>, with <strong>115 passing tests</strong>, six passing seed/registry schema checks, 90 compliant skills, and unchanged baseline stage status.</li><li><code>stage-health-report-check</code> now provides repeatable evidence collection and HTML generation; its reporting work does not implement readiness fixes.</li><li>Reproduced all four current open findings in temporary fixtures with passing baselines. Preserve the original eight finding closures and patches 13–19 implementation history.</li></ul>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Open Finding</th><th scope="col">Owner</th><th scope="col">Planned Patch</th><th scope="col">Priority</th></tr></thead><tbody><tr><td>RISK-HEALTH-009 — General implementation failures</td><td>Stage 6</td><td>21</td><td>High</td></tr><tr><td>RISK-HEALTH-010 — Feature-to-ticket coverage</td><td>Stage 5</td><td>22</td><td>High</td></tr><tr><td>RISK-HEALTH-011 — Complete concrete stack</td><td>Stage 3</td><td>23</td><td>High</td></tr><tr><td>RISK-HEALTH-012 — Downstream approval freshness</td><td>Stages 5–7</td><td>24</td><td>High</td></tr></tbody></table></div></section><section class="section" id="current-enforcement-backlog"><h2>Current Enforcement Backlog</h2><ul><li>Patches 13–19: <strong>implemented and regression-tested</strong>. Patch 20: <strong>prepared; live pilot pending</strong>. Patches 21–24: <strong>planned; not implemented</strong>.</li><li>See <code>Readiness-Enforcement-Contract.md</code> for exact fields and adoption behavior, and <code>Stage-1-8-Improvement-Implementation-Record.md</code> for the change record.</li><li>Existing outputs need genuine review/verification before the next affected finalization; approvals and successful results are never fabricated or refreshed automatically.</li><li>Preserve the eight stages, Stage 4 opening waitlist, normalized Stage 5 envelopes, stable IDs, and unrelated work.</li></ul></section><section class="section" id="implementation-strategy"><h2>Implementation Strategy</h2><ul><li>Retain patches 13–19 as implemented history; their original specific probes remain covered.</li><li>Implement the remaining confirmed fixes in order <strong>21 → 24 → 23 → 22</strong>, keeping each independently reviewable with a reproduced failing probe and successful control.</li><li>Coordinate patches 21/22 for complete planned-work accounting and patches 23/24 for complete approved-stack continuity.</li><li>Then execute Patch 20 with an actual application and its live evidence sources. Reporting and fixtures cannot complete that pilot.</li><li>Run <code>stage-health-report-check</code> after substantive changes to refresh the assessment and both plan editions; do not implement a planned patch merely as part of a health check.</li></ul></section><section class="section" id="review-checklist-for-future-hardening"><h2>Review Checklist For Future Hardening</h2><ul><li>Keep <code>System-References/Docs</code> as the canonical review-document location.</li><li>Reuse the global audit and existing stage-specific helpers rather than add a second readiness authority.</li><li>Preserve the existing user/delegated-policy authority requirement for accepted high and critical risks.</li><li>Evaluate policy-specific exceptions explicitly; never turn missing validation into an implicit approval.</li><li>Keep standalone per-stage audit records and update global state only when safely readable.</li><li>Preserve <code>expected_artifacts</code>, artifact-registry references, normalized Stage 5 ownership, and Stage 4 waitlist placement.</li><li>Confirm the regression probes fail for the intended reason before calling a patch complete.</li></ul></section><section class="section" id="expected-result"><h2>Expected Result</h2><ul><li>Seven enforcement patches implemented; all eight original findings addressed with regression coverage. Four further gaps remain planned under patches 21–24.</li><li>The implementation record documents exact changes, interfaces, compatibility behavior, and verification results.</li><li>The original 84 / 100 diagnostic remains historical; the current health assessment is 88/B. No A+ claim has been made.</li><li>Patch 20 requires real product, publication, runtime, deployment, monitoring, and feedback evidence before it can be completed.</li></ul></section><section aria-labelledby="open-patches"><div class="group-heading"><span class="eyebrow">REMAINING WORK</span><h2 id="open-patches">Open and pending patches</h2><p>Priorities and acceptance criteria come from the reviewed Markdown plan.</p></div><details class="patch" id="patch-20" data-patch="20" open><summary><span class="patch-number">20</span><span class="patch-title">Supervised Real-App Evidence Pilot<span class="patch-meta">Runbook prepared; actual application pilot pending selection and access. See <code>Stage-1-8-Supervised-Pilot-Runbook.md</code>.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Runbook prepared; actual application pilot pending selection and access. See <code>Stage-1-8-Supervised-Pilot-Runbook.md</code>.</li></ul>
+<h3>Objective</h3>
+<ul><li>Establish practical confidence beyond synthetic fixtures after the false-readiness gaps are closed.</li></ul>
+<h3>Changes</h3>
+<ul><li>Run one approved application through Stages 1–8, retaining actual research, feature/stack approval, Stage 4 waitlist publication, design approvals, normalized tickets, runtime/visual tests, deployment proof, and telemetry-driven feedback.</li><li>Review required evidence manually during the pilot and record limitations and provider access failures honestly.</li><li>Update scores from observed results and document any genuine workflow lessons in the owning skills.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>All eight stage audits reflect real outputs and reviewable evidence, with no invented demand, deployment, or telemetry claims.</li><li>Failed checks produce actionable repair routes and are resolved or explicitly accepted where allowed.</li><li>Unattended operation is considered only after the complete evidence set and residual limitations are reviewed; passing fixture tests alone is insufficient.</li></ul></div></details><details class="patch" id="patch-21" data-patch="21" open><summary><span class="patch-number">21</span><span class="patch-title">General Execution And Regression Completion<span class="patch-meta">Planned; not implemented. Priority: high. Owner: Stage 6 / global readiness. Finding: <code>RISK-HEALTH-009</code>.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Planned; not implemented. Priority: high. Owner: Stage 6 / global readiness. Finding: <code>RISK-HEALTH-009</code>.</li></ul>
+<h3>Required Changes</h3>
+<ul><li>Evaluate canonical execution blockers, required test failures, regression outcomes, and planned-ticket completion before Stage 6 readiness.</li><li>Map results to required Stage 5 work; successful critical workflow proof cannot hide an incomplete migration or unrelated required test failure.</li><li>Retain explicitly authorized deferral handling and the existing one-ticket scoped-change entry path.</li></ul>
+<h3>Acceptance Criteria</h3>
+<ul><li>Nonempty unresolved <code>execution_blockers</code> or required <code>test_failures</code> block, even when workflow evidence passes.</li><li>Missing or nonterminal required ticket results block; complete valid results pass.</li><li>Existing normalized and scoped-change successful controls remain passing.</li></ul></div></details><details class="patch" id="patch-22" data-patch="22" open><summary><span class="patch-number">22</span><span class="patch-title">Substantive Feature And Workflow Planning Coverage<span class="patch-meta">Planned; not implemented. Priority: high. Owner: Stage 5. Finding: <code>RISK-HEALTH-010</code>.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Planned; not implemented. Priority: high. Owner: Stage 5. Finding: <code>RISK-HEALTH-010</code>.</li></ul>
+<h3>Required Changes</h3>
+<ul><li>Reconcile approved in-scope feature/workflow IDs with slices, build tickets, assignments, acceptance criteria, and planned validation.</li><li>Block empty planning collections when approved buildable features require work; account for exclusions only through explicit approved scope decisions.</li><li>Reuse the normalized package and existing contract validators; add coverage checks rather than replace them.</li></ul>
+<h3>Acceptance Criteria</h3>
+<ul><li>The current one-feature/zero-ticket probe blocks for missing coverage.</li><li>Missing feature/workflow coverage, unassigned required tickets, or absent validation obligations produce actionable diagnostics.</li><li>A complete traceable plan passes; approved exclusions remain explicit and reviewable.</li></ul></div></details><details class="patch" id="patch-23" data-patch="23" open><summary><span class="patch-number">23</span><span class="patch-title">Complete Selected Stack Readiness<span class="patch-meta">Planned; not implemented. Priority: high. Owner: Stage 3. Finding: <code>RISK-HEALTH-011</code>.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Planned; not implemented. Priority: high. Owner: Stage 3. Finding: <code>RISK-HEALTH-011</code>.</li></ul>
+<h3>Required Changes</h3>
+<ul><li>Validate every required selected-stack component defined by the Stage 3 command, not only hosting/deployment.</li><li>Require concrete choices or explicit allowed <code>none_for_mvp</code> decisions, component rationales, and the existing stack evaluation/compatibility decisions.</li><li>Bind complete reviewed decisions to the existing fingerprints; preserve original platform coverage and deployment comparisons.</li></ul>
+<h3>Acceptance Criteria</h3>
+<ul><li>A hosting-only stack blocks with named missing components.</li><li>Unresolved alternatives, missing required rationales, and unacceptable evaluation decisions block.</li><li>Complete approved web/mobile stack scenarios and deliberate exclusions pass.</li></ul></div></details><details class="patch" id="patch-24" data-patch="24" open><summary><span class="patch-number">24</span><span class="patch-title">Downstream Approval And Evidence Freshness<span class="patch-meta">Planned; not implemented. Priority: high. Owners: Stages 5–7 / shared handoff validation. Finding: <code>RISK-HEALTH-012</code>.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Planned; not implemented. Priority: high. Owners: Stages 5–7 / shared handoff validation. Finding: <code>RISK-HEALTH-012</code>.</li></ul>
+<h3>Required Changes</h3>
+<ul><li>Recheck approved scope/stack/strategy fingerprints at affected downstream finalizations, or consume a versioned explicitly approved decision snapshot with equivalent freshness checks.</li><li>Require affected upstream review and evidence reconciliation when substantive scope changes; reference existence alone must not establish readiness.</li><li>Preserve stable IDs, historical artifacts, unrelated work, and the existing rule against automatically refreshing approvals.</li></ul>
+<h3>Acceptance Criteria</h3>
+<ul><li>The changed-feature probe blocks affected Stage 5, 6, and 7 readiness as it already does in Stages 3–4.</li><li>Stack/strategy drift and stale publication/build evidence are identified with the owning decision and next action.</li><li>Unchanged approved decisions and unrelated control-envelope edits continue to pass.</li></ul></div></details></section><section id="historical-foundation"><div class="group-heading"><span class="eyebrow">REFERENCE</span><h2>Implemented work and foundation</h2><p>Completion labels reflect the Markdown source; they do not imply completed live validation.</p></div><section class="section" id="patch-overview"><h2>Patch Overview</h2><div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Patch</th><th scope="col">Name</th><th scope="col">Primary Impact</th><th scope="col">Priority</th></tr></thead><tbody><tr><td>1</td><td>Artifact Evidence Registry</td><td>Stages 5-7 verification proof</td><td>Critical</td></tr><tr><td>2</td><td>Stage Contract Profiles</td><td>Adaptive workflow depth</td><td>Critical</td></tr><tr><td>3</td><td>Machine-Checkable Schema Validation</td><td>Readiness audit reliability</td><td>High</td></tr><tr><td>4</td><td>Stage 2 Evidence Quality Upgrade</td><td>Validation confidence</td><td>High</td></tr><tr><td>5</td><td>Stage 7 Deployment Proof Upgrade</td><td>Launch readiness rigor</td><td>High</td></tr><tr><td>6</td><td>Stage 8 Feedback Routing Upgrade</td><td>Continuous evolution quality</td><td>High</td></tr><tr><td>7</td><td>Complexity-Based Interactive Guidance</td><td>Reduces workflow friction</td><td>Medium</td></tr></tbody></table></div>
+<p>Patch foundation status after the implementation update:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Patch</th><th scope="col">Status</th><th scope="col">Current Coverage</th></tr></thead><tbody><tr><td>1</td><td>Implemented with evidence integration</td><td>Registry IDs, verified status, and usable proof locations are checked.</td></tr><tr><td>2</td><td>Implemented with profile evaluation</td><td>Active outputs, supported layers, and explicit approval pointers are evaluated.</td></tr><tr><td>3</td><td>Implemented for used vocabulary</td><td>Stage-specific schema/seed checks, uniqueness, references, and unsupported-keyword regressions pass.</td></tr><tr><td>4</td><td>Implemented with Stage 2 gates</td><td>Assumption evidence, confidence ceilings/thresholds, and unresolved critical issues are checked.</td></tr><tr><td>5</td><td>Implemented with launch gates</td><td>Required result objects and verified references block incomplete launch readiness.</td></tr><tr><td>6</td><td>Implemented with destination validation</td><td>Feedback ownership, targets, optional domain routing, high/critical evidence, and cycle reporting execute.</td></tr><tr><td>7</td><td>Contract and shape implemented</td><td>Interview behavior remains agent-driven; unsupported executable requirements block.</td></tr><tr><td>8</td><td>Implemented with stage-specific results</td><td>Outputs, canonical state, registries, and normalized package schemas are evaluated.</td></tr><tr><td>9</td><td>Implemented with scoped exception checks</td><td>Authority, approval evidence, current-stage scope, and expiry govern allowed exceptions.</td></tr><tr><td>10</td><td>Implemented with package integration</td><td>Stable IDs, JSON pointers, manifest paths, and required pre-code handoffs are checked.</td></tr><tr><td>11</td><td>Implemented with malformed-input recovery</td><td>Failed audit and revision output survive supported input failures; damaged global state is preserved.</td></tr><tr><td>12</td><td>Implemented</td><td>Existing canonical names and normalized ownership remain intact.</td></tr></tbody></table></div>
+<p>Patches 1–12 below retain their original design descriptions. Patches 13–19 implement the enforcement corrections; Patch 20 still needs real application evidence. These labels do not imply general Draft 2020-12 compliance, fresh network validation, or completed production validation.</p>
+<p>Original foundation implementation order (historical):</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>1. Artifact Evidence Registry
+2. Stage Contract Profiles
+3. Machine-Checkable Schema Validation
+4. Stage 2 Evidence Quality Upgrade
+5. Stage 7 Deployment Proof Upgrade
+6. Stage 8 Feedback Routing Upgrade
+7. Complexity-Based Interactive Guidance</code></pre></div></section><section class="section" id="follow-up-patch-overview"><h2>Follow-Up Patch Overview</h2><p>Patches 8–12 describe the original follow-up design. Their current status is qualified above; the earlier projected <code>96-98 / 100</code> result is not a verified current grade.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Patch</th><th scope="col">Name</th><th scope="col">Primary Impact</th><th scope="col">Priority</th></tr></thead><tbody><tr><td>8</td><td>Stage-Level Schema Validation Results</td><td>Makes schema validation visible in every stage handoff</td><td>High</td></tr><tr><td>9</td><td>Risk Acceptance Ledger</td><td>Prevents accepted risks from becoming invisible downstream</td><td>High</td></tr><tr><td>10</td><td>Cross-Stage Reference Integrity Audit</td><td>Prevents broken IDs and weak traceability across handoffs</td><td>High</td></tr><tr><td>11</td><td>Readiness Failure Revision Loop</td><td>Makes failed readiness audits actionable and stage-routable</td><td>High</td></tr><tr><td>12</td><td>Artifact Field Standardization</td><td>Removes ambiguity around <code>expected_artifacts</code> and registry references</td><td>Medium</td></tr></tbody></table></div>
+<p>Original follow-up implementation order (historical):</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>8. Stage-Level Schema Validation Results
+9. Risk Acceptance Ledger
+10. Cross-Stage Reference Integrity Audit
+11. Readiness Failure Revision Loop
+12. Artifact Field Standardization</code></pre></div></section><details class="patch" id="patch-1" data-patch="1"><summary><span class="patch-number">01</span><span class="patch-title">Artifact Evidence Registry<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Create a shared evidence registry that records proof generated during planning, implementation, validation, preview, launch readiness, and deployment checks.</p>
+<p>This improves Stage 6 validation, Stage 7 launch readiness, and global readiness audits.</p>
+<h3>New Output</h3>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>Build-Plans/Build-status/Artifact-evidence-registry.json</code></pre></div>
+<h3>Proposed Schema</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;registry_version&quot;: &quot;1.0.0&quot;,
+  &quot;artifacts&quot;: [
+    {
+      &quot;artifact_id&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;test_output | screenshot | preview_url | build_log | validation_report | deployment_evidence | launch_check | telemetry_source&quot;,
+      &quot;related_stage&quot;: &quot;&quot;,
+      &quot;related_stage_output&quot;: &quot;&quot;,
+      &quot;related_ticket_ids&quot;: [],
+      &quot;related_validation_ids&quot;: [],
+      &quot;related_agent_ids&quot;: [],
+      &quot;path_or_url&quot;: &quot;&quot;,
+      &quot;status&quot;: &quot;pending | passed | failed | blocked | accepted_risk&quot;,
+      &quot;confidence&quot;: &quot;low | medium | high&quot;,
+      &quot;created_by&quot;: &quot;&quot;,
+      &quot;created_at&quot;: &quot;&quot;,
+      &quot;notes&quot;: &quot;&quot;
+    }
+  ]
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Global-Stage-Readiness-Audit.md
+System-References/Docs/Stage-5-development-orchestration-draft.md
+System-References/Docs/Stage-6-implementation-validation-draft.md
+System-References/Docs/Stage-7-launch-operationalization-draft.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/stage-5-development-orchestration/skill.md
+.opencode/Skills/build-ticket-generation/skill.md
+.opencode/Skills/stage-6-implementation-validation/skill.md
+.opencode/Skills/implementation-execution/skill.md
+.opencode/Skills/validation-execution/skill.md
+.opencode/Skills/system-health-synthesis/skill.md
+.opencode/Skills/stage-7-launch-operationalization/skill.md
+.opencode/Skills/launch-readiness-validation/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Stage 5 should define expected artifacts per ticket.</p>
+<p>Stage 6 should record actual artifacts generated by implementation, validation, repair, preview, visual QA, and regression checks.</p>
+<p>Stage 7 should consume artifact evidence before launch readiness is accepted.</p>
+<p>Global readiness audits should verify artifact evidence exists when a stage claims validation, preview, build, deployment, or launch readiness.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Artifact registry schema exists in the docs.</li><li>Stage 5 tickets can declare expected artifacts.</li><li>Stage 6 outputs reference generated artifacts.</li><li>Stage 7 launch readiness checks artifact evidence.</li><li>Global readiness audit includes artifact evidence checks.</li></ul></div></details><details class="patch" id="patch-2" data-patch="2"><summary><span class="patch-number">02</span><span class="patch-title">Stage Contract Profiles<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Make the stage workflow adaptive based on product type and complexity so simple apps are not over-planned and complex apps still receive deep planning.</p>
+<h3>Proposed Profiles</h3>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>simple-crud-app
+frontend-heavy-app
+ai-heavy-app
+marketplace-app
+internal-tool
+enterprise-saas
+mobile-first-app
+compliance-sensitive-app
+integration-heavy-app
+data-heavy-app</code></pre></div>
+<h3>Proposed Shared Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;stage_contract_profile&quot;: {
+    &quot;profile_id&quot;: &quot;&quot;,
+    &quot;profile_name&quot;: &quot;&quot;,
+    &quot;app_type&quot;: &quot;&quot;,
+    &quot;complexity_level&quot;: &quot;low | medium | high | critical&quot;,
+    &quot;guidance_depth&quot;: &quot;minimal | standard | detailed | exhaustive&quot;,
+    &quot;required_stage_depth&quot;: {
+      &quot;stage_1&quot;: &quot;&quot;,
+      &quot;stage_2&quot;: &quot;&quot;,
+      &quot;stage_3&quot;: &quot;&quot;,
+      &quot;stage_4&quot;: &quot;&quot;,
+      &quot;stage_5&quot;: &quot;&quot;,
+      &quot;stage_6&quot;: &quot;&quot;,
+      &quot;stage_7&quot;: &quot;&quot;,
+      &quot;stage_8&quot;: &quot;&quot;
+    },
+    &quot;required_validation_layers&quot;: [],
+    &quot;optional_outputs&quot;: [],
+    &quot;required_outputs&quot;: [],
+    &quot;skip_allowed_outputs&quot;: [],
+    &quot;approval_gates&quot;: []
+  }
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Stage-1-product-initialization-draft.md
+System-References/Docs/Stage-2-architect.md
+System-References/Docs/Stage-3-system-architecture-draft.md
+System-References/Docs/Stage-4-ux-interaction-architecture-draft.md
+System-References/Docs/Stage-5-development-orchestration-draft.md
+System-References/Docs/Stage-6-implementation-validation-draft.md
+System-References/Docs/Stage-7-launch-operationalization-draft.md
+System-References/Docs/Stage-8-post-launch-evolution-draft.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/Stage-1-product-initialization/skill.md
+.opencode/Skills/stage-2-research-and-validation/skill.md
+.opencode/Skills/stage-3-system-architecture/skill.md
+.opencode/Skills/stage-4-ux-interaction-architecture/skill.md
+.opencode/Skills/stage-5-development-orchestration/skill.md
+.opencode/Skills/stage-6-implementation-validation/skill.md
+.opencode/Skills/stage-7-launch-operationalization/skill.md
+.opencode/Skills/stage-8-post-launch-evolution/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Stage 1 should identify or infer the initial contract profile.</p>
+<p>Each stage should adjust required depth based on the profile.</p>
+<p>The global readiness audit should verify that the stage completed the requirements for the selected profile, not a one-size-fits-all checklist.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Contract profile object exists in global workflow docs.</li><li>Stage 1 can initialize the profile.</li><li>Stages 2-8 consume the profile.</li><li>Readiness audits account for profile-specific requirements.</li><li>Low-complexity apps can move faster without losing required safety gates.</li></ul></div></details><details class="patch" id="patch-3" data-patch="3"><summary><span class="patch-number">03</span><span class="patch-title">Machine-Checkable Schema Validation<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Turn documented JSON output expectations into machine-checkable schema expectations.</p>
+<p>This improves readiness audit reliability and prevents malformed handoffs.</p>
+<h3>New Folder</h3>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Schemas/</code></pre></div>
+<h3>Proposed Schema Files</h3>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>stage-1-output.schema.json
+stage-2-output.schema.json
+stage-3-output.schema.json
+stage-4-output.schema.json
+stage-5-output.schema.json
+stage-6-output.schema.json
+stage-7-output.schema.json
+stage-8-output.schema.json
+artifact-evidence-registry.schema.json
+global-readiness-audit.schema.json</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Readiness-Audit.md
+System-References/Docs/Global-Stage-Workflow-Contract.md</code></pre></div>
+<p>All stage review docs should reference their schema expectations.</p>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>All stage command skills
+global-stage-readiness-audit skill, if present or later created</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Each stage should declare which schema validates its outputs.</p>
+<p>The readiness audit should record:</p>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;schema_validation&quot;: {
+    &quot;schema_refs&quot;: [],
+    &quot;validated_files&quot;: [],
+    &quot;schema_errors&quot;: [],
+    &quot;schemas_valid&quot;: false
+  }
+}</code></pre></div>
+<h3>Acceptance Criteria</h3>
+<ul><li>Schema folder is documented.</li><li>Stage outputs reference schema files.</li><li>Readiness audit includes schema validation results.</li><li>Missing or invalid schema results can block readiness.</li></ul></div></details><details class="patch" id="patch-4" data-patch="4"><summary><span class="patch-number">04</span><span class="patch-title">Stage 2 Evidence Quality Upgrade<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Improve validation reliability by making evidence quality, freshness, source type, confidence rationale, and inference boundaries explicit.</p>
+<h3>Proposed Evidence Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;evidence_id&quot;: &quot;&quot;,
+  &quot;claim_or_assumption_id&quot;: &quot;&quot;,
+  &quot;source_type&quot;: &quot;primary | secondary | user_provided | inferred | unavailable&quot;,
+  &quot;source_url&quot;: &quot;&quot;,
+  &quot;source_date&quot;: &quot;&quot;,
+  &quot;freshness&quot;: &quot;current | recent | stale | unknown&quot;,
+  &quot;evidence_quality&quot;: &quot;none | low | medium | high&quot;,
+  &quot;confidence_effect&quot;: &quot;increase | decrease | neutral&quot;,
+  &quot;confidence_delta&quot;: 0.0,
+  &quot;summary&quot;: &quot;&quot;,
+  &quot;is_inference&quot;: false,
+  &quot;limitations&quot;: [],
+  &quot;requires_external_research&quot;: false
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Stage-2-architect.md
+System-References/Docs/Global-Stage-Workflow-Contract.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/stage-2-research-and-validation/skill.md
+.opencode/Skills/assumption-analysis/skill.md
+.opencode/Skills/market-and-competitive-validation/skill.md
+.opencode/Skills/technical-and-operational-validation/skill.md
+.opencode/Skills/business-and-scalability-validation/skill.md
+.opencode/Skills/validation-synthesis/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Every validated assumption should include evidence metadata.</p>
+<p>Unsupported claims should remain assumptions.</p>
+<p>Architecture-critical assumptions should require at least medium evidence quality or an explicit accepted risk.</p>
+<p>Stage 2 should distinguish:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>evidence-backed finding
+inference
+unsupported assumption
+critical unknown</code></pre></div>
+<h3>Acceptance Criteria</h3>
+<ul><li>Evidence quality rules are documented.</li><li>Stage 2 outputs include evidence metadata.</li><li>Critical assumptions cannot be marked validated without evidence or accepted risk.</li><li>Stage 3 handoff receives evidence quality and confidence rationale.</li></ul></div></details><details class="patch" id="patch-5" data-patch="5"><summary><span class="patch-number">05</span><span class="patch-title">Stage 7 Deployment Proof Upgrade<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Strengthen launch readiness by requiring deployment and production-readiness proof instead of only readiness descriptions.</p>
+<h3>Proposed Deployment Proof Fields</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;deployment_proof&quot;: {
+    &quot;production_build_artifact&quot;: &quot;&quot;,
+    &quot;deployment_dry_run_result&quot;: {},
+    &quot;smoke_test_results&quot;: [],
+    &quot;rollback_test_result&quot;: {},
+    &quot;environment_verification&quot;: {},
+    &quot;monitoring_alert_test&quot;: {},
+    &quot;release_blockers&quot;: [],
+    &quot;accepted_launch_risks&quot;: []
+  }
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Stage-7-launch-operationalization-draft.md
+System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Global-Stage-Readiness-Audit.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/stage-7-launch-operationalization/skill.md
+.opencode/Skills/launch-readiness-validation/skill.md
+.opencode/Skills/deployment-framework-planning/skill.md
+.opencode/Skills/launch-operationalization-synthesis/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Stage 7 should require production build proof, deployment dry-run evidence, smoke test results, rollback proof, and environment verification when launch readiness claims depend on them.</p>
+<p>Missing proof should become a launch blocker unless accepted as a known risk.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Launch readiness output includes deployment proof.</li><li>Stage 7 completion gate checks deployment proof.</li><li>Global readiness audit checks launch proof for Stage 7.</li><li>Stage 8 receives launch proof references in the handoff.</li></ul></div></details><details class="patch" id="patch-6" data-patch="6"><summary><span class="patch-number">06</span><span class="patch-title">Stage 8 Feedback Routing Upgrade<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Make Stage 8 a true evolution engine by routing live-product findings back to the correct earlier stage.</p>
+<h3>Proposed Routing Rules</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Signal</th><th scope="col">Route</th></tr></thead><tbody><tr><td>Retention, positioning, or product-market issue</td><td>Stage 1 or Stage 2</td></tr><tr><td>Invalid validated assumption</td><td>Stage 2</td></tr><tr><td>Performance, API, infrastructure, security, or scalability issue</td><td>Stage 3</td></tr><tr><td>UX confusion, navigation friction, accessibility issue</td><td>Stage 4</td></tr><tr><td>Ticket sequencing, agent, or test coverage issue</td><td>Stage 5</td></tr><tr><td>Bug, regression, repair, or validation failure</td><td>Stage 6</td></tr><tr><td>Support, monitoring, onboarding, or operational issue</td><td>Stage 7</td></tr><tr><td>Roadmap expansion or optimization opportunity</td><td>Stage 8</td></tr></tbody></table></div>
+<h3>Proposed Feedback Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;feedback_route_id&quot;: &quot;&quot;,
+  &quot;source_signal_ids&quot;: [],
+  &quot;finding&quot;: &quot;&quot;,
+  &quot;recommended_target_stage&quot;: &quot;&quot;,
+  &quot;severity&quot;: &quot;&quot;,
+  &quot;evidence_refs&quot;: [],
+  &quot;recommended_action&quot;: &quot;&quot;,
+  &quot;blocks_current_evolution&quot;: false,
+  &quot;creates_new_stage_cycle&quot;: false
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Stage-8-post-launch-evolution-draft.md
+System-References/Docs/Global-Stage-Workflow-Contract.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/stage-8-post-launch-evolution/skill.md
+.opencode/Skills/telemetry-analysis/skill.md
+.opencode/Skills/operational-optimization/skill.md
+.opencode/Skills/ai-improvement-planning/skill.md
+.opencode/Skills/roadmap-evolution-planning/skill.md
+.opencode/Skills/scalability-evolution-planning/skill.md
+.opencode/Skills/post-launch-evolution-synthesis/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Stage 8 should not only produce evolution plans. It should classify findings and decide whether to:</p>
+<ul><li>optimize within Stage 8</li><li>create a new roadmap item</li><li>route the issue to an earlier stage</li><li>open a new validation cycle</li><li>mark a live-product risk</li></ul>
+<h3>Acceptance Criteria</h3>
+<ul><li>Stage 8 outputs include feedback routes.</li><li>Stage 8 synthesis can create prior-stage feedback objects.</li><li>Global workflow contract documents live feedback loops.</li><li>Stage 8 completion gate requires unresolved critical feedback routes to have owners.</li></ul></div></details><details class="patch" id="patch-7" data-patch="7"><summary><span class="patch-number">07</span><span class="patch-title">Complexity-Based Interactive Guidance<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Reduce user friction by scaling question depth to app complexity and stage risk.</p>
+<h3>Proposed Shared Guidance Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;guidance_policy&quot;: {
+    &quot;complexity_level&quot;: &quot;low | medium | high | critical&quot;,
+    &quot;guidance_depth&quot;: &quot;minimal | standard | detailed | exhaustive&quot;,
+    &quot;ask_threshold&quot;: &quot;only_blockers | material_decisions | important_tradeoffs | all_uncertainties&quot;,
+    &quot;default_inference_allowed&quot;: true,
+    &quot;approval_required_for&quot;: [],
+    &quot;max_questions_per_turn&quot;: 3
+  }
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Workflow-Contract.md
+All Stage 1-8 review docs</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>All Stage 1-8 command skills</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Each stage should use the guidance policy before asking the user questions.</p>
+<p>Low-complexity apps should use fewer pauses and more recorded assumptions.</p>
+<p>High-risk apps should ask more confirmation questions and block more often.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Global guidance policy is documented.</li><li>Each stage command consumes guidance policy.</li><li>Interactive guidance rules reference complexity level and guidance depth.</li><li>Readiness audits can identify unresolved guidance blockers.</li></ul></div></details><details class="patch" id="patch-8" data-patch="8"><summary><span class="patch-number">08</span><span class="patch-title">Stage-Level Schema Validation Results<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Require every stage to write schema validation results into its readiness/audit output so schema checks are visible at the stage level, not only in the global audit contract.</p>
+<p>This closes the gap where stages reference schema files but do not explicitly require a machine-readable validation result in the stage review doc.</p>
+<h3>Proposed Shared Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;schema_validation&quot;: {
+    &quot;schema_refs&quot;: [],
+    &quot;validated_files&quot;: [],
+    &quot;schema_errors&quot;: [],
+    &quot;schemas_valid&quot;: false,
+    &quot;validated_at&quot;: &quot;&quot;,
+    &quot;validator&quot;: &quot;&quot;,
+    &quot;blocking&quot;: true
+  }
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Stage-1-product-initialization-draft.md
+System-References/Docs/Stage-2-architect.md
+System-References/Docs/Stage-3-system-architecture-draft.md
+System-References/Docs/Stage-4-ux-interaction-architecture-draft.md
+System-References/Docs/Stage-5-development-orchestration-draft.md
+System-References/Docs/Stage-6-implementation-validation-draft.md
+System-References/Docs/Stage-7-launch-operationalization-draft.md
+System-References/Docs/Stage-8-post-launch-evolution-draft.md
+System-References/Docs/Global-Stage-Readiness-Audit.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>All Stage 1-8 command skills
+.opencode/Skills/global-stage-readiness-audit/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Each stage must include schema validation results before using a ready completion status.</p>
+<p>The readiness audit must block progression when:</p>
+<ul><li>required schema refs are missing</li><li>required stage output files were not validated</li><li>schema errors exist for launch-critical or handoff-critical outputs</li><li><code>schemas_valid</code> is false and no accepted exception exists</li></ul>
+<h3>Acceptance Criteria</h3>
+<ul><li>Every stage review doc includes the <code>schema_validation</code> object.</li><li>Every stage completion gate requires schema validation before ready status.</li><li>Global readiness audit checks stage-level schema validation results.</li><li>Schema failures produce concrete next actions.</li></ul></div></details><details class="patch" id="patch-9" data-patch="9"><summary><span class="patch-number">09</span><span class="patch-title">Risk Acceptance Ledger<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Create a durable ledger for accepted risks so risks that are allowed to pass a stage remain visible to downstream stages.</p>
+<p>This prevents accepted risk from becoming hidden once a stage completes.</p>
+<h3>New Output</h3>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>Build-Plans/Build-status/Risk-acceptance-ledger.json</code></pre></div>
+<h3>Proposed Schema</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;ledger_version&quot;: &quot;1.0.0&quot;,
+  &quot;accepted_risks&quot;: [
+    {
+      &quot;risk_id&quot;: &quot;&quot;,
+      &quot;source_stage&quot;: &quot;&quot;,
+      &quot;source_output&quot;: &quot;&quot;,
+      &quot;risk&quot;: &quot;&quot;,
+      &quot;severity&quot;: &quot;low | medium | high | critical&quot;,
+      &quot;accepted_by&quot;: &quot;&quot;,
+      &quot;accepted_at&quot;: &quot;&quot;,
+      &quot;acceptance_reason&quot;: &quot;&quot;,
+      &quot;mitigation&quot;: &quot;&quot;,
+      &quot;owner_stage&quot;: &quot;&quot;,
+      &quot;downstream_visibility&quot;: [],
+      &quot;revisit_trigger&quot;: &quot;&quot;,
+      &quot;expires_or_recheck_at&quot;: &quot;&quot;,
+      &quot;status&quot;: &quot;active | mitigated | expired | superseded&quot;
+    }
+  ]
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Global-Stage-Readiness-Audit.md
+System-References/Docs/Stage-2-architect.md
+System-References/Docs/Stage-3-system-architecture-draft.md
+System-References/Docs/Stage-5-development-orchestration-draft.md
+System-References/Docs/Stage-6-implementation-validation-draft.md
+System-References/Docs/Stage-7-launch-operationalization-draft.md
+System-References/Docs/Stage-8-post-launch-evolution-draft.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>All stage command skills that can accept risk
+.opencode/Skills/global-stage-readiness-audit/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Any stage that allows progression with an accepted risk must create or update a risk ledger entry.</p>
+<p>The entry must include:</p>
+<ul><li>severity</li><li>accepting owner</li><li>rationale</li><li>mitigation</li><li>downstream stages that must see the risk</li><li>revisit trigger</li><li>expiry or recheck condition</li></ul>
+<p>Critical accepted risks must always appear in the next stage handoff.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Risk acceptance ledger output is documented.</li><li>Accepted risks cannot be silent completion exceptions.</li><li>Downstream handoffs include active high and critical accepted risks.</li><li>Readiness audit checks whether accepted risks have owners and revisit triggers.</li></ul></div></details><details class="patch" id="patch-10" data-patch="10"><summary><span class="patch-number">10</span><span class="patch-title">Cross-Stage Reference Integrity Audit<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Add a reference integrity check that validates IDs passed between stages.</p>
+<p>This ensures downstream stages do not depend on broken references, missing IDs, stale ticket links, or orphaned artifacts.</p>
+<h3>Proposed Reference Integrity Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;reference_integrity&quot;: {
+    &quot;checked_refs&quot;: [],
+    &quot;missing_refs&quot;: [],
+    &quot;orphaned_refs&quot;: [],
+    &quot;stale_refs&quot;: [],
+    &quot;duplicate_ids&quot;: [],
+    &quot;integrity_status&quot;: &quot;passed | passed_with_warnings | failed&quot;,
+    &quot;blocking_ref_errors&quot;: []
+  }
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Global-Stage-Readiness-Audit.md
+All Stage 1-8 review docs</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/global-stage-readiness-audit/skill.md
+All Stage 1-8 command skills</code></pre></div>
+<h3>Required Behavior</h3>
+<p>The readiness audit should validate references such as:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>USER-*
+WORKFLOW-*
+CAP-*
+FEATURE-*
+BOUNDARY-*
+DEP-*
+RISK-*
+ASSUMPTION-*
+SERVICE-*
+ENTITY-*
+API-*
+SCREEN-*
+PAGE-*
+COMPONENT-*
+TICKET-*
+AGENT-*
+ARTIFACT-*</code></pre></div>
+<p>The audit should fail when launch-critical downstream outputs reference missing or duplicated upstream IDs.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Global workflow contract defines reference integrity rules.</li><li>Readiness audit emits <code>reference_integrity</code>.</li><li>Each stage completion gate requires blocking reference errors to be resolved or explicitly accepted.</li><li>Stage 5 tickets and Stage 6 validation results preserve traceability to Stage 1-4 source IDs.</li></ul></div></details><details class="patch" id="patch-11" data-patch="11"><summary><span class="patch-number">11</span><span class="patch-title">Readiness Failure Revision Loop<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Define what happens when a readiness audit intentionally fails or blocks, including how findings route back to the owning stage, output file, and skill.</p>
+<p>This makes failed audits actionable instead of only preventing progression.</p>
+<h3>Proposed Revision Object</h3>
+<div class="code-wrap"><span class="code-label">json</span><pre><code>{
+  &quot;revision_loop&quot;: {
+    &quot;revision_id&quot;: &quot;&quot;,
+    &quot;triggering_audit&quot;: &quot;&quot;,
+    &quot;owning_stage&quot;: &quot;&quot;,
+    &quot;owning_output&quot;: &quot;&quot;,
+    &quot;owning_skill&quot;: &quot;&quot;,
+    &quot;blocking_issue&quot;: &quot;&quot;,
+    &quot;required_change&quot;: &quot;&quot;,
+    &quot;recommended_action&quot;: &quot;&quot;,
+    &quot;can_continue_with_accepted_risk&quot;: false,
+    &quot;target_status_after_revision&quot;: &quot;&quot;,
+    &quot;status&quot;: &quot;open | in_progress | resolved | accepted_risk&quot;
+  }
+}</code></pre></div>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Global-Stage-Readiness-Audit.md
+System-References/Docs/Global-Stage-Workflow-Contract.md
+All Stage 1-8 review docs</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/global-stage-readiness-audit/skill.md
+All Stage 1-8 command skills</code></pre></div>
+<h3>Required Behavior</h3>
+<p>When readiness fails, the audit must produce revision-loop records that identify:</p>
+<ul><li>exact blocking condition</li><li>owning stage</li><li>owning output</li><li>owning skill or command</li><li>required change</li><li>whether accepted risk is allowed</li><li>next target status</li></ul>
+<p>Stage commands must not use a ready status until revision-loop blockers are resolved or explicitly accepted according to profile rules.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Failed readiness audits produce actionable revision-loop objects.</li><li>Revision loops distinguish current-stage revision from prior-stage revision.</li><li>Critical unresolved blockers cannot be hidden as warnings.</li><li>Accepted-risk revision loops link to the risk acceptance ledger.</li></ul></div></details><details class="patch" id="patch-12" data-patch="12"><summary><span class="patch-number">12</span><span class="patch-title">Artifact Field Standardization<span class="patch-meta">Historical reference; see current coverage table</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Objective</h3>
+<p>Standardize artifact field names across Stage 5, Stage 6, Stage 7, and global audit docs.</p>
+<p>The diagnostic found that Stage 5 often says &quot;artifact expectations&quot; while Stage 6 and skills use <code>expected_artifacts</code>.</p>
+<h3>Standard Terms</h3>
+<p>Use:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>expected_artifacts
+artifact_evidence_updates
+artifact_refs
+Artifact-evidence-registry.json</code></pre></div>
+<p>Avoid ambiguous variants such as:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>artifact expectations
+proof notes
+evidence notes
+artifact list</code></pre></div>
+<p>unless they are explanatory prose around the canonical fields.</p>
+<h3>Files To Update</h3>
+<p>Review docs:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>System-References/Docs/Stage-5-development-orchestration-draft.md
+System-References/Docs/Stage-6-implementation-validation-draft.md
+System-References/Docs/Stage-7-launch-operationalization-draft.md
+System-References/Docs/Global-Stage-Workflow-Contract.md
+System-References/Docs/Global-Stage-Readiness-Audit.md</code></pre></div>
+<p>Skills:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>.opencode/Skills/build-ticket-generation/skill.md
+.opencode/Skills/implementation-execution/skill.md
+.opencode/Skills/validation-execution/skill.md
+.opencode/Skills/system-health-synthesis/skill.md
+.opencode/Skills/launch-readiness-validation/skill.md
+.opencode/Skills/global-stage-readiness-audit/skill.md</code></pre></div>
+<h3>Required Behavior</h3>
+<p>Stage 5 build tickets must use the exact field:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>expected_artifacts</code></pre></div>
+<p>Stage 6 must produce:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>artifact_evidence_updates
+artifact_refs</code></pre></div>
+<p>Stage 7 must consume:</p>
+<div class="code-wrap"><span class="code-label">text</span><pre><code>artifact_refs
+deployment_proof</code></pre></div>
+<p>Global readiness audits must validate that required expected artifacts have matching registry entries or accepted blockers.</p>
+<h3>Acceptance Criteria</h3>
+<ul><li>Stage 5 review doc uses <code>expected_artifacts</code> in build ticket schema and completion checklist.</li><li>Stage 6 review doc maps <code>expected_artifacts</code> to <code>artifact_evidence_updates</code>.</li><li>Stage 7 review doc maps deployment proof to <code>artifact_refs</code>.</li><li>Global readiness audit uses canonical artifact field names.</li></ul></div></details><details class="patch" id="patch-13" data-patch="13"><summary><span class="patch-number">13</span><span class="patch-title">Schema Coverage And Seed Parity<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Close RISK-HEALTH-001 and RISK-HEALTH-002 without overstating Draft 2020-12 coverage.</li></ul>
+<h3>Changes</h3>
+<ul><li>Align the UX <code>ui_blueprints</code> seed with the Stage 4 array contract, retaining the documented legacy-empty-object compatibility only where needed for existing inputs.</li><li>Add <code>uniqueItems</code> support to the shared validator, or remove its use only if the same invariant is guaranteed at every intended entry point. Prefer implementing this small used keyword.</li><li>Check every seed against its specific stage schema and registries against their own schemas.</li><li>Inventory schema vocabulary and fail tests when a newly used validation keyword has no implementation; account for known subset behavior such as <code>$ref</code> siblings before claiming general standards compliance.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>All six current seed/registry checks pass.</li><li>Duplicate <code>required_targets</code> fail standalone deployment schema validation as well as the dedicated deployment gate.</li><li>Unique arrays pass, and existing conditional/reference/normalized schema behavior remains correct.</li></ul></div></details><details class="patch" id="patch-14" data-patch="14"><summary><span class="patch-number">14</span><span class="patch-title">Active Profiles And Research Evidence Gates<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Close RISK-HEALTH-003 by evaluating policy and Stage 2 substantive evidence rather than reporting successful policy evaluation from shape alone.</li></ul>
+<h3>Changes</h3>
+<ul><li>Read the canonical active profile and evaluate declared required outputs, validation layers, and approval gates. Unknown or unsupported requirements produce an explicit blocker instead of a hardcoded <code>standard</code> success.</li><li>Add focused Stage 2 checks for architecture-critical assumptions, evidence quality, confidence thresholds, contradictions, and explicitly authorized risk exceptions under existing rules.</li><li>Require current-stage assumption/risk decisions where applicable; earlier-stage records must not substitute for missing current-stage assessments.</li><li>Preserve Stage 2 research ownership: no waitlist artifact, launch, signup threshold, or measurement delay is required there.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>The custom-profile missing-output probe fails with the actual missing path and active profile ID.</li><li>Empty research envelopes cannot become ready without required evidence or a documented policy-authorized exception.</li><li>Passing evidence, explicitly accepted risks, low confidence, unavailable research, and unresolved critical contradictions have distinct tests.</li></ul></div></details><details class="patch" id="patch-15" data-patch="15"><summary><span class="patch-number">15</span><span class="patch-title">Normalized Stage 5 Audit And Handoff Integration<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Close RISK-HEALTH-004 and make the global runner enforce the same package invariants as the dedicated Stage 5 contract.</li></ul>
+<h3>Changes</h3>
+<ul><li>Use the existing contract helpers and resolver to validate the complete context, eight artifact envelopes, manifest index, canonical collections, and Stage 6 handoff during global readiness.</li><li>Check indexed paths, IDs, types, and data pointers against actual artifacts; reject mixed/partial v2 packages. Preserve archived self-contained input through the existing read-only compatibility path.</li><li>Require the Stage 4 waitlist and approved Stage 3 deployment references at the applicable new-workflow handoffs through Stages 5–7; merely adding optional constructor fields is insufficient.</li><li>Add a genuinely normalized package to the global Stage 1–8 integration fixture. Keep archived/common-envelope compatibility tests separate and clearly labeled.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>The missing indexed path probe blocks Stage 5 readiness and identifies the broken entry.</li><li>Mismatched context, artifact identity, data path, missing handoff references, and partial packages fail.</li><li>A full normalized package passes, the resolver returns both pre-code references, and applicable archived fixtures retain compatibility.</li></ul></div></details><details class="patch" id="patch-16" data-patch="16"><summary><span class="patch-number">16</span><span class="patch-title">Runtime Outcomes And Launch Proof Enforcement<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Close RISK-HEALTH-005 and RISK-HEALTH-006 before relying on automatic release readiness.</li></ul>
+<h3>Changes</h3>
+<ul><li>Evaluate every required launch-critical workflow by stable ID, status, outcome, and resolvable proof. Do not accept a nonempty workflow array as success.</li><li>Block failed persistence, blocked/unvalidated required workflows, missing workflow coverage, and unresolved dead controls or fixture runtime dependencies. Use existing approval/risk rules for any allowed deferral.</li><li>Require applicable Stage 7 production-build, deployment, smoke-test, rollback, environment, and monitoring-alert evidence; check artifact identity, verification status, and readable location.</li><li>Evaluate required visual QA/compliance outcomes and unresolved failures, rather than only reporting field presence. Explicit accepted launch risks must resolve to valid authority.</li><li>Keep provider-specific live tests in the owning workflow; the global gate validates the recorded results and references.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>Both confirmed false-readiness probes fail with actionable blockers.</li><li>Missing proof, unverified artifacts, missing required workflows, failed visual QA, and invalid deferrals block.</li><li>Complete successful evidence passes; accepted-risk exceptions pass only where the contract permits them.</li><li>Tests prove each applicable proof category is independently required, not satisfied by an unrelated earlier-stage record.</li></ul></div></details><details class="patch" id="patch-17" data-patch="17"><summary><span class="patch-number">17</span><span class="patch-title">Durable Diagnostics For Malformed Inputs<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Close RISK-HEALTH-007 and preserve the promise of an audit for every finalization attempt.</li></ul>
+<h3>Changes</h3>
+<ul><li>Convert canonical state, ledger, registry, schema, and document parse/shape failures into owned blocking diagnostics before finalization can crash.</li><li>Make the CLI persist a failed audit and revision actions with nonzero exit when inputs are unreadable or malformed. Preserve damaged source files for repair.</li><li>Avoid overwriting an unreadable global-state file with a fabricated baseline; write the standalone failed audit and report the global-state update failure explicitly.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>Malformed JSON, unexpected root types, missing schema targets, and malformed ledgers produce deterministic failed audits without uncontrolled exceptions.</li><li>Valid global state records the failed attempt. Invalid global state is preserved with a visible recovery action.</li><li>No invalid input can advance readiness or be silently replaced by success defaults.</li></ul></div></details><details class="patch" id="patch-18" data-patch="18"><summary><span class="patch-number">18</span><span class="patch-title">Feedback Destination And Audit Accuracy<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Close RISK-HEALTH-008 while preserving Stage 8&#x27;s terminal, cyclical role.</li></ul>
+<h3>Changes</h3>
+<ul><li>Validate feedback items against allowed owning stages and existing issue-routing rules, not merely owner/action presence.</li><li>Require evidence and resolution/ownership data for high/critical routes according to the contract; resolve evidence references.</li><li>Populate <code>routes_checked</code>, missing-field diagnostics, and cycle flags from actual evaluation instead of returning default empty arrays and <code>creates_new_stage_cycle: false</code> unconditionally.</li></ul>
+<h3>Acceptance</h3>
+<ul><li><code>Stage 99</code>, missing/invalid target stages, unresolved required evidence, and incomplete critical routes block evolution readiness.</li><li>Valid routes to earlier stages pass and preserve target, owner, action, evidence, and cycle information.</li><li>Audit fields match the evaluated routes, including the valid no-new-cycle case.</li></ul></div></details><details class="patch" id="patch-19" data-patch="19"><summary><span class="patch-number">19</span><span class="patch-title">Bind Pre-Code Decisions To Approved Scope<span class="patch-meta">Implemented and regression-tested.</span></span><span class="toggle" aria-hidden="true">+</span></summary><div class="patch-body"><h3>Implementation Status</h3>
+<ul><li>Implemented and regression-tested.</li></ul>
+<h3>Objective</h3>
+<ul><li>Reduce stale-approval and platform-omission risk identified through static inspection of the new Stage 3/4 controls.</li></ul>
+<h3>Changes</h3>
+<ul><li>Reconcile required deployment targets with the approved Stage 1 platform requirements, with explicit scope-change approval for omissions.</li><li>Record the feature/stack/deployment revision used for waitlist creation using the smallest existing revision or content-hash mechanism available; reuse the written-page approval pattern where appropriate.</li><li>Invalidate only affected approvals and downstream evidence when those decisions materially change; preserve stable IDs and historical artifacts.</li><li>Keep the waitlist at the Stage 4 opening checkpoint, with a verified launch required before completion and no signup-count gate.</li></ul>
+<h3>Acceptance</h3>
+<ul><li>Omitting an approved target from both architecture state and the strategy does not evade validation.</li><li>A material approved-scope or stack change is detected and requires reconciliation; unrelated edits do not restart the workflow.</li><li>The unchanged approved scope/stack plus verified waitlist passes without waiting for demand metrics.</li></ul></div></details></section><footer class="page-footer"><p>Generated from the Markdown plan and reviewed health report. No live validation is inferred.</p><a href="Stage-1-8-A-Grade-Improvement-Patch-Plan.md">Markdown plan</a><a href="Stage-1-8%20Health%20Report.mdx">Health report</a><a href="Stage-1-8-Improvement-Implementation-Record.md">Implementation record</a><a href="Stage-1-8-Supervised-Pilot-Runbook.md">Pilot runbook</a></footer></main><script>const patches = [...document.querySelectorAll('details.patch')];
+const input = document.getElementById('patch-search');
+const status = document.getElementById('search-status');
+const filter = () => {
+  const query = input.value.trim().toLowerCase();
+  let matches = 0;
+  for (const patch of patches) {
+    const match = !query || patch.textContent.toLowerCase().includes(query);
+    patch.hidden = !match;
+    if (match) matches++;
+    if (query && match) patch.open = true;
+  }
+  status.textContent = query ? `${matches} of ${patches.length} patches match. Overview sections remain visible.` : `Showing all ${patches.length} patches · Filter patches or browse the section navigation.`;
+};
+input.addEventListener('input', filter);
+document.getElementById('expand').addEventListener('click', () => patches.filter(p => !p.hidden).forEach(p => p.open = true));
+document.getElementById('collapse').addEventListener('click', () => patches.forEach(p => p.open = false));
+document.getElementById('print').addEventListener('click', () => window.print());
+function revealHash() {
+  const target = document.getElementById(location.hash.slice(1));
+  if (target?.matches('details.patch')) {
+    if (target.hidden) { input.value = ''; filter(); }
+    target.open = true;
+    target.scrollIntoView({block:'start'});
+  }
+}
+window.addEventListener('hashchange', revealHash);
+document.querySelectorAll('.sidebar a[href^="#patch-"]').forEach(link => link.addEventListener('click', () => {
+  const target = document.getElementById(link.hash.slice(1));
+  if (target?.matches('details.patch')) {
+    if (target.hidden) { input.value = ''; filter(); }
+    target.open = true;
+  }
+}));
+let printState = [];
+window.addEventListener('beforeprint', () => { printState = patches.map(p => p.open); patches.forEach(p => p.open = true); });
+window.addEventListener('afterprint', () => { patches.forEach((p,i) => p.open = printState[i]); });
+revealHash();
+</script></body></html>

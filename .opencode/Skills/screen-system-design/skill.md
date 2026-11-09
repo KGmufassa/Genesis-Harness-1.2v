@@ -168,6 +168,14 @@ Pause for user input when screen architecture affects journey completion, permis
 
 ---
 
+# Individual Screen Specifications
+
+- Maintain every in-scope screen in `screen_system.screen_inventory` with a stable `screen_id`, including supporting and role-specific screens required by product scope. Use the same ID as `page_ref` downstream.
+- Supply the screen, navigation, permission, data, and interaction inputs for [Written Page Specification Review](../stage-4-ux-interaction-architecture/references/page-specification-review.md). The command completes these documents after design-system and template selection, before Stitch.
+- Use one document per screen with web/mobile differences together; split materially different workflows. Keep ordinary modals, drawers, and states in the owning screen.
+
+---
+
 # Shared State Updates
 
 Update:

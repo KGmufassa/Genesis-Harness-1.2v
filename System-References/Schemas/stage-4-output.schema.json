@@ -4,6 +4,31 @@
   "title": "Stage 4 Output",
   "allOf": [{ "$ref": "stage-output-common.schema.json" }],
   "$defs": {
+    "page_specification": {
+      "type": "object",
+      "properties": {
+        "screen_ref": {"type": "string", "pattern": "^SCREEN-[A-Za-z0-9._-]+$"},
+        "document_path": {"type": "string", "default": ""},
+        "content_hash": {"type": "string", "default": ""},
+        "approved_hash": {"type": "string", "default": ""},
+        "approval_status": {"enum": ["needs_user_review", "approved"], "default": "needs_user_review"},
+        "approved_by": {"type": "string", "default": ""},
+        "approved_at": {"type": ["string", "null"], "default": null}
+      },
+      "required": ["screen_ref", "document_path", "content_hash", "approved_hash", "approval_status", "approved_by", "approved_at"],
+      "additionalProperties": true
+    },
+    "page_set_approval": {
+      "type": "object",
+      "properties": {
+        "approved_screen_refs": {"type": "array", "items": {"type": "string"}, "default": []},
+        "approval_status": {"enum": ["needs_user_review", "approved"], "default": "needs_user_review"},
+        "approved_by": {"type": "string", "default": ""},
+        "approved_at": {"type": ["string", "null"], "default": null}
+      },
+      "required": ["approved_screen_refs", "approval_status", "approved_by", "approved_at"],
+      "additionalProperties": true
+    },
     "interactive_element": {
       "type": "object",
       "properties": {
@@ -274,6 +299,10 @@
     }
   },
   "properties": {
+    "waitlist_validation_ref": { "type": "string", "default": "" },
+    "deployment_strategy_ref": { "type": "string", "default": "" },
+    "page_specifications": { "type": "array", "items": { "$ref": "#/$defs/page_specification" }, "default": [] },
+    "page_set_approval": { "$ref": "#/$defs/page_set_approval" },
     "page_inventory": { "type": "array", "default": [] },
     "ui_blueprints": { "type": "array", "default": [] },
     "ui_architecture_template_selection": { "$ref": "#/$defs/ui_architecture_template_selection" },

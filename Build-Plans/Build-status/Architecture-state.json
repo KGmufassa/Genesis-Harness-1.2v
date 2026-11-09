@@ -11,6 +11,8 @@
   "stage_1_inputs": {},
   "stage_2_inputs": {},
   "preflight": {},
+  "deployment_strategy_ref": "",
+  "deployment_targets": [],
   "architecture_drivers": [],
   "architecture_decisions": [],
   "stage_decision_brief": {

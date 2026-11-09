@@ -1159,3 +1159,11 @@ Stage 2 readiness must also record:
 ```
 
 Stage 2 may not use `ready_for_stage_3` until required schema validation passes, assumption and evidence references resolve to Stage 1 sources, accepted high and critical validation risks are written to `Build-Plans/Build-status/Risk-acceptance-ledger.json`, and failed readiness checks are converted into revision-loop actions.
+
+---
+
+# Waitlist Research Handoff
+
+- Define validation assumptions and research feasibility using the Stage 1 core features and MVP boundaries; record unsupported demand as an assumption or unknown under the existing evidence rules.
+- Carry the audience, value proposition, signup offer, desired metrics, measurement window, and owner forward as planning inputs. Stage 2 does not create or publish the waitlist and does not require a waitlist artifact or launch evidence for readiness.
+- Stage 4 launches the waitlist at its opening checkpoint after Stage 3 stack and deployment approval; see `System-References/Docs/Pre-Code-Validation-and-Deployment.md`.

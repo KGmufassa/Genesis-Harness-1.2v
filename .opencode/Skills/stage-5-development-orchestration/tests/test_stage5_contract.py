@@ -139,6 +139,28 @@ class Stage5ContractTests(unittest.TestCase):
         self.assertEqual(result["data"], {"tickets": []})
         self.assertEqual(result["context"]["artifact_type"], "stage_context")
 
+    def test_precode_references_survive_normalized_handoff(self) -> None:
+        references = {
+            "waitlist_validation_ref": "Build-Plans/Stage-4/10-waitlist-validation.json#",
+            "deployment_strategy_ref": "Build-Plans/Stage-3/09-deployment-strategy.json#",
+        }
+        self.context = build_context(
+            status="complete",
+            selected_stack={},
+            stage_contract_profile={},
+            guidance_policy={},
+            source_inputs={"stage_1": [], "stage_2": [], "stage_3": [], "stage_4": []},
+            **references,
+        )
+        self.manifest["stage_6_handoff"].update(references)
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            self._write_v2(directory)
+            result = resolve_artifact(directory, "build_tickets", with_context=True)
+            for key, reference in references.items():
+                self.assertEqual(result["context"][key], reference)
+                self.assertEqual(self.manifest["stage_6_handoff"][key], reference)
+
     def test_legacy_resolver_supports_self_contained_file(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)

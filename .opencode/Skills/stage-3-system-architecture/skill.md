@@ -358,7 +358,8 @@ Run Stage 3 skills in this order:
 3. data-and-api-architecture
 4. integration-and-infrastructure-architecture
 5. security-and-scalability-architecture
-6. architecture-synthesis
+6. deployment-strategy-selection
+7. architecture-synthesis
 ```
 
 ---
@@ -729,3 +730,23 @@ Build-Plans/Build-status/Risk-acceptance-ledger.json
 ```
 
 Failed readiness checks must become revision-loop actions with owning output, owning skill, required change, and next action.
+
+---
+
+# Deployment Strategy Gate
+
+- Read `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical deployment fields and continuity rules.
+- Confirm the approved Stage 1 core features and MVP boundaries remain feasible; route material scope changes back for approval before Stage 3 completes. Stage 4 creates the waitlist after stack and deployment approval; Stage 3 does not require a published waitlist.
+- Run `deployment-strategy-selection` during concrete stack evaluation before `architecture-synthesis` and the Stage 3 decision brief. Revise the stack and infrastructure model if deployment constraints invalidate them.
+- Add `09-deployment-strategy.json` to required outputs without renumbering existing files; retain `deployment_targets`, `deployment_strategy_ref`, and exact `selected_stack.hosting_and_deployment.target_methods` in architecture state.
+- Include web/mobile alternatives, official-source evidence, target selections, cost and compatibility findings, prerequisites, and tradeoffs in the Stage 3 decision brief.
+- Carry `deployment_strategy_ref` into `stage_4_handoff`; block readiness for missing target coverage, unresolved choices, incompatibility, or missing user approval.
+- Decide deployment before application implementation. Stage 7 operationalizes this decision; it does not postpone or silently replace selection.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Reconcile deployment targets against approved Stage 1 target_platforms. Present core-feature, stack, and strategy hashes for approval and retain them in the deployment approval; do not refresh approvals automatically after changes.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

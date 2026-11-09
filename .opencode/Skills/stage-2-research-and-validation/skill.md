@@ -808,3 +808,19 @@ Before completing Stage 2, confirm:
   }
 }
 ```
+
+---
+
+# Waitlist Research Handoff
+
+- Define validation assumptions and research feasibility using the Stage 1 core features and MVP boundaries; record unsupported demand as an assumption or unknown under the existing evidence rules.
+- Carry the audience, value proposition, signup offer, desired metrics, measurement window, and owner forward as planning inputs. Stage 2 does not create or publish the waitlist and does not require a waitlist artifact or launch evidence for readiness.
+- Stage 4 launches the waitlist at its opening checkpoint after Stage 3 stack and deployment approval; see `System-References/Docs/Pre-Code-Validation-and-Deployment.md`.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Require populated assumption_registry, evidence-quality/confidence checks, and the five existing readiness thresholds. Carry authorized risk exceptions explicitly; do not require a waitlist launch here.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

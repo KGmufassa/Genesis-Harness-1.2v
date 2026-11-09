@@ -715,3 +715,18 @@ Build-Plans/Build-status/Risk-acceptance-ledger.json
 ```
 
 Failed readiness checks must become revision-loop actions with owning output, owning skill, required change, and next action.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Put `waitlist_validation_ref` and `deployment_strategy_ref` in normalized shared context `00-stage-context.json` at the top level, and in the manifest-owned Stage 6 handoff. Create strategy-linked setup, account, build, signing, distribution, and release-verification tickets for the required targets.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Require a complete normalized v2 package and pinned-schema/manifest consistency checks. Carry both pre-code references in shared context and the manifest handoff; runtime proof is planned here and collected during implementation.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

@@ -112,3 +112,18 @@ This skill contributes to:
 ```text
 Build-Plans/Stage-7/02-deployment-framework.json
 ```
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume `deployment_strategy_ref` and `waitlist_validation_ref` from the Stage 6 handoff. Execute the approved per-platform methods and collect deployment proof. Route material deployment or platform changes back to Stage 3; retain both references in the Stage 8 handoff.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Produce the six passed deployment_proof result objects with evidence_refs or an explicitly authorized stage-scoped deferral. Preserve the approved strategy and outgoing pre-code references.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

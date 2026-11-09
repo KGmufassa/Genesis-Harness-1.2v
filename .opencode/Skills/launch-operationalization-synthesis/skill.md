@@ -98,3 +98,10 @@ Build-Plans/Build-status/Operationalization-state.json
 ```
 
 with `stage_8_handoff`, `completion_status`, unresolved blockers, and launch risks.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume `deployment_strategy_ref` and `waitlist_validation_ref` from the Stage 6 handoff. Execute the approved per-platform methods and collect deployment proof. Route material deployment or platform changes back to Stage 3; retain both references in the Stage 8 handoff.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.

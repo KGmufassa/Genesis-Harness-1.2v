@@ -33,6 +33,8 @@ STAGE_SUBSKILLS = {
     "technical-and-operational-validation": "Stage 2 subskill",
     "business-and-scalability-validation": "Stage 2 subskill",
     "validation-synthesis": "Stage 2 subskill",
+    "waitlist-validation": "Stage 4 subskill",
+    "deployment-strategy-selection": "Stage 3 subskill",
     "system-topology-design": "Stage 3 subskill",
     "service-boundary-architecture": "Stage 3 subskill",
     "data-and-api-architecture": "Stage 3 subskill",
@@ -369,6 +371,7 @@ def _infer_priority(name: str, description: str) -> str:
 
 
 def classify_skill(folder: str) -> tuple[bool, str]:
+    folder = folder.lower()
     if folder in STAGE_FOLDERS:
         stage_num = next((i for i in range(1, 9) if f"stage-{i}" in folder), "?")
         return True, f"Stage {stage_num} command skill"

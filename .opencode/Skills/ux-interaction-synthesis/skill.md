@@ -222,6 +222,8 @@ Build-Plans/Stage-4/06-accessibility-framework.json
 Build-Plans/Stage-4/07-ui-blueprint-specification.json
 Build-Plans/Stage-4/08-design-system-foundation.json
 Build-Plans/Stage-4/09-complete-app-blueprint.md
+Build-Plans/Stage-4/Pages/README.md
+Build-Plans/Stage-4/Pages/<screen_id>/page-spec.md
 ```
 
 When useful, also write or update:
@@ -244,6 +246,15 @@ Each output must include:
 Stitch-specific metadata remains Stage-4-local. Do not add Stitch project IDs,
 screen IDs, screenshot paths, visual source control fields, or suggestion review
 ledger entries to `stage_5_handoff`.
+
+---
+
+# Written Specification Completion
+
+- Follow [Written Page Specification Review](../stage-4-ux-interaction-architecture/references/page-specification-review.md). Preserve individual page files and user edits; reconcile final structured state with approved content.
+- Require `Pages/README.md`, one `Pages/<screen_id>/page-spec.md` for every in-scope screen, and passing written-specification validation before Stage 4 completion.
+- Link individual documents from the combined app blueprint. Preserve `page_specifications` and `page_set_approval` in UX state; do not add them to `stage_5_handoff`.
+- Keep written approval, prototype approval, and the final Stage 4 decision-brief approval separate. A failure in any required approval blocks readiness.
 
 ---
 
@@ -373,3 +384,10 @@ Build-Plans/Stage-4/09-complete-app-blueprint.md
 ```
 
 If the complete app blueprint is missing, incomplete, or does not map launch-critical pages to `ui_blueprint_id` values, return the blueprint gaps for revision before locking Stage 4.
+
+---
+
+# Waitlist Launch Synthesis
+
+- Consume `Build-Plans/Stage-4/10-waitlist-validation.json` before final synthesis; include launch evidence and pending/observed demand in the decision brief.
+- Require verified publication for Stage 4 completion and carry `waitlist_validation_ref` and `deployment_strategy_ref` into `stage_5_handoff`; retain all existing app design approval gates.

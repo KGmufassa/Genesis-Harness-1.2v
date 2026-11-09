@@ -164,3 +164,10 @@ Keep all release collections inside
 `08-release-plan.json.data.release_plan`. Release views use IDs or compact
 indexes and `risk_refs`; completion and the Stage 6 handoff belong only in the
 manifest.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Put `waitlist_validation_ref` and `deployment_strategy_ref` in normalized shared context `00-stage-context.json` at the top level, and in the manifest-owned Stage 6 handoff. Create strategy-linked setup, account, build, signing, distribution, and release-verification tickets for the required targets.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.

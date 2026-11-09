@@ -251,3 +251,20 @@ The workflow state must record:
 * blockers
 * revision loops
 * next recommended action
+
+---
+
+# Pre-Code Validation And Deployment
+
+- Apply `System-References/Docs/Pre-Code-Validation-and-Deployment.md` as part of the stage contract.
+- Stage 4 requires `10-waitlist-validation.json`, created at its opening checkpoint after Stage 3 approval, with a published public page, verified signup/measurement checks, and resolvable evidence; do not require demand thresholds or an elapsed experiment window. Stage 2 and Stage 3 do not require waitlist publication.
+- Stage 3 requires `09-deployment-strategy.json`, all requested web/iOS/Android targets, official-source comparisons, stack-compatible selected methods, and user approval before application coding.
+- Validate both new artifact schemas and their state/handoff references. Existing projects must supply real evidence before their next affected readiness approval; never invent historical results.
+- Readiness is structural and evidence-backed; it does not itself perform live network checks.
+
+---
+
+# Executable Enforcement Contract
+
+- Apply `System-References/Docs/Readiness-Enforcement-Contract.md` for active profile evaluation, evidence gates, scope hashes, normalized handoff validation, and durable input-error diagnostics.
+- Existing artifacts without the new binding/proof fields require real review and verification before their next affected readiness attempt; never fabricate backfilled success.

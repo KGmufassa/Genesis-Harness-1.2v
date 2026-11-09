@@ -792,6 +792,15 @@ Build-Plans/Stage-4/UI-COMPONENTS.md
 
 ---
 
+# Written Specification Continuity
+
+- Consume every approved `Pages/<screen_id>/page-spec.md` through [Written Page Specification Review](../stage-4-ux-interaction-architecture/references/page-specification-review.md); use stable screen IDs as `page_ref`.
+- Read and reconcile user edits before producing final blueprints. Do not overwrite reviewed Markdown from stale JSON or treat prototype approval as written-specification approval.
+- Reconcile proposed components and visual choices with approved prototype evidence. Changes to a specification require renewed written approval before further generation or readiness.
+- Link all individual specifications from `09-complete-app-blueprint.md` and retain the existing combined hierarchy and canonical JSON outputs. Keep review metadata out of `stage_5_handoff`.
+
+---
+
 # Shared State Updates
 
 Update:

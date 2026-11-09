@@ -723,3 +723,10 @@ Stage 7 may not use `ready_for_stage_8` until required schema validation passes,
 Stage 7 must reject Stage 6 handoffs that lack launch-critical workflow evidence.
 Missing workflow evidence, unresolved dead controls, and unresolved fixture-backed
 runtime data are launch blockers, not documentation gaps.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume `deployment_strategy_ref` and `waitlist_validation_ref` from the Stage 6 handoff. Execute the approved per-platform methods and collect deployment proof. Route material deployment or platform changes back to Stage 3; retain both references in the Stage 8 handoff.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.

@@ -2,7 +2,7 @@
 
 # Purpose
 
-This review document defines the planned patches needed to raise the full Stage 1-8 workflow from a strong B+/A- system to an A-grade workflow across planning, implementation, launch, and post-launch evolution.
+This review document defines the planned patches needed to raise the full Stage 1-8 workflow from the current B-grade assessment to an A-grade workflow across planning, implementation, launch, and post-launch evolution.
 
 The goal is not to restructure the stage architecture. The current architecture is sound.
 
@@ -20,97 +20,71 @@ The goal is to improve:
 
 # Current Health Baseline
 
-Original overall workflow grade before patches 1-7:
+Implementation update: **2026-11-08**.
 
-```text
-88 / 100
-```
+| Measure | Verified Status |
+| --- | --- |
+| Original diagnostic assessment | 84 / 100 — B, retained as the pre-patch baseline |
+| Current health assessment | **88 / 100 — B**; four further readiness gaps remain |
+| Patches 13–19 | **Implemented and regression-tested** |
+| Patch 20 | **Runbook prepared; real-app execution pending application selection/access** |
+| Repository tests, latest health check | **115 passed; 0 failed** |
+| Seed/registry schema checks | **6 passed; 0 failed** |
+| Original confirmed findings | **8 addressed by executable controls and regression tests** |
+| Skill packages | **90 compliant packages** |
+| Actual application stages | Baseline remains `not_started`; no live pilot or production evidence claimed |
 
-Diagnostic result after applying patches 1-7:
+See `Stage-1-8-Improvement-Implementation-Record.md` for the change inventory, exact contract additions, test evidence, and remaining work. The HTML edition mirrors this implementation status.
 
-```text
-94 / 100
-```
-
-Diagnostic result after applying patches 8-12:
-
-```text
-97 / 100
-```
-
-Target workflow grade:
-
-```text
-96-98 / 100
-```
-
-Target result:
-
-```text
-All stages grade A-range.
-```
+The post-implementation health check assesses the harness at 88/B. The original eight findings remain addressed, while four further gaps are mapped to planned patches 21–24. A+ still requires stronger readiness enforcement and supervised real-app evidence; passing counts alone do not award a grade.
 
 ---
 
 # Latest Diagnostic Run
 
-Diagnostic date:
+- Preserved unrelated in-progress edits, the eight-stage architecture, and the approved Stage 4 waitlist placement.
+- Added regression coverage for the confirmed gaps and successful controls, then implemented the missing checks.
+- Replaced the generic Stage 5 integration fixture with an actual normalized v2 package and recorded runtime/launch evidence fixtures.
+- Verified all repository tests, schema vocabulary coverage, stage-specific seeds, metadata, script syntax, and patch whitespace.
+- Saved implementation details in `Stage-1-8-Improvement-Implementation-Record.md`; the original health report retains the pre-patch diagnostic as historical evidence.
 
-```text
-2026-06-16
-```
+## Verified Improvements
 
-Review scope:
+- Active profiles, current-stage decisions, Stage 2 research confidence/evidence, and supported approval gates are evaluated.
+- The global audit invokes normalized package, reference, scope, wave, and completion-definition validators.
+- Failed persistence, missing current-stage outcomes, incomplete visual checks, missing launch proof, and unverified artifacts block readiness.
+- Malformed canonical/registry/ledger/schema inputs produce failed audit diagnostics; damaged global state is preserved.
+- Feedback routes have valid destinations, owned actions, verified high/critical evidence, and accurate cycle reporting.
+- Feature/platform, selected-stack, and deployment fingerprints detect stale approvals and waitlist decisions.
+- Patch 20 has a separate supervised runbook; it has not been represented as a completed real-app run.
 
-```text
-System-References/Docs/Stage-1-product-initialization-draft.md
-System-References/Docs/Stage-2-architect.md
-System-References/Docs/Stage-3-system-architecture-draft.md
-System-References/Docs/Stage-4-ux-interaction-architecture-draft.md
-System-References/Docs/Stage-5-development-orchestration-draft.md
-System-References/Docs/Stage-6-implementation-validation-draft.md
-System-References/Docs/Stage-7-launch-operationalization-draft.md
-System-References/Docs/Stage-8-post-launch-evolution-draft.md
-```
+## Confirmed Findings Addressed
 
-Diagnostic summary:
+| Finding | Implemented Resolution | Patch | Status |
+| --- | --- | --- | --- |
+| RISK-HEALTH-001 | UX blueprint seed is an array; stage-specific seed regression checks pass. | 13 | Verified |
+| RISK-HEALTH-002 | Shared validator enforces JSON-aware uniqueness and used vocabulary, including reference siblings. | 13 | Verified |
+| RISK-HEALTH-003 | Actual profile requirements and Stage 2 evidence/confidence are checked. | 14 | Verified |
+| RISK-HEALTH-004 | Normalized manifest paths, IDs, schemas, pointers, package contracts, and handoffs are checked. | 15 | Verified |
+| RISK-HEALTH-005 | Failed persistence and missing required current-stage workflow evidence block. | 16 | Verified |
+| RISK-HEALTH-006 | All six launch-proof categories require passed, verified evidence or an expressly allowed scoped exception. | 16 | Verified |
+| RISK-HEALTH-007 | Malformed input produces durable failed audit/revision output; damaged source/global state is preserved. | 17 | Verified |
+| RISK-HEALTH-008 | Invalid feedback destinations and missing high/critical proof block; route audit fields reflect actual evaluation. | 18 | Verified |
 
-| Area | Status | Notes |
-| --- | --- | --- |
-| Stage contract profiles | Present | All Stage 1-8 review docs consume `stage_contract_profile`. |
-| Guidance policy | Present | All Stage 1-8 review docs consume `guidance_policy`. |
-| Schema references | Present | All Stage 1-8 review docs reference their stage schema file. |
-| Artifact evidence registry | Implemented | Stages 1-8 now reference artifact evidence where relevant, and Stage 3 explicitly names the registry path. |
-| Stage 2 evidence quality | Present | Evidence metadata and quality rules are documented. |
-| Stage 5 expected artifacts | Implemented | Stage 5 now standardizes on the exact `expected_artifacts` field name. |
-| Stage 6 implementation proof | Strong | Stage 6 requires terminal ticket status, artifact evidence, validation proof, visual QA, and regression mapping. |
-| Stage 7 deployment proof | Present | Launch readiness now includes deployment proof fields and completion requirements. |
-| Stage 8 feedback routing | Present | Stage 8 includes prior-stage feedback routing and critical route ownership rules. |
-| Schema validation result object | Implemented | Stage review docs, command skills, common schema, and readiness audit now require `schema_validation`. |
-| Risk acceptance durability | Implemented | `Build-Plans/Build-status/Risk-acceptance-ledger.json` and schema now exist. |
-| Cross-stage reference integrity | Implemented | Stage review docs, command skills, global contract, and readiness audit now require `reference_integrity`. |
-| Revision loop behavior | Implemented | Failed readiness checks now require `revision_loops` with owning stage, output, skill, required change, and next action. |
+---
 
-Stage diagnostic grade:
+# Latest Health Check
 
-| Stage | Grade | Diagnostic |
-| --- | --- | --- |
-| Stage 1 | A | Strong product initialization, schema controls, risk ledger visibility, and Stage 2 handoff. |
-| Stage 2 | A | Evidence-quality upgrade is strong and now includes readiness control objects. |
-| Stage 3 | A | Architecture scope is coherent and now explicitly references artifacts, risk ledger, and reference integrity. |
-| Stage 4 | A | UX, UI blueprint, visual spec, design system, schema validation, and reference controls are strong. |
-| Stage 5 | A | Ticket, agent, skill, visual, and artifact planning now standardizes `expected_artifacts`. |
-| Stage 6 | A | Implementation loop, validation, repair, artifact proof, visual QA, and terminal status controls are strong. |
-| Stage 7 | A | Deployment proof, launch gates, risk ledger linkage, and readiness controls are strong. |
-| Stage 8 | A | Feedback routing, evolution controls, risk ledger linkage, and revision-loop rules are strong. |
+- Assessment date: **2026-11-08**; current result **88/100 — B**, with **115 passing tests**, six passing seed/registry schema checks, 90 compliant skills, and unchanged baseline stage status.
+- `stage-health-report-check` now provides repeatable evidence collection and HTML generation; its reporting work does not implement readiness fixes.
+- Reproduced all four current open findings in temporary fixtures with passing baselines. Preserve the original eight finding closures and patches 13–19 implementation history.
 
-Most important remaining gaps after patches 8-12:
-
-```text
-1. Actual schema validation tooling can be made stricter later if the harness adds a concrete validator command.
-2. Reference integrity checks are now specified, but future implementation can add a dedicated automated resolver.
-3. Risk acceptance entries are durable, but future runs should decide who counts as `accepted_by` for automated agent execution.
-```
+| Open Finding | Owner | Planned Patch | Priority |
+| --- | --- | --- | --- |
+| RISK-HEALTH-009 — General implementation failures | Stage 6 | 21 | High |
+| RISK-HEALTH-010 — Feature-to-ticket coverage | Stage 5 | 22 | High |
+| RISK-HEALTH-011 — Complete concrete stack | Stage 3 | 23 | High |
+| RISK-HEALTH-012 — Downstream approval freshness | Stages 5–7 | 24 | High |
 
 ---
 
@@ -126,24 +100,26 @@ Most important remaining gaps after patches 8-12:
 | 6 | Stage 8 Feedback Routing Upgrade | Continuous evolution quality | High |
 | 7 | Complexity-Based Interactive Guidance | Reduces workflow friction | Medium |
 
-Patch implementation status:
+Patch foundation status after the implementation update:
 
-| Patch | Status | Diagnostic Result |
+| Patch | Status | Current Coverage |
 | --- | --- | --- |
-| 1 | Implemented | Registry file, schema, Stage 5 expectations, Stage 6 evidence, Stage 7 launch proof, and audit checks exist. |
-| 2 | Implemented | All stage review docs and command skills consume stage contract profiles. |
-| 3 | Implemented | Schema folder and schema refs exist. Stage-level schema validation result recording remains a follow-up. |
-| 4 | Implemented | Stage 2 evidence metadata and quality rules are documented. |
-| 5 | Implemented | Stage 7 deployment proof exists in readiness output and completion gate. |
-| 6 | Implemented | Stage 8 prior-stage feedback routing exists. |
-| 7 | Implemented | All stage review docs and command skills consume guidance policy. |
-| 8 | Implemented | Stage review docs, command skills, readiness audit, and common schema include schema validation results. |
-| 9 | Implemented | Risk acceptance ledger output and schema exist, and stages require accepted high/critical risks to be recorded. |
-| 10 | Implemented | Global contract, readiness audit, stage review docs, and command skills require reference integrity checks. |
-| 11 | Implemented | Global contract, readiness audit, stage review docs, and command skills require revision-loop actions for failed readiness checks. |
-| 12 | Implemented | Stage 5, Stage 6, skills, and global contract use canonical artifact field names. |
+| 1 | Implemented with evidence integration | Registry IDs, verified status, and usable proof locations are checked. |
+| 2 | Implemented with profile evaluation | Active outputs, supported layers, and explicit approval pointers are evaluated. |
+| 3 | Implemented for used vocabulary | Stage-specific schema/seed checks, uniqueness, references, and unsupported-keyword regressions pass. |
+| 4 | Implemented with Stage 2 gates | Assumption evidence, confidence ceilings/thresholds, and unresolved critical issues are checked. |
+| 5 | Implemented with launch gates | Required result objects and verified references block incomplete launch readiness. |
+| 6 | Implemented with destination validation | Feedback ownership, targets, optional domain routing, high/critical evidence, and cycle reporting execute. |
+| 7 | Contract and shape implemented | Interview behavior remains agent-driven; unsupported executable requirements block. |
+| 8 | Implemented with stage-specific results | Outputs, canonical state, registries, and normalized package schemas are evaluated. |
+| 9 | Implemented with scoped exception checks | Authority, approval evidence, current-stage scope, and expiry govern allowed exceptions. |
+| 10 | Implemented with package integration | Stable IDs, JSON pointers, manifest paths, and required pre-code handoffs are checked. |
+| 11 | Implemented with malformed-input recovery | Failed audit and revision output survive supported input failures; damaged global state is preserved. |
+| 12 | Implemented | Existing canonical names and normalized ownership remain intact. |
 
-Recommended implementation order:
+Patches 1–12 below retain their original design descriptions. Patches 13–19 implement the enforcement corrections; Patch 20 still needs real application evidence. These labels do not imply general Draft 2020-12 compliance, fresh network validation, or completed production validation.
+
+Original foundation implementation order (historical):
 
 ```text
 1. Artifact Evidence Registry
@@ -159,7 +135,7 @@ Recommended implementation order:
 
 # Follow-Up Patch Overview
 
-These patches are recommended after the diagnostic run to move the workflow from approximately `94 / 100` to `96-98 / 100`.
+Patches 8–12 describe the original follow-up design. Their current status is qualified above; the earlier projected `96-98 / 100` result is not a verified current grade.
 
 | Patch | Name | Primary Impact | Priority |
 | --- | --- | --- | --- |
@@ -169,7 +145,7 @@ These patches are recommended after the diagnostic run to move the workflow from
 | 11 | Readiness Failure Revision Loop | Makes failed readiness audits actionable and stage-routable | High |
 | 12 | Artifact Field Standardization | Removes ambiguity around `expected_artifacts` and registry references | Medium |
 
-Recommended follow-up implementation order:
+Original follow-up implementation order (historical):
 
 ```text
 8. Stage-Level Schema Validation Results
@@ -1182,66 +1158,319 @@ Global readiness audits must validate that required expected artifacts have matc
 
 ---
 
+# Current Enforcement Backlog
+
+- Patches 13–19: **implemented and regression-tested**. Patch 20: **prepared; live pilot pending**. Patches 21–24: **planned; not implemented**.
+- See `Readiness-Enforcement-Contract.md` for exact fields and adoption behavior, and `Stage-1-8-Improvement-Implementation-Record.md` for the change record.
+- Existing outputs need genuine review/verification before the next affected finalization; approvals and successful results are never fabricated or refreshed automatically.
+- Preserve the eight stages, Stage 4 opening waitlist, normalized Stage 5 envelopes, stable IDs, and unrelated work.
+
+---
+
+# Patch 13 — Schema Coverage And Seed Parity
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Close RISK-HEALTH-001 and RISK-HEALTH-002 without overstating Draft 2020-12 coverage.
+
+## Changes
+
+- Align the UX `ui_blueprints` seed with the Stage 4 array contract, retaining the documented legacy-empty-object compatibility only where needed for existing inputs.
+- Add `uniqueItems` support to the shared validator, or remove its use only if the same invariant is guaranteed at every intended entry point. Prefer implementing this small used keyword.
+- Check every seed against its specific stage schema and registries against their own schemas.
+- Inventory schema vocabulary and fail tests when a newly used validation keyword has no implementation; account for known subset behavior such as `$ref` siblings before claiming general standards compliance.
+
+## Acceptance
+
+- All six current seed/registry checks pass.
+- Duplicate `required_targets` fail standalone deployment schema validation as well as the dedicated deployment gate.
+- Unique arrays pass, and existing conditional/reference/normalized schema behavior remains correct.
+
+---
+
+# Patch 14 — Active Profiles And Research Evidence Gates
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Close RISK-HEALTH-003 by evaluating policy and Stage 2 substantive evidence rather than reporting successful policy evaluation from shape alone.
+
+## Changes
+
+- Read the canonical active profile and evaluate declared required outputs, validation layers, and approval gates. Unknown or unsupported requirements produce an explicit blocker instead of a hardcoded `standard` success.
+- Add focused Stage 2 checks for architecture-critical assumptions, evidence quality, confidence thresholds, contradictions, and explicitly authorized risk exceptions under existing rules.
+- Require current-stage assumption/risk decisions where applicable; earlier-stage records must not substitute for missing current-stage assessments.
+- Preserve Stage 2 research ownership: no waitlist artifact, launch, signup threshold, or measurement delay is required there.
+
+## Acceptance
+
+- The custom-profile missing-output probe fails with the actual missing path and active profile ID.
+- Empty research envelopes cannot become ready without required evidence or a documented policy-authorized exception.
+- Passing evidence, explicitly accepted risks, low confidence, unavailable research, and unresolved critical contradictions have distinct tests.
+
+---
+
+# Patch 15 — Normalized Stage 5 Audit And Handoff Integration
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Close RISK-HEALTH-004 and make the global runner enforce the same package invariants as the dedicated Stage 5 contract.
+
+## Changes
+
+- Use the existing contract helpers and resolver to validate the complete context, eight artifact envelopes, manifest index, canonical collections, and Stage 6 handoff during global readiness.
+- Check indexed paths, IDs, types, and data pointers against actual artifacts; reject mixed/partial v2 packages. Preserve archived self-contained input through the existing read-only compatibility path.
+- Require the Stage 4 waitlist and approved Stage 3 deployment references at the applicable new-workflow handoffs through Stages 5–7; merely adding optional constructor fields is insufficient.
+- Add a genuinely normalized package to the global Stage 1–8 integration fixture. Keep archived/common-envelope compatibility tests separate and clearly labeled.
+
+## Acceptance
+
+- The missing indexed path probe blocks Stage 5 readiness and identifies the broken entry.
+- Mismatched context, artifact identity, data path, missing handoff references, and partial packages fail.
+- A full normalized package passes, the resolver returns both pre-code references, and applicable archived fixtures retain compatibility.
+
+---
+
+# Patch 16 — Runtime Outcomes And Launch Proof Enforcement
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Close RISK-HEALTH-005 and RISK-HEALTH-006 before relying on automatic release readiness.
+
+## Changes
+
+- Evaluate every required launch-critical workflow by stable ID, status, outcome, and resolvable proof. Do not accept a nonempty workflow array as success.
+- Block failed persistence, blocked/unvalidated required workflows, missing workflow coverage, and unresolved dead controls or fixture runtime dependencies. Use existing approval/risk rules for any allowed deferral.
+- Require applicable Stage 7 production-build, deployment, smoke-test, rollback, environment, and monitoring-alert evidence; check artifact identity, verification status, and readable location.
+- Evaluate required visual QA/compliance outcomes and unresolved failures, rather than only reporting field presence. Explicit accepted launch risks must resolve to valid authority.
+- Keep provider-specific live tests in the owning workflow; the global gate validates the recorded results and references.
+
+## Acceptance
+
+- Both confirmed false-readiness probes fail with actionable blockers.
+- Missing proof, unverified artifacts, missing required workflows, failed visual QA, and invalid deferrals block.
+- Complete successful evidence passes; accepted-risk exceptions pass only where the contract permits them.
+- Tests prove each applicable proof category is independently required, not satisfied by an unrelated earlier-stage record.
+
+---
+
+# Patch 17 — Durable Diagnostics For Malformed Inputs
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Close RISK-HEALTH-007 and preserve the promise of an audit for every finalization attempt.
+
+## Changes
+
+- Convert canonical state, ledger, registry, schema, and document parse/shape failures into owned blocking diagnostics before finalization can crash.
+- Make the CLI persist a failed audit and revision actions with nonzero exit when inputs are unreadable or malformed. Preserve damaged source files for repair.
+- Avoid overwriting an unreadable global-state file with a fabricated baseline; write the standalone failed audit and report the global-state update failure explicitly.
+
+## Acceptance
+
+- Malformed JSON, unexpected root types, missing schema targets, and malformed ledgers produce deterministic failed audits without uncontrolled exceptions.
+- Valid global state records the failed attempt. Invalid global state is preserved with a visible recovery action.
+- No invalid input can advance readiness or be silently replaced by success defaults.
+
+---
+
+# Patch 18 — Feedback Destination And Audit Accuracy
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Close RISK-HEALTH-008 while preserving Stage 8's terminal, cyclical role.
+
+## Changes
+
+- Validate feedback items against allowed owning stages and existing issue-routing rules, not merely owner/action presence.
+- Require evidence and resolution/ownership data for high/critical routes according to the contract; resolve evidence references.
+- Populate `routes_checked`, missing-field diagnostics, and cycle flags from actual evaluation instead of returning default empty arrays and `creates_new_stage_cycle: false` unconditionally.
+
+## Acceptance
+
+- `Stage 99`, missing/invalid target stages, unresolved required evidence, and incomplete critical routes block evolution readiness.
+- Valid routes to earlier stages pass and preserve target, owner, action, evidence, and cycle information.
+- Audit fields match the evaluated routes, including the valid no-new-cycle case.
+
+---
+
+# Patch 19 — Bind Pre-Code Decisions To Approved Scope
+
+## Implementation Status
+
+- Implemented and regression-tested.
+
+## Objective
+
+- Reduce stale-approval and platform-omission risk identified through static inspection of the new Stage 3/4 controls.
+
+## Changes
+
+- Reconcile required deployment targets with the approved Stage 1 platform requirements, with explicit scope-change approval for omissions.
+- Record the feature/stack/deployment revision used for waitlist creation using the smallest existing revision or content-hash mechanism available; reuse the written-page approval pattern where appropriate.
+- Invalidate only affected approvals and downstream evidence when those decisions materially change; preserve stable IDs and historical artifacts.
+- Keep the waitlist at the Stage 4 opening checkpoint, with a verified launch required before completion and no signup-count gate.
+
+## Acceptance
+
+- Omitting an approved target from both architecture state and the strategy does not evade validation.
+- A material approved-scope or stack change is detected and requires reconciliation; unrelated edits do not restart the workflow.
+- The unchanged approved scope/stack plus verified waitlist passes without waiting for demand metrics.
+
+---
+
+# Patch 20 — Supervised Real-App Evidence Pilot
+
+## Implementation Status
+
+- Runbook prepared; actual application pilot pending selection and access. See `Stage-1-8-Supervised-Pilot-Runbook.md`.
+
+## Objective
+
+- Establish practical confidence beyond synthetic fixtures after the false-readiness gaps are closed.
+
+## Changes
+
+- Run one approved application through Stages 1–8, retaining actual research, feature/stack approval, Stage 4 waitlist publication, design approvals, normalized tickets, runtime/visual tests, deployment proof, and telemetry-driven feedback.
+- Review required evidence manually during the pilot and record limitations and provider access failures honestly.
+- Update scores from observed results and document any genuine workflow lessons in the owning skills.
+
+## Acceptance
+
+- All eight stage audits reflect real outputs and reviewable evidence, with no invented demand, deployment, or telemetry claims.
+- Failed checks produce actionable repair routes and are resolved or explicitly accepted where allowed.
+- Unattended operation is considered only after the complete evidence set and residual limitations are reviewed; passing fixture tests alone is insufficient.
+
+---
+
+# Patch 21 — General Execution And Regression Completion
+
+## Implementation Status
+
+- Planned; not implemented. Priority: high. Owner: Stage 6 / global readiness. Finding: `RISK-HEALTH-009`.
+
+## Required Changes
+
+- Evaluate canonical execution blockers, required test failures, regression outcomes, and planned-ticket completion before Stage 6 readiness.
+- Map results to required Stage 5 work; successful critical workflow proof cannot hide an incomplete migration or unrelated required test failure.
+- Retain explicitly authorized deferral handling and the existing one-ticket scoped-change entry path.
+
+## Acceptance Criteria
+
+- Nonempty unresolved `execution_blockers` or required `test_failures` block, even when workflow evidence passes.
+- Missing or nonterminal required ticket results block; complete valid results pass.
+- Existing normalized and scoped-change successful controls remain passing.
+
+---
+
+# Patch 22 — Substantive Feature And Workflow Planning Coverage
+
+## Implementation Status
+
+- Planned; not implemented. Priority: high. Owner: Stage 5. Finding: `RISK-HEALTH-010`.
+
+## Required Changes
+
+- Reconcile approved in-scope feature/workflow IDs with slices, build tickets, assignments, acceptance criteria, and planned validation.
+- Block empty planning collections when approved buildable features require work; account for exclusions only through explicit approved scope decisions.
+- Reuse the normalized package and existing contract validators; add coverage checks rather than replace them.
+
+## Acceptance Criteria
+
+- The current one-feature/zero-ticket probe blocks for missing coverage.
+- Missing feature/workflow coverage, unassigned required tickets, or absent validation obligations produce actionable diagnostics.
+- A complete traceable plan passes; approved exclusions remain explicit and reviewable.
+
+---
+
+# Patch 23 — Complete Selected Stack Readiness
+
+## Implementation Status
+
+- Planned; not implemented. Priority: high. Owner: Stage 3. Finding: `RISK-HEALTH-011`.
+
+## Required Changes
+
+- Validate every required selected-stack component defined by the Stage 3 command, not only hosting/deployment.
+- Require concrete choices or explicit allowed `none_for_mvp` decisions, component rationales, and the existing stack evaluation/compatibility decisions.
+- Bind complete reviewed decisions to the existing fingerprints; preserve original platform coverage and deployment comparisons.
+
+## Acceptance Criteria
+
+- A hosting-only stack blocks with named missing components.
+- Unresolved alternatives, missing required rationales, and unacceptable evaluation decisions block.
+- Complete approved web/mobile stack scenarios and deliberate exclusions pass.
+
+---
+
+# Patch 24 — Downstream Approval And Evidence Freshness
+
+## Implementation Status
+
+- Planned; not implemented. Priority: high. Owners: Stages 5–7 / shared handoff validation. Finding: `RISK-HEALTH-012`.
+
+## Required Changes
+
+- Recheck approved scope/stack/strategy fingerprints at affected downstream finalizations, or consume a versioned explicitly approved decision snapshot with equivalent freshness checks.
+- Require affected upstream review and evidence reconciliation when substantive scope changes; reference existence alone must not establish readiness.
+- Preserve stable IDs, historical artifacts, unrelated work, and the existing rule against automatically refreshing approvals.
+
+## Acceptance Criteria
+
+- The changed-feature probe blocks affected Stage 5, 6, and 7 readiness as it already does in Stages 3–4.
+- Stack/strategy drift and stale publication/build evidence are identified with the owning decision and next action.
+- Unchanged approved decisions and unrelated control-envelope edits continue to pass.
+
+---
+
 # Implementation Strategy
 
-Implement patches in dependency order:
-
-1. Add Artifact Evidence Registry because it supports later proof and audit improvements.
-2. Add Stage Contract Profiles because they influence stage depth and required outputs.
-3. Add Schema Validation because it strengthens readiness checks after outputs are stabilized.
-4. Upgrade Stage 2 evidence quality because validated assumptions drive architecture.
-5. Upgrade Stage 7 deployment proof because launch readiness depends on artifacts and evidence.
-6. Upgrade Stage 8 feedback routing because live signals need stronger loopback behavior.
-7. Add Complexity-Based Interactive Guidance across all stages after profile rules exist.
-
-Then apply follow-up patches:
-
-8. Add stage-level schema validation results.
-9. Add durable risk acceptance ledger.
-10. Add cross-stage reference integrity audit.
-11. Add readiness failure revision-loop routing.
-12. Standardize artifact field names across Stage 5-7 and global audit docs.
+- Retain patches 13–19 as implemented history; their original specific probes remain covered.
+- Implement the remaining confirmed fixes in order **21 → 24 → 23 → 22**, keeping each independently reviewable with a reproduced failing probe and successful control.
+- Coordinate patches 21/22 for complete planned-work accounting and patches 23/24 for complete approved-stack continuity.
+- Then execute Patch 20 with an actual application and its live evidence sources. Reporting and fixtures cannot complete that pilot.
+- Run `stage-health-report-check` after substantive changes to refresh the assessment and both plan editions; do not implement a planned patch merely as part of a health check.
 
 ---
 
 # Review Checklist For Future Hardening
 
-Before adding stricter automation around these patches, confirm:
-
-* Whether `System-References/Docs` remains the canonical docs folder.
-* Whether schema validation should be run by the readiness audit only or also by each stage command.
-* Whether accepted risks should require explicit user approval for high and critical severity.
-* Whether reference integrity failures should always block readiness or allow profile-specific exceptions.
-* Whether revision-loop records should be written into one global file or each stage readiness audit.
-* Whether `expected_artifacts` should be required for all build tickets or only validation/preview/deployment-sensitive tickets.
+- Keep `System-References/Docs` as the canonical review-document location.
+- Reuse the global audit and existing stage-specific helpers rather than add a second readiness authority.
+- Preserve the existing user/delegated-policy authority requirement for accepted high and critical risks.
+- Evaluate policy-specific exceptions explicitly; never turn missing validation into an implicit approval.
+- Keep standalone per-stage audit records and update global state only when safely readable.
+- Preserve `expected_artifacts`, artifact-registry references, normalized Stage 5 ownership, and Stage 4 waitlist placement.
+- Confirm the regression probes fail for the intended reason before calling a patch complete.
 
 ---
 
 # Expected Result
 
-After patches 1-7, the stage workflow improved from:
-
-```text
-88 / 100
-```
-
-to approximately:
-
-```text
-94 / 100
-```
-
-After follow-up patches 8-12, the current workflow grade is approximately:
-
-```text
-97 / 100
-```
-
-The biggest expected gains:
-
-* Stage-level schema validation becomes visible and enforceable.
-* Accepted risks remain durable across downstream stages.
-* Broken cross-stage references become auditable before handoff.
-* Failed readiness audits produce precise revision-loop actions.
-* Artifact proof fields become consistent across Stage 5 planning, Stage 6 validation, Stage 7 launch readiness, and global audits.
-* Global readiness improves through schema, profile, artifact, reference, risk, and revision-loop-aware audits.
+- Seven enforcement patches implemented; all eight original findings addressed with regression coverage. Four further gaps remain planned under patches 21–24.
+- The implementation record documents exact changes, interfaces, compatibility behavior, and verification results.
+- The original 84 / 100 diagnostic remains historical; the current health assessment is 88/B. No A+ claim has been made.
+- Patch 20 requires real product, publication, runtime, deployment, monitoring, and feedback evidence before it can be completed.

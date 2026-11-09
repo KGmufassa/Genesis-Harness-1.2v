@@ -155,3 +155,9 @@ Validate:
 * observability needs are recorded
 * integration and infrastructure risks are recorded
 
+---
+
+# Deployment Decision Continuity
+
+- Coordinate the infrastructure model with `deployment-strategy-selection` before Stage 3 synthesis; revise incompatible runtime, data, storage, or job assumptions.
+- Use `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for the approved deployment artifact and target mappings.

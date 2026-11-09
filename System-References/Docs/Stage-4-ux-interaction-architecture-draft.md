@@ -70,6 +70,7 @@ stage-4-ux-interaction-architecture (command)
 ├── state-transition-and-accessibility-design
 ├── design-system-foundation
 ├── ui-architecture-template-selection
+├── Written page specifications and complete-set approval
 ├── Stitch MCP prototype and page-confirmation loop
 ├── ui-blueprint-specification
 └── ux-interaction-synthesis
@@ -110,7 +111,7 @@ Stage 4 must not:
 * redesign backend system architecture
 * write implementation tickets
 * produce final UI art direction as decoration
-* generate frontend code
+* generate frontend code outside the approved opening waitlist checkpoint
 * plan engineering sprints
 
 Stage 4 may recommend product or architecture revisions only when interaction design exposes a blocking contradiction.
@@ -153,6 +154,8 @@ The command must load this file at the beginning of Stage 4, update it after eac
   "user_journeys": {},
   "interaction_architecture": {},
   "screen_system": {},
+  "page_specifications": [],
+  "page_set_approval": { "approval_status": "needs_user_review", "approved_screen_refs": [], "approved_by": "", "approved_at": null },
   "feature_behaviors": {},
   "state_transition_map": {},
   "accessibility_framework": {},
@@ -1175,6 +1178,16 @@ Apply precedence:
 
 ---
 
+# Written Page Specifications Before Stitch
+
+- After UI architecture template selection, follow [Written Page Specification Review](../../.opencode/Skills/stage-4-ux-interaction-architecture/references/page-specification-review.md) and its [page template](../../.opencode/Skills/stage-4-ux-interaction-architecture/references/page-spec-template.md).
+- Produce `Build-Plans/Stage-4/Pages/README.md` and `Build-Plans/Stage-4/Pages/<screen_id>/page-spec.md` for every in-scope screen, including supporting pages.
+- Reconcile user edits into canonical state and record `page_specifications` plus `page_set_approval`. Require approval of all current written specifications and the complete page set before any Stitch generation/update.
+- Run `python3 .opencode/Skills/global-stage-readiness-audit/scripts/page_specifications.py --workspace-root .` immediately before every Stitch mutation. Stop on failure; do not infer approval from existing prototype evidence.
+- Keep web/mobile differences together unless workflows materially differ. Preserve edits and reapprove changed content. Keep later prototype approval separate and retain the existing explicit fallback decision.
+
+---
+
 # Stitch MCP Prototype And Reconciliation Contract
 
 The Stitch MCP phase converts the current Stage 4 interaction architecture into reviewable prototype pages before final UI blueprints are produced.
@@ -1185,7 +1198,10 @@ Apply this workflow:
 
 ```text
 Stage 4 UX foundations and design constraints
--> constrained Stitch prototype prompt
+-> individual written page specifications
+-> explicit approval of all specifications and the complete page set
+-> passing written page approval gate
+-> constrained Stitch prototype prompt from approved specifications
 -> generated launch-critical page candidates
 -> screenshot evidence capture
 -> visual-source and suggestion review
@@ -1481,6 +1497,8 @@ The Stitch phase must not change Stage 5 through Stage 8 contracts.
 Run Stage 4 skills and the prototype phase in this order:
 
 ```text
+Opening checkpoint: waitlist-validation (after approved Stage 3 preflight)
+
 1. user-journey-design
 2. interaction-architecture-design
 3. screen-system-design
@@ -1488,9 +1506,10 @@ Run Stage 4 skills and the prototype phase in this order:
 5. state-transition-and-accessibility-design
 6. design-system-foundation
 7. ui-architecture-template-selection
-8. Stitch MCP prototype and page-confirmation loop
-9. ui-blueprint-specification
-10. ux-interaction-synthesis
+8. Written page specifications and complete-set approval
+9. Stitch MCP prototype and page-confirmation loop
+10. ui-blueprint-specification
+11. ux-interaction-synthesis
 ```
 
 ---
@@ -2797,6 +2816,8 @@ Build-Plans/Stage-4/06-accessibility-framework.json
 Build-Plans/Stage-4/07-ui-blueprint-specification.json
 Build-Plans/Stage-4/08-design-system-foundation.json
 Build-Plans/Stage-4/09-complete-app-blueprint.md
+Build-Plans/Stage-4/Pages/README.md
+Build-Plans/Stage-4/Pages/<screen_id>/page-spec.md
 ```
 
 When useful, also write or update:
@@ -3181,6 +3202,8 @@ stage_decision_brief.approval_status = approved
 
 # Completion Gate
 
+- All in-scope screens have individual Markdown specifications, the complete page set is approved, and the written page approval validator passes against current file content.
+
 Before Stage 4 may use `ready_for_stage_5`, it must run `global-stage-readiness-audit` and write:
 
 ```text
@@ -3266,7 +3289,7 @@ Before completing Stage 4, confirm:
 * Stage 4 did not redefine product strategy
 * Stage 4 did not redesign backend architecture
 * Stage 4 did not write implementation tickets
-* Stage 4 did not generate frontend code
+* Stage 4 did not generate frontend code outside the approved opening waitlist checkpoint
 * every MVP workflow has a user journey
 * every launch-critical feature has behavior rules
 * every required screen maps to a journey or feature
@@ -3342,3 +3365,15 @@ Stage 4 readiness must also record:
 ```
 
 Stage 4 may not use `ready_for_stage_5` until required schema validation passes, UI blueprint, visual spec, design system, journey, screen, action, state, and accessibility references resolve to Stage 1-3 source IDs, accepted high and critical UX or visual risks are written to `Build-Plans/Build-status/Risk-acceptance-ledger.json`, and failed readiness checks are converted into revision-loop actions.
+
+---
+
+# Waitlist Opening Checkpoint And Deployment Continuity
+
+- After input preflight and before app-wide UX work, run `waitlist-validation` using the approved Stage 1 core features/MVP boundaries and Stage 3 stack/deployment strategy. Do not publish against unapproved feature scope or an unapproved stack.
+- Confirm Stage 3 retained the agreed core features; route any material feature change through Stage 1 and revalidate affected Stage 2/3 decisions before page creation.
+- Create a focused responsive waitlist design, approve it under the applicable page/design rules, and build and publish it using the approved stack and deployment approach. Keep this exception limited to the page, signup collection, and measurement plumbing; full app implementation remains Stage 6.
+- Write `Build-Plans/Stage-4/10-waitlist-validation.json`; set `waitlist_validation_ref` and `deployment_strategy_ref` in UX state and `stage_5_handoff`. Include launch evidence and pending/observed demand in the Stage 4 decision brief.
+- Require verified publication before Stage 4 completes; signup counts and the measurement window do not block completion. Existing Stage 4 app-wide page specification, prototype, design approval, and visual continuity gates remain in force.
+- Carry the published waitlist design into subsequent app design work and record planned revisions rather than recreating it silently.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical fields and evidence requirements.

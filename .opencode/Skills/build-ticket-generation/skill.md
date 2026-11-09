@@ -581,3 +581,10 @@ against the actual loaded Stage 1-4 documents. For a file-plus-JSON-Pointer
 reference, verify the file exists, navigate the pointer, and verify its target
 exists. If visual acceptance criteria lack IDs, use their valid source
 file-plus-JSON-Pointer; do not invent identifiers. Any failure stops generation.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Put `waitlist_validation_ref` and `deployment_strategy_ref` in normalized shared context `00-stage-context.json` at the top level, and in the manifest-owned Stage 6 handoff. Create strategy-linked setup, account, build, signing, distribution, and release-verification tickets for the required targets.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.

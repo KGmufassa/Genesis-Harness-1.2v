@@ -677,3 +677,18 @@ Build-Plans/Build-status/Risk-acceptance-ledger.json
 ```
 
 Failed readiness checks must become revision-loop actions with owning output, owning skill, required change, and next action.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Read `waitlist_validation_ref` and `deployment_strategy_ref` through the normalized Stage 5 context/handoff. Verify application builds against approved methods and carry both references into `stage_7_handoff`. Stage 4 permits only validation-site work before this stage, after core-feature, stack, and deployment approval.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Reject failed persistence, blocked/unvalidated critical workflows, missing current-stage evidence, and unresolved visual outcomes. Require verified workflow proof and both pre-code references in the canonical output and Stage 7 handoff.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

@@ -2875,3 +2875,10 @@ Stage 5 readiness must also record:
 ```
 
 Stage 5 may not use `ready_for_stage_6` until required schema validation passes, slice, ticket, skill, agent, UI blueprint, visual spec, design system, route, component, validation, and artifact references resolve to upstream sources, accepted high and critical execution risks are written to `Build-Plans/Build-status/Risk-acceptance-ledger.json`, and failed readiness checks are converted into revision-loop actions.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Put `waitlist_validation_ref` and `deployment_strategy_ref` in normalized shared context `00-stage-context.json` at the top level, and in the manifest-owned Stage 6 handoff. Create strategy-linked setup, account, build, signing, distribution, and release-verification tickets for the required targets.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.

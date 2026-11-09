@@ -298,3 +298,29 @@ needs_current_stage_revision
 needs_prior_stage_revision
 blocked
 ```
+
+---
+
+# Stage 4 Written Page Review
+
+- Stage 4 readiness uses `scripts/page_specifications.py` to require complete per-screen Markdown coverage, index links, current approved content hashes, and explicit written page/set approvals.
+- The Stage 4 command also runs this read-only script before Stitch generation or updates. It does not grant approval or modify files.
+- This check is Stage-4-local; Stage 5 through Stage 8 handoff consumption is unchanged.
+
+---
+
+# Pre-Code Validation And Deployment
+
+- Apply `System-References/Docs/Pre-Code-Validation-and-Deployment.md` as part of the stage contract.
+- Stage 4 requires `10-waitlist-validation.json`, created at its opening checkpoint after Stage 3 approval, with a published public page, verified signup/measurement checks, and resolvable evidence; do not require demand thresholds or an elapsed experiment window. Stage 2 and Stage 3 do not require waitlist publication.
+- Stage 3 requires `09-deployment-strategy.json`, all requested web/iOS/Android targets, official-source comparisons, stack-compatible selected methods, and user approval before application coding.
+- Validate both new artifact schemas and their state/handoff references. Existing projects must supply real evidence before their next affected readiness approval; never invent historical results.
+- Readiness is structural and evidence-backed; it does not itself perform live network checks.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Require actual active-profile evaluation, stage-specific schemas, current-stage decisions, normalized package integrity, recorded runtime/visual/launch outcomes, and valid feedback destinations. Preserve failed audits on malformed input; never replace damaged global state.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

@@ -2,24 +2,268 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "stage-7-output.schema.json",
   "title": "Stage 7 Output",
-  "allOf": [{ "$ref": "stage-output-common.schema.json" }],
+  "allOf": [
+    {
+      "$ref": "stage-output-common.schema.json"
+    }
+  ],
   "properties": {
     "workflow_evidence_review": {
       "type": "object",
       "properties": {
-        "required": { "type": "boolean", "default": false },
-        "workflow_evidence_present": { "type": "boolean", "default": false },
-        "launch_critical_workflows_passed": { "type": "boolean", "default": false },
-        "missing_workflow_evidence": { "type": "array", "default": [] },
-        "accepted_workflow_risks": { "type": "array", "default": [] },
-        "blocking_workflow_gaps": { "type": "array", "default": [] }
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "workflow_evidence_present": {
+          "type": "boolean",
+          "default": false
+        },
+        "launch_critical_workflows_passed": {
+          "type": "boolean",
+          "default": false
+        },
+        "missing_workflow_evidence": {
+          "type": "array",
+          "default": []
+        },
+        "accepted_workflow_risks": {
+          "type": "array",
+          "default": []
+        },
+        "blocking_workflow_gaps": {
+          "type": "array",
+          "default": []
+        }
       },
       "additionalProperties": true
     },
     "workflow_evidence": {
       "type": "array",
-      "items": { "$ref": "stage-6-output.schema.json#/$defs/workflow_evidence" },
+      "items": {
+        "$ref": "stage-6-output.schema.json#/$defs/workflow_evidence"
+      },
       "default": []
+    },
+    "deployment_proof": {
+      "type": "object",
+      "properties": {
+        "production_build_artifact": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "passed",
+                "failed",
+                "pending",
+                "deferred_with_approval"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "accepted_risk_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": true
+        },
+        "deployment_dry_run_result": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "passed",
+                "failed",
+                "pending",
+                "deferred_with_approval"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "accepted_risk_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": true
+        },
+        "smoke_test_results": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "passed",
+                "failed",
+                "pending",
+                "deferred_with_approval"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "accepted_risk_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": true
+        },
+        "rollback_test_result": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "passed",
+                "failed",
+                "pending",
+                "deferred_with_approval"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "accepted_risk_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": true
+        },
+        "environment_verification": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "passed",
+                "failed",
+                "pending",
+                "deferred_with_approval"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "accepted_risk_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": true
+        },
+        "monitoring_alert_test": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "passed",
+                "failed",
+                "pending",
+                "deferred_with_approval"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "accepted_risk_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": true
+        },
+        "release_blockers": {
+          "type": "array"
+        }
+      },
+      "required": [
+        "production_build_artifact",
+        "deployment_dry_run_result",
+        "smoke_test_results",
+        "rollback_test_result",
+        "environment_verification",
+        "monitoring_alert_test"
+      ],
+      "additionalProperties": true
+    },
+    "visual_qa": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "deferred_with_approval"
+          ]
+        },
+        "responsive_validation": {
+          "type": "string"
+        },
+        "design_system_compliance": {
+          "type": "string"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "accepted_risk_ref": {
+          "type": "string"
+        },
+        "unresolved_failures": {
+          "type": "array"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "additionalProperties": true
+    },
+    "waitlist_validation_ref": {
+      "type": "string"
+    },
+    "deployment_strategy_ref": {
+      "type": "string"
     }
   },
   "additionalProperties": true

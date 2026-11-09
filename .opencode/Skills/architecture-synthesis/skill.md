@@ -332,3 +332,23 @@ Build-Plans/Stage-3/00-stage-decision-brief.md
 If the decision brief is not approved, return the architecture and tech stack proposal for user review instead of locking Stage 3.
 
 If `selected_stack` is not complete or contains unresolved alternatives, return the concrete stack gaps for revision before producing `ready_for_stage_4` or Stage 5 architecture handoff.
+
+---
+
+# Deployment Strategy Gate
+
+- Read `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical deployment fields and continuity rules.
+- Confirm the approved Stage 1 core features and MVP boundaries remain feasible; route material scope changes back for approval before Stage 3 completes. Stage 4 creates the waitlist after stack and deployment approval; Stage 3 does not require a published waitlist.
+- Consume `deployment-strategy-selection` before final synthesis; reconcile the selected methods with the infrastructure model and stack.
+- Add `09-deployment-strategy.json` to required outputs without renumbering existing files; retain `deployment_targets`, `deployment_strategy_ref`, and exact `selected_stack.hosting_and_deployment.target_methods` in architecture state.
+- Include web/mobile alternatives, official-source evidence, target selections, cost and compatibility findings, prerequisites, and tradeoffs in the Stage 3 decision brief.
+- Carry `deployment_strategy_ref` into `stage_4_handoff`; block readiness for missing target coverage, unresolved choices, incompatibility, or missing user approval.
+- Decide deployment before application implementation. Stage 7 operationalizes this decision; it does not postpone or silently replace selection.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Require approved scope/stack/strategy bindings and full platform coverage before synthesis; preserve the approved deployment decision into Stage 4.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

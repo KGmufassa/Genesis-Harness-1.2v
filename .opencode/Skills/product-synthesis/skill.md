@@ -165,3 +165,19 @@ Build-Plans/Stage-1/00-stage-decision-brief.md
 ```
 
 The brief must confirm the app idea, feature direction, MVP boundary, and how the app should work. If `stage_decision_brief.approval_status` is not `approved`, return the brief for user review instead of locking Stage 1.
+
+---
+
+# Waitlist Validation Intent
+
+- Define the waitlist audience, value proposition, signup offer, target assumptions, desired metrics, measurement window, and owner in the product boundaries and success framework.
+- Hand these inputs through Stage 2 research and Stage 3 approval to the Stage 4 opening checkpoint; waitlist launch is required, but reaching signup targets does not gate development.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for the cross-stage contract.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Retain the approved target_platforms and core-feature hash in Stage 1 outputs/decision brief so later stack and waitlist approvals can be checked for staleness.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

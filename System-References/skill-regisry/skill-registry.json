@@ -34,12 +34,16 @@
     ]
   },
   "statistics": {
-    "skills_scanned": 87,
-    "skills_included": 27,
-    "stage_associated_skills_excluded": 60,
+    "skills_scanned": 90,
+    "skills_included": 28,
+    "stage_associated_skills_excluded": 62,
     "non_skill_artifacts_ignored": 1
   },
   "excluded_stage_skills": [
+    {
+      "folder": "Stage-1-product-initialization",
+      "reason": "Stage 1 command skill"
+    },
     {
       "folder": "agent-assignment-planning",
       "reason": "Stage 5 subskill"
@@ -79,6 +83,10 @@
     {
       "folder": "deployment-framework-planning",
       "reason": "Stage 7 subskill"
+    },
+    {
+      "folder": "deployment-strategy-selection",
+      "reason": "Stage 3 subskill"
     },
     {
       "folder": "design-system-foundation",
@@ -197,10 +205,6 @@
       "reason": "Stage 3 subskill"
     },
     {
-      "folder": "stage-1-product-initialization",
-      "reason": "Stage 1 command skill"
-    },
-    {
       "folder": "stage-2-research-and-validation",
       "reason": "Stage 2 command skill"
     },
@@ -275,6 +279,10 @@
     {
       "folder": "validation-synthesis",
       "reason": "Stage 2 subskill"
+    },
+    {
+      "folder": "waitlist-validation",
+      "reason": "Stage 4 subskill"
     },
     {
       "folder": "workflow-and-capability-synthesis",
@@ -1381,6 +1389,63 @@
       "rule_engine_tags": [
         "code quality",
         "skill-registry-builder"
+      ],
+      "selection_priority": "normal",
+      "risk_flags": [],
+      "inferred_metadata": true
+    },
+    {
+      "skill_id": "stage-health-report-check",
+      "name": "stage-health-report-check",
+      "aliases": [
+        "stage-health-report-check"
+      ],
+      "folder": "stage-health-report-check",
+      "source_path": ".opencode/Skills/stage-health-report-check/skill.md",
+      "stage_associated": false,
+      "description": "Run a health check across all eight Genesis stages and synchronize the health report, Markdown improvement plan, and HTML reading edition.",
+      "domains": [
+        "code review"
+      ],
+      "capabilities": [
+        "generate report",
+        "review code",
+        "tag findings"
+      ],
+      "task_triggers": [
+        "Assess workflow correctness and executable enforcement. A real application finalization or security audit is a separate task.",
+        "Do not invoke the readiness CLI against the actual workspace: it writes audits/global state. Use `build_audit()` or the CLI in isolated temporary fixtures for behavioral probes.",
+        "Inspect all eight live command skills, relevant synthesis/completion guidance, schemas, canonical state templates, executable controls, and tests; resolve discoverable facts from current source.",
+        "Limit durable updates to the three reporting outputs below. Collect evidence in a temporary directory; do not implement fixes, launch an app, change approvals, or advance `Build-Plans` state during a health check.",
+        "Preserve existing work, IDs, historical implementation status, and user decisions, including deployment selection in Stage 3 and the waitlist opening Stage 4.",
+        "Read the complete results, including per-suite output and timeouts; the JSON is evidence, not a finished assessment or automatic grade.",
+        "Read the repository `AGENTS.md`, the current health report, improvement plan, implementation record, pilot runbook, global workflow/readiness contracts, and applicable enforcement/pre-code contracts.",
+        "Run the collector from the repository root, using an absolute temporary output path. It discovers test suites/counts and checks stage-specific seeds/registries, syntax, JSON, metadata, whitespace, and baseline preservation without hardcoded inventory totals.",
+        "Treat a nonzero collector exit as evidence to report, not permission to fix code or stop without documenting failed checks. `--skip-tests` is partial collection and cannot support a claim that tests passed.",
+        "Use when the user requests `stage health report check`, an all-stage harness health assessment, or refreshed health and improvement-plan documents."
+      ],
+      "input_requirements": [
+        "skill.md file",
+        "codebase or diff context"
+      ],
+      "outputs": [
+        "report"
+      ],
+      "tools_or_scripts": [],
+      "references": [
+        ".opencode/Skills/stage-health-report-check/references/assessment-guide.md"
+      ],
+      "constraints": [
+        "Compare each stage's substantive completion obligations with the actual audit paths, not only schema shape or helper existence.",
+        "Keep stable `RISK-HEALTH-` finding IDs. Mark findings resolved only after fresh contrary evidence; use unverified/not rechecked for incomplete reviews. Preserve the original closure history and do not equate a broader new gap with reopening an old specific probe.",
+        "Preserve existing patch numbers and history; allocate new numbers after the current maximum. Never mark planned fixes implemented, or mark the real-app pilot complete, from reporting work or fixture success.",
+        "Regenerate `System-References/Docs/Stage-1-8-A-Grade-Improvement-Patch-Plan.html` only after both reviewed Markdown documents are consistent. Use the bundled renderer, which handles new patch numbers and embeds local styles/scripts for offline viewing.",
+        "Check all three documents agree on current findings, scores, counts, date, patch status, and pending real-app work; historical metrics must be labeled historical.",
+        "Update this skill in place when verified usage reveals a workflow lesson; preserve the reporting-only scope."
+      ],
+      "rule_engine_tags": [
+        "code review",
+        "stage-health-report-check"
       ],
       "selection_priority": "normal",
       "risk_flags": [],

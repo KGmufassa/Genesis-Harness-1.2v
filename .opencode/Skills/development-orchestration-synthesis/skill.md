@@ -347,3 +347,18 @@ Before completing Stage 5, confirm:
 * release plan includes readiness gates
 * critical interactive guidance questions are answered or converted into recorded assumptions
 * Stage 6 handoff is usable for implementation and validation
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Put `waitlist_validation_ref` and `deployment_strategy_ref` in normalized shared context `00-stage-context.json` at the top level, and in the manifest-owned Stage 6 handoff. Create strategy-linked setup, account, build, signing, distribution, and release-verification tickets for the required targets.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.
+
+---
+
+# Executable Enforcement Upgrade
+
+- Use the existing Stage 5 helpers and pinned schemas to validate the entire manifest package, ticket references, risk refs, scopes, waves, completion definitions, and pre-code handoff references.
+- Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
+- Update this skill in place when verified workflow lessons change its requirements.

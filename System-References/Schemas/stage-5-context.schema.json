@@ -42,6 +42,8 @@
       },
       "additionalProperties": true
     },
+    "waitlist_validation_ref": { "type": "string", "default": "" },
+    "deployment_strategy_ref": { "type": "string", "default": "" },
     "execution_decision_refs": { "type": "array", "items": { "type": "string" }, "default": [] },
     "assumptions": { "type": "array", "default": [] },
     "risks": { "type": "array", "default": [] },

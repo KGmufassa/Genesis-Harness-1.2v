@@ -99,3 +99,10 @@ Route examples:
 * deployment, monitoring, onboarding, support, or launch-readiness issue -> Stage 7
 
 Each route candidate must include source signal IDs, affected `UI-ELEMENT-`, `ROUTE-`, and `ACTION-` IDs when applicable, related Stage 5 ticket and Stage 6 validation references, severity, evidence references, recommended target stage, recommended action, and whether it blocks current evolution.
+
+---
+
+# Waitlist And Deployment Continuity
+
+- Consume waitlist evidence through `waitlist_validation_ref`. Compare observed demand with original assumptions and desired metrics, preserve observation dates and limitations, and route product implications to Stage 1/2. Unobserved metrics remain unknown.
+- Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical references and requirements.
