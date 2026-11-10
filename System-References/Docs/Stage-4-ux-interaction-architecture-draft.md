@@ -3377,3 +3377,11 @@ Stage 4 may not use `ready_for_stage_5` until required schema validation passes,
 - Require verified publication before Stage 4 completes; signup counts and the measurement window do not block completion. Existing Stage 4 app-wide page specification, prototype, design approval, and visual continuity gates remain in force.
 - Carry the published waitlist design into subsequent app design work and record planned revisions rather than recreating it silently.
 - Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md` for canonical fields and evidence requirements.
+
+---
+
+## Page Standards and Revision Continuity
+
+- Stage 4 generates `PAGE-STANDARDS.md`, `Pages/README.md`, each screen's specification, and `Page-Revisions/README.md` with baseline/revision records and retained snapshots. Preserve existing approval gates and canonical JSON authority.
+- Follow [Page Standards, Content and Revision Contract](../../.opencode/Skills/stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md) for exact fields, source hashes, required tables, revision lifecycle, approval evidence, draft/final checks and migration.
+- Link these documents from the complete app blueprint. Stage 5 planning and Stage 6 implementation/visual QA consume the links and track downstream impacts against stable IDs without changing the Stage 5 handoff interface.

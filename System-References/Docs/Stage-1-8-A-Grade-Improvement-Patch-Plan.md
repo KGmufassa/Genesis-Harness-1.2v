@@ -20,15 +20,15 @@ The goal is to improve:
 
 # Current Health Baseline
 
-Implementation update: **2026-11-08**.
+Assessment update: **2026-11-09**. Patches 13–19 retain their historical 2026-11-08 implementation record.
 
 | Measure | Verified Status |
 | --- | --- |
 | Original diagnostic assessment | 84 / 100 — B, retained as the pre-patch baseline |
-| Current health assessment | **88 / 100 — B**; four further readiness gaps remain |
+| Current health assessment | **87 / 100 — B**; four readiness gaps and one contract-test regression remain |
 | Patches 13–19 | **Implemented and regression-tested** |
 | Patch 20 | **Runbook prepared; real-app execution pending application selection/access** |
-| Repository tests, latest health check | **115 passed; 0 failed** |
+| Repository tests, latest health check | **132 executed: 131 passed; 1 error; 0 assertion failures** |
 | Seed/registry schema checks | **6 passed; 0 failed** |
 | Original confirmed findings | **8 addressed by executable controls and regression tests** |
 | Skill packages | **90 compliant packages** |
@@ -36,11 +36,17 @@ Implementation update: **2026-11-08**.
 
 See `Stage-1-8-Improvement-Implementation-Record.md` for the change inventory, exact contract additions, test evidence, and remaining work. The HTML edition mirrors this implementation status.
 
-The post-implementation health check assesses the harness at 88/B. The original eight findings remain addressed, while four further gaps are mapped to planned patches 21–24. A+ still requires stronger readiness enforcement and supervised real-app evidence; passing counts alone do not award a grade.
+The current health check assesses the harness at 87/B (workflow design 94 at 30%, enforcement 84 at 50%, verification 85 at 20%; weighted 87.2). The prior 88/B grade is historical. The original eight findings remain addressed; four readiness gaps map to planned patches 21–24, and a new contract-test regression maps to Patch 25. Stronger enforcement, a green regression run and supervised real-app evidence are still required; counts alone do not award a grade.
 
 ---
 
 # Latest Diagnostic Run
+
+- Reporting-only check on 2026-11-09: all eight stage contracts and live controls reviewed; all four prior open findings re-confirmed with passing synthetic baselines.
+- The complete collector ran 132 tests (131 passed, one error), six passing seed/registry checks, 90 compliant skill packages, 17 syntax checks and 37 JSON checks. No timeouts or skipped suites.
+- New Stage 4 standards/page/revision controls were present before the check. No fixes or stage advancement occurred during this reporting run.
+
+## Historical Implementation Work — Patches 13–19
 
 - Preserved unrelated in-progress edits, the eight-stage architecture, and the approved Stage 4 waitlist placement.
 - Added regression coverage for the confirmed gaps and successful controls, then implemented the missing checks.
@@ -75,16 +81,19 @@ The post-implementation health check assesses the harness at 88/B. The original 
 
 # Latest Health Check
 
-- Assessment date: **2026-11-08**; current result **88/100 — B**, with **115 passing tests**, six passing seed/registry schema checks, 90 compliant skills, and unchanged baseline stage status.
-- `stage-health-report-check` now provides repeatable evidence collection and HTML generation; its reporting work does not implement readiness fixes.
-- Reproduced all four current open findings in temporary fixtures with passing baselines. Preserve the original eight finding closures and patches 13–19 implementation history.
+- Assessment date: **2026-11-09**; result **87/100 — B**. The full test run recorded **132 executed: 131 passed; 1 error**; all six seed/registry schemas pass, all 90 skills pass metadata checks, and baseline stage status is unchanged.
+- The collector exits 1 because the Stage 4 phase-heading assertion raises `ValueError`; no code is fixed during this reporting check. Verification maturity is reduced from 88 to 85; other dimension scores are unchanged.
+- Reproduced all four current readiness gaps and added a page-edit variant to RISK-HEALTH-012. The new test regression is RISK-HEALTH-013. Preserve original closure and implementation history.
+- Stage 4 now has 27 page-specification tests within 87 passing readiness tests; the separate Stitch contract suite has three passes and one error. The real-app pilot remains pending.
+- The HTML edition is regenerated from reviewed sources: 25 patches, six pending (20–25), valid anchors/local links and JavaScript syntax. Browser visual preview was unavailable because browser host/native permissions were unavailable; responsive/print checks are static only.
 
 | Open Finding | Owner | Planned Patch | Priority |
 | --- | --- | --- | --- |
 | RISK-HEALTH-009 — General implementation failures | Stage 6 | 21 | High |
 | RISK-HEALTH-010 — Feature-to-ticket coverage | Stage 5 | 22 | High |
 | RISK-HEALTH-011 — Complete concrete stack | Stage 3 | 23 | High |
-| RISK-HEALTH-012 — Downstream approval freshness | Stages 5–7 | 24 | High |
+| RISK-HEALTH-012 — Downstream scope/page approval freshness | Stages 5–7 | 24 | High |
+| RISK-HEALTH-013 — Stage 4 contract-test heading drift | Stage 4 tests/documentation | 25 | Medium |
 
 ---
 
@@ -1436,20 +1445,43 @@ Global readiness audits must validate that required expected artifacts have matc
 
 - Recheck approved scope/stack/strategy fingerprints at affected downstream finalizations, or consume a versioned explicitly approved decision snapshot with equivalent freshness checks.
 - Require affected upstream review and evidence reconciliation when substantive scope changes; reference existence alone must not establish readiness.
+- Carry reviewed Stage 4 page content, shared-standard hashes and revision approval references through the existing blueprint-linked handoff. Recheck freshness when affected Stage 5–7 work finalizes.
 - Preserve stable IDs, historical artifacts, unrelated work, and the existing rule against automatically refreshing approvals.
 
 ## Acceptance Criteria
 
 - The changed-feature probe blocks affected Stage 5, 6, and 7 readiness as it already does in Stages 3–4.
+- The unapproved page-edit probe also blocks affected Stage 5, 6 and 7 readiness; shared-standard changes and stale revision approvals are covered.
 - Stack/strategy drift and stale publication/build evidence are identified with the owning decision and next action.
 - Unchanged approved decisions and unrelated control-envelope edits continue to pass.
+
+---
+
+# Patch 25 — Stage 4 Contract-Test And Workflow Wording Synchronization
+
+## Implementation Status
+
+- Planned; not implemented. Priority: medium. Owner: Stage 4 tests/documentation. Finding: `RISK-HEALTH-013`. Dependencies: existing Stage 4 standards/specification/revision implementation; independent of Patches 21–24.
+
+## Required Changes
+
+- Reconcile the Stage 4 command and draft phase-8 wording to include shared standards, written page specifications, revision baselines and complete-set approval.
+- Replace the brittle exact old-heading assertion with an ordering check that tolerates descriptive text but verifies all written-review obligations precede Stitch generation/update.
+- Retain separate prototype approval, read-only draft/final gates, and fallback approval requirements. Do not weaken checks just to make the wording test pass.
+
+## Acceptance Criteria
+
+- The dedicated Stage 4 suite passes all four tests, including its command and draft subtests, with no `ValueError`.
+- A negative control that moves written approval after prototype mutation is rejected; harmless heading elaboration passes.
+- The complete repository run passes, including the 27 page-specification tests and all 87 readiness tests in the current baseline. Additions may increase counts; never hardcode them as the acceptance mechanism.
+- Stage ordering and new standards/revision obligations remain intact; no application state or approvals are changed by the repair.
 
 ---
 
 # Implementation Strategy
 
 - Retain patches 13–19 as implemented history; their original specific probes remain covered.
-- Implement the remaining confirmed fixes in order **21 → 24 → 23 → 22**, keeping each independently reviewable with a reproduced failing probe and successful control.
+- Repair contract-test drift with **25**, then implement readiness fixes in order **21 → 24 → 23 → 22**, keeping each independently reviewable with a reproduced failing probe and successful control.
 - Coordinate patches 21/22 for complete planned-work accounting and patches 23/24 for complete approved-stack continuity.
 - Then execute Patch 20 with an actual application and its live evidence sources. Reporting and fixtures cannot complete that pilot.
 - Run `stage-health-report-check` after substantive changes to refresh the assessment and both plan editions; do not implement a planned patch merely as part of a health check.
@@ -1470,7 +1502,7 @@ Global readiness audits must validate that required expected artifacts have matc
 
 # Expected Result
 
-- Seven enforcement patches implemented; all eight original findings addressed with regression coverage. Four further gaps remain planned under patches 21–24.
+- Seven enforcement patches implemented; all eight original findings addressed with regression coverage. Four readiness gaps remain planned under patches 21–24; the additional Stage 4 test regression is planned under Patch 25.
 - The implementation record documents exact changes, interfaces, compatibility behavior, and verification results.
-- The original 84 / 100 diagnostic remains historical; the current health assessment is 88/B. No A+ claim has been made.
+- The original 84 / 100 diagnostic remains historical; the current health assessment is 87/B. No A+ claim has been made.
 - Patch 20 requires real product, publication, runtime, deployment, monitoring, and feedback evidence before it can be completed.

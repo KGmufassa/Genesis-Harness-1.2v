@@ -321,3 +321,10 @@ Validate:
 * design approval status is recorded
 * Stage 5 can consume the design system without inventing visual direction
 * no frontend code is generated
+
+---
+
+## Page Standards and Revision Continuity
+
+- Generate `Build-Plans/Stage-4/PAGE-STANDARDS.md` as the readable shared standard derived from canonical UX state; include precise typography and all shared layout, component, accessibility and state rules.
+- Follow [Page Standards, Content and Revision Contract](../stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md). Update source/content hashes after reconciliation; shared-rule changes require affected-page review and revision records before renewed approval.

@@ -209,7 +209,7 @@ def build_audit(root: Path, stage: int, proposed_status: str) -> dict[str, Any]:
         blocking.extend(_checked("Deployment", lambda: validate_deployment(root, canonical)))
     if stage == 4:
         blocking.extend(_checked("Waitlist", lambda: validate_waitlist(root, canonical)))
-        blocking.extend(_checked("Page specifications", lambda: validate_page_specifications(root, canonical)))
+        blocking.extend(_checked("Page specifications", lambda: validate_page_specifications(root, canonical, final=True)))
     if stage == 5:
         blocking.extend(_checked("Stage 5 manifest", lambda: stage5_errors(root, documents)))
     if stage in {6, 7}:

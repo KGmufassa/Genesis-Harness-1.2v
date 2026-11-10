@@ -25,6 +25,7 @@ from run_readiness_audit import (  # noqa: E402
 from workflow_validation import validate_schema  # noqa: E402
 from precode_fixtures import seed_precode
 from enforcement_fixtures import seed_enforcement
+from page_document_fixtures import seed_page_documents
 
 
 def write_json(path: Path, payload: Any) -> None:
@@ -65,6 +66,7 @@ class ReadinessRunnerTests(unittest.TestCase):
                     payload["screen_system"] = {"screen_inventory": [{"screen_id": "SCREEN-001"}]}
                     payload["page_specifications"] = [{"screen_ref": "SCREEN-001", "document_path": str(spec_path.relative_to(root)), "content_hash": digest, "approved_hash": digest, **approval}]
                     payload["page_set_approval"] = {"approved_screen_refs": ["SCREEN-001"], **approval}
+                    seed_page_documents(root, payload)
                 write_json(status / STATE_FILES[stage], payload)
 
         seed_precode(root)

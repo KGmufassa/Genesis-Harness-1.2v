@@ -268,3 +268,12 @@ The workflow state must record:
 
 - Apply `System-References/Docs/Readiness-Enforcement-Contract.md` for active profile evaluation, evidence gates, scope hashes, normalized handoff validation, and durable input-error diagnostics.
 - Existing artifacts without the new binding/proof fields require real review and verification before their next affected readiness attempt; never fabricate backfilled success.
+
+---
+
+## Stage 4 Page Standards and Revision Enforcement
+
+- Apply [Page Standards, Content and Revision Contract](../../.opencode/Skills/stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md) to all Stage 4 runs, including legacy runs before their next prototype mutation or readiness approval.
+- Written review requires populated shared standards and page content, current source/standard hashes, baseline/revision snapshots, complete hash chains and explicit current approvals. Human review establishes workflow completeness and semantic correctness.
+- Before prototype mutation use the read-only `page_specifications.py --workspace-root . --phase draft` gate; final readiness uses `--phase final` and additionally reconciles completed blueprints and downstream impact resolutions/routes. Missing history must be recovered or transparently rebaselined and reviewed, never fabricated.
+- Keep `page_standards`, `page_baselines` and `page_revisions` in Stage 4 UX state. Preserve the existing downstream handoff interface; link generated Markdown through the complete app blueprint.

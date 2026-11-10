@@ -1,5 +1,7 @@
 # Written Page Specification Review
 
+- Follow [Page Standards, Content and Revision Contract](page-standards-and-revisions.md) for required page content, standards, snapshots, revision records and draft/final gates.
+
 - Run this phase after `ui-architecture-template-selection` and before creating or updating any Stitch project or screen. Read-only capability discovery may run earlier.
 - Maintain the complete in-scope screen list in `screen_system.screen_inventory` in UX state; each entry has a stable `screen_id`. Include supporting, authentication, settings, and administrative screens when required by the approved product scope, not only launch-critical screens.
 - Use these same `SCREEN-` IDs as `page_ref` in page inventories and blueprints. Preserve existing IDs; reconcile existing page aliases explicitly before review.
@@ -29,6 +31,7 @@
     {
       "screen_ref": "SCREEN-001",
       "document_path": "Build-Plans/Stage-4/Pages/SCREEN-001/page-spec.md",
+      "standards_hash": "",
       "content_hash": "",
       "approval_status": "needs_user_review",
       "approved_hash": "",

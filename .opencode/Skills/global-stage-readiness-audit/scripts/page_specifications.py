@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from workflow_validation import load_json
+from page_documents import validate_documents
 
 
 PAGES = Path("Build-Plans/Stage-4/Pages")
@@ -23,7 +24,7 @@ def _approved(record: Mapping[str, Any]) -> bool:
     )
 
 
-def validate_page_specifications(root: Path, state: Mapping[str, Any]) -> list[str]:
+def validate_page_specifications(root: Path, state: Mapping[str, Any], *, final: bool = False) -> list[str]:
     errors: list[str] = []
     system = state.get("screen_system", {})
     screens = system.get("screen_inventory", []) if isinstance(system, Mapping) else []
@@ -49,6 +50,7 @@ def validate_page_specifications(root: Path, state: Mapping[str, Any]) -> list[s
     records = state.get("page_specifications", [])
     if not isinstance(records, list):
         return errors + ["Page specifications: page_specifications must be a list"]
+    documents: dict[str, str] = {}
     refs: list[str] = []
     index_path = root / PAGES / "README.md"
     try:
@@ -79,6 +81,7 @@ def validate_page_specifications(root: Path, state: Mapping[str, Any]) -> list[s
         except (OSError, UnicodeError):
             errors.append(f"{ref}: specification is missing or unreadable")
             continue
+        documents[ref] = content.decode("utf-8")
         digest = hashlib.sha256(content).hexdigest()
         if record.get("content_hash") != digest or record.get("approved_hash") != digest:
             errors.append(f"{ref}: specification changed or lacks matching approved content hash")
@@ -102,17 +105,19 @@ def validate_page_specifications(root: Path, state: Mapping[str, Any]) -> list[s
         errors.append("Page specifications: page-set approval does not match the current screen set")
     if not _approved(approval):
         errors.append("Page specifications: explicit approval of the complete page set is missing")
+    errors.extend(validate_documents(root, state, documents, final))
     return errors
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace-root", type=Path, default=Path.cwd())
+    parser.add_argument("--phase", choices=("draft", "final"), default="draft")
     args = parser.parse_args()
     try:
         state = load_json(args.workspace_root / "Build-Plans/Build-status/UX-state.json")
-        errors = validate_page_specifications(args.workspace_root, state) if isinstance(state, Mapping) else ["UX state must be an object"]
-    except (ValueError, OSError, UnicodeError) as exc:
+        errors = validate_page_specifications(args.workspace_root, state, final=args.phase == "final") if isinstance(state, Mapping) else ["UX state must be an object"]
+    except (ValueError, OSError, UnicodeError, TypeError, KeyError, AttributeError) as exc:
         errors = [str(exc)]
     print(json.dumps({"passed": not errors, "blocking_gaps": errors}, indent=2))
     return 1 if errors else 0

@@ -22,6 +22,26 @@
 - Preserve the hierarchy: Page → Section → Component → Interactive Element → Route, Action, or No Navigation.
 - Identify shared components and proposed design-system/template references.
 
+## Components
+
+| Component ID | Section | Purpose / shared reference |
+|---|---|---|
+
+## Assets
+
+| Asset reference | Type | Owning component | Usage | Source / planned location | Availability | Accessibility treatment |
+|---|---|---|---|---|---|---|
+
+## Typography
+
+| Usage | Token reference | Font family / fallback | Weight | Size | Line height | Overrides |
+|---|---|---|---|---|---|---|
+
+## Shared Standard and Deviations
+
+- [Page standards](../../PAGE-STANDARDS.md)
+- Approved deviations and rationale, or explicitly none:
+
 ## Interactive Elements
 
 | Element ID / label | Owning section / component | Trigger | Route / action / no navigation | Outcome / recovery | Permissions / confirmation |

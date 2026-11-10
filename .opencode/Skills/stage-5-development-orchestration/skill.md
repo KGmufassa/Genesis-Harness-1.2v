@@ -730,3 +730,11 @@ Failed readiness checks must become revision-loop actions with owning output, ow
 - Require a complete normalized v2 package and pinned-schema/manifest consistency checks. Carry both pre-code references in shared context and the manifest handoff; runtime proof is planned here and collected during implementation.
 - Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
 - Update this skill in place when verified workflow lessons change its requirements.
+
+---
+
+## Page Standards and Revision Continuity
+
+- Consume Stage 4 `PAGE-STANDARDS.md`, page specifications and `Page-Revisions/README.md` through links in `09-complete-app-blueprint.md`; retain affected `SCREEN-`, component, `UI-ELEMENT-`, `ROUTE-`, `ACTION-` and `CHANGE-` references in Stage 5 work.
+- Review revision impacts before planning or implementing affected work. Record owner, resolution and evidence for downstream propagation; route UX or design changes back through Stage 4 reconciliation and reapproval.
+- Follow [Page Standards, Content and Revision Contract](../stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md). Keep the existing Stage 5 handoff interface and avoid new Stitch dependencies.

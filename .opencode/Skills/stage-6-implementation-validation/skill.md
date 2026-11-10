@@ -692,3 +692,11 @@ Failed readiness checks must become revision-loop actions with owning output, ow
 - Reject failed persistence, blocked/unvalidated critical workflows, missing current-stage evidence, and unresolved visual outcomes. Require verified workflow proof and both pre-code references in the canonical output and Stage 7 handoff.
 - Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
 - Update this skill in place when verified workflow lessons change its requirements.
+
+---
+
+## Page Standards and Revision Continuity
+
+- Consume Stage 4 `PAGE-STANDARDS.md`, page specifications and `Page-Revisions/README.md` through links in `09-complete-app-blueprint.md`; retain affected `SCREEN-`, component, `UI-ELEMENT-`, `ROUTE-`, `ACTION-` and `CHANGE-` references in Stage 6 work.
+- Review revision impacts before planning or implementing affected work. Record owner, resolution and evidence for downstream propagation; route UX or design changes back through Stage 4 reconciliation and reapproval.
+- Follow [Page Standards, Content and Revision Contract](../stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md). Keep the existing Stage 5 handoff interface and avoid new Stitch dependencies.

@@ -1465,3 +1465,11 @@ Stage 6 may not use `ready_for_stage_7` until required schema validation passes,
 
 - Read `waitlist_validation_ref` and `deployment_strategy_ref` through the normalized Stage 5 context/handoff. Verify application builds against approved methods and carry both references into `stage_7_handoff`. Stage 4 permits only validation-site work before this stage, after core-feature, stack, and deployment approval.
 - Follow `System-References/Docs/Pre-Code-Validation-and-Deployment.md`; preserve canonical references rather than inventing a parallel strategy.
+
+---
+
+## Page Standards and Revision Continuity
+
+- Stage 4 generates `PAGE-STANDARDS.md`, `Pages/README.md`, each screen's specification, and `Page-Revisions/README.md` with baseline/revision records and retained snapshots. Preserve existing approval gates and canonical JSON authority.
+- Follow [Page Standards, Content and Revision Contract](../../.opencode/Skills/stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md) for exact fields, source hashes, required tables, revision lifecycle, approval evidence, draft/final checks and migration.
+- Link these documents from the complete app blueprint. Stage 5 planning and Stage 6 implementation/visual QA consume the links and track downstream impacts against stable IDs without changing the Stage 5 handoff interface.

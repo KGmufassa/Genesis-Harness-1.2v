@@ -80,3 +80,12 @@
 - When `issue_domain` is supplied, route product → 1, assumptions → 2, architecture → 3, UX → 4, planning → 5, implementation → 6, deployment → 7, telemetry → 8.
 - High/critical feedback requires verified evidence references. Populate checked route records, missing-owner/action/evidence diagnostics, and cycle flags from actual evaluation.
 - Feedback recommendations do not authorize implementation or deployment changes on their own.
+
+---
+
+## Stage 4 Page Standards and Revision Enforcement
+
+- Apply [Page Standards, Content and Revision Contract](../../.opencode/Skills/stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md) to all Stage 4 runs, including legacy runs before their next prototype mutation or readiness approval.
+- Written review requires populated shared standards and page content, current source/standard hashes, baseline/revision snapshots, complete hash chains and explicit current approvals. Human review establishes workflow completeness and semantic correctness.
+- Before prototype mutation use the read-only `page_specifications.py --workspace-root . --phase draft` gate; final readiness uses `--phase final` and additionally reconciles completed blueprints and downstream impact resolutions/routes. Missing history must be recovered or transparently rebaselined and reviewed, never fabricated.
+- Keep `page_standards`, `page_baselines` and `page_revisions` in Stage 4 UX state. Preserve the existing downstream handoff interface; link generated Markdown through the complete app blueprint.

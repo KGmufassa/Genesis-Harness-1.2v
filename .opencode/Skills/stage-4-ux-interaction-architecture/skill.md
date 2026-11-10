@@ -95,6 +95,9 @@ The command must load this file at the beginning of Stage 4, update it after eac
   "user_journeys": {},
   "interaction_architecture": {},
   "screen_system": {},
+  "page_standards": {"content_hash": "", "source_hashes": {}},
+  "page_baselines": {},
+  "page_revisions": [],
   "page_specifications": [],
   "page_set_approval": { "approval_status": "needs_user_review", "approved_screen_refs": [], "approved_by": "", "approved_at": null },
   "feature_behaviors": {},
@@ -385,7 +388,7 @@ Opening checkpoint: waitlist-validation (after approved Stage 3 preflight)
 5. state-transition-and-accessibility-design
 6. design-system-foundation
 7. ui-architecture-template-selection
-8. Written page specifications and complete-set approval
+8. Shared page standard, written page specifications, revision baselines and complete-set approval
 9. Stitch MCP prototype and page-confirmation loop
 10. ui-blueprint-specification
 11. ux-interaction-synthesis
@@ -538,6 +541,7 @@ The library is read-only during normal Stage 4 runs. Record template deviations 
 
 ## Written Page Specifications and Complete-Set Approval
 
+- Generate shared standards and revision baselines using [Page Standards, Content and Revision Contract](references/page-standards-and-revisions.md).
 - After template selection, follow [Written Page Specification Review](references/page-specification-review.md) and use [the page specification template](references/page-spec-template.md).
 - Write every in-scope screen into `Build-Plans/Stage-4/Pages/<screen_id>/page-spec.md` and link it from `Build-Plans/Stage-4/Pages/README.md`.
 - Reconcile user edits and obtain explicit approval of every written specification and the complete page set before any Stitch generation.
@@ -656,6 +660,9 @@ Build-Plans/Stage-4/06-accessibility-framework.json
 Build-Plans/Stage-4/07-ui-blueprint-specification.json
 Build-Plans/Stage-4/08-design-system-foundation.json
 Build-Plans/Stage-4/09-complete-app-blueprint.md
+Build-Plans/Stage-4/PAGE-STANDARDS.md
+Build-Plans/Stage-4/Page-Revisions/README.md
+Build-Plans/Stage-4/Page-Revisions/<change_id>.md
 Build-Plans/Stage-4/Pages/README.md
 Build-Plans/Stage-4/Pages/<screen_id>/page-spec.md
 ```

@@ -324,3 +324,10 @@ blocked
 - Require actual active-profile evaluation, stage-specific schemas, current-stage decisions, normalized package integrity, recorded runtime/visual/launch outcomes, and valid feedback destinations. Preserve failed audits on malformed input; never replace damaged global state.
 - Read `System-References/Docs/Readiness-Enforcement-Contract.md` for exact fields, compatibility boundaries, and risk/evidence rules.
 - Update this skill in place when verified workflow lessons change its requirements.
+
+---
+
+## Page Standards and Revision Continuity
+
+- For Stage 4, run the existing page validator with final checks, including populated standards/specifications, source hashes, canonical components/controls/routes, revision snapshots/hash chains, approval evidence and resolved or owned/routed downstream impacts.
+- Follow [Page Standards, Content and Revision Contract](../stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md). CLI prototype checks use `--phase draft`; `--phase final` requires completed blueprints. Both modes are read-only and cannot grant approval.

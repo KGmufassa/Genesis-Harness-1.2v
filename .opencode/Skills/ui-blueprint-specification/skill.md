@@ -873,3 +873,10 @@ Validate:
 * Mermaid nodes reconcile with stable page, `UI-ELEMENT-`, `ROUTE-`, and `ACTION-` references
 * frontend build package is usable by frontend-design, frontend-builder, task generators, and agent builders
 * no frontend code is generated
+
+---
+
+## Page Standards and Revision Continuity
+
+- Apply `PAGE-STANDARDS.md` and reviewed page specifications to every in-scope page. Reconcile final component/control IDs, owners and route/action destinations without overwriting user edits.
+- Follow [Page Standards, Content and Revision Contract](../stage-4-ux-interaction-architecture/references/page-standards-and-revisions.md). Preserve revision history and link standards, page files and `Page-Revisions/README.md` from `09-complete-app-blueprint.md`.

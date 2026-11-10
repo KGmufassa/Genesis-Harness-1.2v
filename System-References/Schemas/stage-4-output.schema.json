@@ -9,13 +9,14 @@
       "properties": {
         "screen_ref": {"type": "string", "pattern": "^SCREEN-[A-Za-z0-9._-]+$"},
         "document_path": {"type": "string", "default": ""},
+        "standards_hash": {"type": "string", "default": ""},
         "content_hash": {"type": "string", "default": ""},
         "approved_hash": {"type": "string", "default": ""},
         "approval_status": {"enum": ["needs_user_review", "approved"], "default": "needs_user_review"},
         "approved_by": {"type": "string", "default": ""},
         "approved_at": {"type": ["string", "null"], "default": null}
       },
-      "required": ["screen_ref", "document_path", "content_hash", "approved_hash", "approval_status", "approved_by", "approved_at"],
+      "required": ["screen_ref", "document_path", "standards_hash", "content_hash", "approved_hash", "approval_status", "approved_by", "approved_at"],
       "additionalProperties": true
     },
     "page_set_approval": {
@@ -301,6 +302,27 @@
   "properties": {
     "waitlist_validation_ref": { "type": "string", "default": "" },
     "deployment_strategy_ref": { "type": "string", "default": "" },
+    "page_standards": {
+      "type": "object",
+      "properties": {
+        "content_hash": {"type": "string", "default": ""},
+        "source_hashes": {"type": "object", "additionalProperties": {"type": "string"}, "default": {}}
+      },
+      "additionalProperties": true
+    },
+    "page_baselines": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "default": {}},
+    "page_revisions": {
+      "type": "array", "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "change_id": {"type": "string", "pattern": "^CHANGE-[A-Za-z0-9._-]+$"},
+          "document_path": {"type": "string", "minLength": 1}
+        },
+        "required": ["change_id", "document_path"],
+        "additionalProperties": true
+      }
+    },
     "page_specifications": { "type": "array", "items": { "$ref": "#/$defs/page_specification" }, "default": [] },
     "page_set_approval": { "$ref": "#/$defs/page_set_approval" },
     "page_inventory": { "type": "array", "default": [] },

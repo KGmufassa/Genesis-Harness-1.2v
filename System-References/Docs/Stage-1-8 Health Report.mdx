@@ -7,21 +7,21 @@ description: Post-implementation assessment of all eight stages, verified contro
 
 ## Executive Grade
 
-Diagnostic date: **2026-11-08 — refreshed with stage-health-report-check**.
+Diagnostic date: **2026-11-09 — refreshed with stage-health-report-check**.
 
-Overall harness health: **88 / 100 — B**.
+Overall harness health: **87 / 100 — B**.
 
 | Dimension | Score | Weight | Assessment |
 | --- | ---: | ---: | --- |
 | Workflow and contract design | 94 | 30% | Clear ownership, approvals, evidence obligations, and stage continuity. |
 | Executable enforcement | 84 | 50% | The original gaps have regression coverage; substantive completeness and downstream freshness still have false-readiness paths. |
-| Verification maturity | 88 | 20% | All 115 tests pass, including a normalized integration fixture; additional probes identify remaining coverage gaps. |
+| Verification maturity | 85 | 20% | 132 tests executed: 131 passed and one Stage 4 contract-test error; normalized integration and fresh negative controls pass. |
 
-The weighted result is 87.8, rounded to 88. Scores are engineering judgments against the contracts, not measured application reliability. A = 90–100, B = 80–89, C = 70–79, D = 60–69, F = below 60. Per-stage scores are separate local assessments, not the inputs to this weighted score.
+The weighted result is 87.2, rounded to 87. The prior 88/B assessment is historical; verification maturity falls from 88 to 85 because the complete regression run is no longer green. Workflow design and enforcement scores remain unchanged: the Stage 4 additions strengthen local checks, while the four existing systemic gaps still reproduce. Scores are engineering judgments against the contracts, not measured application reliability. A = 90–100, B = 80–89, C = 70–79, D = 60–69, F = below 60. Per-stage scores are separate local assessments, not the inputs to this weighted score.
 
-**Verdict: improved from the pre-patch 84/B assessment, suitable for a supervised pilot, but not yet A-grade or ready for unattended finalization.**
+**Verdict: 87/B; stronger local Stage 4 traceability, but fix the contract-test error before a supervised pilot. Not ready for unattended finalization.**
 
-Patches 13–19 addressed the eight previously confirmed findings. This review also found four remaining gaps through isolated probes. Passing tests establish the behaviors they exercise; they do not establish complete readiness enforcement or successful production operation.
+Patches 13–19 addressed the eight previously confirmed findings. This review re-confirmed four remaining readiness gaps, extended the downstream-freshness evidence to page edits, and found one Stage 4 contract-test regression. Passing tests establish the behaviors they exercise; they do not establish complete readiness enforcement or successful production operation.
 
 ---
 
@@ -39,25 +39,27 @@ Patches 13–19 addressed the eight previously confirmed findings. This review a
 
 | Check | Current Result |
 | --- | --- |
-| All repository Python suites | **115 passed; 0 failed** |
-| Global readiness and control tests | **70 passed** |
+| All repository Python suites | **132 executed: 131 passed; 1 error; 0 assertion failures** |
+| Global readiness and control tests | **87 passed** |
 | Stage 5 contract and resolver tests | **19 passed** |
 | Stage 5–8 summary tests | **6 passed** |
 | Scoped-change router tests | **4 passed** |
-| Stage 4 Stitch contract tests | **4 passed** |
+| Stage 4 Stitch contract tests | **4 executed: 3 passed; 1 error** |
 | Skill package tests | **1 passed** |
 | Stage health reporting skill tests | **7 passed** |
 | Conversation distillation tests | **4 passed** |
 | Stage-specific state/registry schema checks | **6 passed; 0 failed** |
 | Skill metadata scan | **90 checked; 0 errors; no files rewritten** |
-| Python workflow syntax | **16 scripts compiled in memory; no errors** |
+| Python workflow syntax | **17 scripts compiled in memory; no errors** |
 | Repository JSON parsing | **37 files parsed; no errors**, excluding Git/dependency directories |
 | Normalized Stage 1–8 integration fixture | **Passes all eight stage audits**, with explicitly synthetic domain evidence |
 | Original finding regressions | **All eight addressed in passing coverage** |
-| Additional isolated probes | **Four remaining enforcement gaps re-confirmed** |
+| Additional isolated probes | **Four readiness gaps re-confirmed; page-staleness variant also reproduced** |
 | Working-tree whitespace check | **Passed** |
 
-The reporting skill collected this run at `2026-11-09T02:20:06.810255+00:00` (UTC); the report date above uses the workspace time zone. Its evidence collector confirmed `Build-Plans` files were unchanged. The weighted assessment remains 88/B because the new reporting tools do not repair the four open readiness gaps.
+The reporting skill collected this run at `2026-11-10T01:34:10.810808+00:00` (UTC); the diagnostic date uses America/New_York. Seven of eight suites passed. The collector exited 1 because of the Stage 4 test error; no suite timed out or was skipped. The `Build-Plans` snapshot remained unchanged during collection. Temporary evidence and probe scripts are retained for this session under `/tmp/genesis-health-Mc2AzD/`; they are not durable application evidence.
+
+The Stage 4 content/revision implementation was already present before this reporting run. Its 27 page-specification tests are included in the 87 readiness tests. This health check did not fix its failing contract test or any readiness finding.
 
 Each `.opencode/Skills/*/tests` suite was run separately. Representative commands:
 
@@ -80,13 +82,13 @@ All diagnostic probes used temporary workspaces. No actual stage was finalized, 
 | 1 — Product Initialization | 86 | B | Current-stage decisions, attributed approvals, platform schema, and scope fingerprints support downstream checks. | Substantive product/MVP completeness still depends on the command and human review beyond generic output shape. |
 | 2 — Research & Validation | 90 | A | Assumption registry, evidence quality, confidence ceilings/thresholds, and critical unknown checks execute. | Source quality and actual research credibility remain dependent on trustworthy evidence collection and review. |
 | 3 — System Architecture | 86 | B | Platform coverage, deployment methods, compatibility, approval, and decision fingerprints are enforced. | The global audit accepts a selected stack containing only hosting/deployment, despite the full-stack contract. |
-| 4 — UX & Interaction Architecture | 92 | A | Correct seed/schema shape, waitlist proof, upstream decision bindings, page hashes, and complete-set approval execute. | Stored visual evidence cannot establish real usability or service availability without live review. |
+| 4 — UX & Interaction Architecture | 90 | A | Shared standards/source hashes, detailed page content, snapshots/diffs, current approvals, draft/final reconciliation, and waitlist checks execute. | One contract-test error remains; changed page approvals are not rechecked downstream. Human review still establishes semantic completeness and usability. |
 | 5 — Development Orchestration | 86 | B | Normalized package schemas/index, references, scopes, waves, and pre-code handoffs are checked. | A nonempty approved feature set can still receive an empty ticket plan; downstream approval freshness is not rechecked. |
 | 6 — Implementation & Validation | 82 | B | Critical workflow outcomes, verified artifacts, applicable visual QA, and current-stage checks execute. | General execution blockers/test failures can be overlooked; complete ticket execution and upstream freshness are not established by the current gate. |
 | 7 — Launch & Operationalization | 86 | B | Six launch-proof categories, runtime outcomes, verified evidence, and scoped risk exceptions execute. | Upstream scope changes can leave a ready result despite stale approvals; proof is recorded metadata rather than independently repeated deployment execution. |
 | 8 — Post-Launch Evolution | 91 | A | Feedback destinations, ownership/actions, high/critical evidence, and cycle reporting execute. | Real analytics, monitoring, feedback access, and a review trigger/schedule still need to be supplied by an application environment. |
 
-A local A score describes that stage's assessed harness controls. It does not mean a real application has completed the stage.
+Stage 4 falls from 92 to 90 because the full contract suite has an error and the new page-edit freshness variant is not blocked downstream. Other stage scores remain unchanged because their reproduced limitations are unchanged. A local A score describes that stage's assessed harness controls. It does not mean a real application has completed the stage.
 
 ---
 
@@ -107,9 +109,9 @@ These closures apply to the original observed behaviors. They do not imply that 
 
 ---
 
-## Newly Confirmed Gaps
+## Open Findings
 
-Probes started from the passing temporary workspace created by `test_readiness_runner.ReadinessRunnerTests._workspace()`. Each called `build_audit()` for the stated stage with its ready status. No production files were modified.
+Probes started from the passing temporary workspace created by `test_readiness_runner.ReadinessRunnerTests._workspace()`. Each called `build_audit()` for the stated stage with its ready status. No production files were modified. The all-eight-stage baseline passed before mutations; the standalone Stage 4 draft and final gates also passed. Negative controls rejected missing research evidence and failed `production_build_artifact` proof for the intended domain reasons.
 
 ### RISK-HEALTH-009 — General Implementation Failures Are Not Blocking
 
@@ -145,9 +147,27 @@ Severity: **high**. Owners: **Stages 5–7 / cross-stage handoff**.
 - Changed the substantive `features` payload in `Stage-1/05-feature-structure.json` after the fixture's approvals and waitlist hashes were recorded, preserving the stable feature ID.
 - Actual result: **Stages 3 and 4 correctly rejected the stale scope**, but **Stages 5, 6, and 7 still returned ready**.
 - Later handoff checks establish that references exist; they do not revalidate the binding between those referenced decisions and the current approved scope.
-- Required improvement: recheck upstream approval fingerprints or consume a versioned, explicitly approved decision snapshot at affected downstream finalizations. Do not silently refresh hashes or invalidate unrelated work.
+- Added a second mutation: append `Changed page requirements after approval.` to `Pages/SCREEN-001/page-spec.md` without refreshing its approved hash. Stage 4 rejects changed content and missing reconciled history; Stages 5, 6 and 7 still return ready with no gaps. This extends the existing freshness finding rather than reopening the original Stage 4 approval gate.
+- Required improvement: recheck upstream approval fingerprints or consume a versioned, explicitly approved decision snapshot at affected downstream finalizations. Include page content, reviewed shared-standard hashes and revision approval references. Do not silently refresh hashes or invalidate unrelated work.
 
-These are workflow correctness findings, not a security scan. Severity describes the risk of false readiness. No new finding was fixed during this reporting pass.
+### RISK-HEALTH-013 — Stage 4 Contract Test Depends On A Removed Heading
+
+Severity: **medium**. Owner: **Stage 4 contract tests/documentation**. Status: **open; not fixed in this reporting pass**.
+
+- Reproduce with `python3 -m unittest discover .opencode/Skills/stage-4-ux-interaction-architecture/tests`.
+- `test_written_page_gate_precedes_stitch_in_command_and_draft` calls `content.index("8. Written page specifications")`. The live skill now says `8. Shared page standard, written page specifications, revision baselines and complete-set approval`; the draft retains the old heading.
+- Actual result: `ValueError: substring not found`, one errored test out of four. The complete collector therefore exits 1. This is a contract/test synchronization regression, not evidence that Stitch now runs before written approval.
+- Passing control: direct inspection confirms phase 8 precedes `9. Stitch MCP` in both documents; both read-only page gates and all 87 readiness tests pass. The remaining three Stage 4 contract tests also pass.
+- Required improvement: reconcile command/draft phase wording and make ordering checks tolerate descriptive wording while proving written approval, standards and revision-baseline requirements precede prototype mutation. Add a negative reordered-phase control.
+
+### Reproduction And Evidence Boundaries
+
+- Setup: import `ReadinessRunnerTests` from `.opencode/Skills/global-stage-readiness-audit/tests/test_readiness_runner.py`, call `_workspace(Path(temporary_directory))`, and call `build_audit(root, stage, READY_STATUSES[stage])`. Use a fresh temporary workspace for each mutation.
+- RISK-HEALTH-009 mutates `Stage-6/04-system-health.json`; RISK-HEALTH-010 inspects the baseline feature and `/data/tickets` collections; RISK-HEALTH-011 inspects architecture-state `selected_stack`; RISK-HEALTH-012 mutates feature content or the approved page bytes. Each result above includes a passing baseline rather than an unrelated failing fixture.
+- New Stage 4 checks were inspected in `page_specifications.py`, `page_documents.py`, the page/standards/revision templates, Stage 4 schema and UX state, command/design-system/blueprint guidance, and Stage 5/6 continuation instructions. Regression cases exercise missing sections/assets/fonts/controls, stale standard/source hashes, exact diffs, snapshot chains, reapproval, downstream impacts, standards-only revisions, and final blueprint links.
+- These checks verify structured records and recorded approvals. They do not establish that every real screen was discovered, that all semantic page requirements are correct, or that the recorded approver is authentic.
+
+These are workflow correctness findings, not a security scan. Severity describes the risk of false readiness. No finding was fixed during this reporting pass.
 
 ---
 
@@ -161,7 +181,7 @@ These are workflow correctness findings, not a security scan. Severity describes
 | Schema validation | All current seeds pass; used vocabulary is covered. The validator remains a documented subset. |
 | Decision fingerprints | Feature/platform, stack, and strategy bindings execute at Stages 3–4; downstream freshness remains open. |
 | Waitlist | Stage 4 publication and verification gates execute after stack approval; no signup-count delay is imposed. |
-| Written design approvals | Page hashes, paths, screen-set coverage, and complete-set approval execute. |
+| Written design approvals and revisions | Standards/source hashes, populated page tables, component/control/route consistency, snapshot/diff chains, matching approval evidence and complete-set approval execute. Stage 5–7 freshness remains open; the Stage 4 wording test errors. |
 | Normalized orchestration | Package structure, manifest index, and helper checks execute; substantive work coverage remains open. |
 | Implementation readiness | Workflow/visual proof executes; broader execution and regression completion remain incomplete. |
 | Launch proof | Six required categories and authorized exceptions execute; live proof collection and downstream freshness require review. |
@@ -193,17 +213,26 @@ Stage 8 owns learning and improvement routing. It needs actual analytics, monito
 - Fingerprints detect changed content; they do not independently authenticate human approval.
 - External research/provider facts, evidence accuracy, and service access still require trustworthy collection and review.
 - The scoped-change router leaves Git branching, commits, pushes, and merges to the approved Git workflow.
-- Browser visual preview and external provider execution were not part of this health run.
+- External provider execution was not part of this health run. Browser preview was attempted but unavailable: the browser access host is unavailable and native Computer Use permissions are not granted. No server was started; responsive and print behavior have static checks only.
+
+---
+
+## Reading Edition Verification
+
+- Regenerated the HTML from this reviewed report and the Markdown plan; source-to-render equality passes.
+- Verified all 25 patch cards, six pending patches (20–25), five open finding IDs, 43 unique anchors, and 40 navigation/local links. Code examples are present and escaped.
+- Embedded filtering/navigation/print JavaScript passes `node --check`; search/expand/collapse/print controls and responsive/print styles are present. Visual and interactive behavior could not be previewed because browser access and native Computer Use permissions were unavailable.
+- Final `Build-Plans` hashes match the pre-report snapshot. Reporting changes are limited to these three documents; no fixes, new approvals or stage advancement were performed.
 
 ---
 
 ## Recommended Next Work
 
-1. Close Stage 6 general execution/test/regression completion checks and downstream approval freshness before trusting automatic release progression.
-1. Add full selected-stack completeness and feature-to-ticket coverage gates, with positive and negative integration fixtures containing actual planned work.
-1. Retain the existing 115 passing tests and add regressions for the four newly confirmed behaviors. Evaluate invalid inputs against successful controls, rather than increasing test count alone.
-1. Complete the supervised real-app pilot, then reassess operational confidence and grade.
+1. Repair the Stage 4 contract-test synchronization error (Patch 25) and preserve the 131 passing tests.
+1. Close Stage 6 general execution/test/regression completion and downstream approval freshness (Patches 21 and 24), including stale written page approvals.
+1. Add full selected-stack completeness and feature-to-ticket coverage gates (Patches 23 and 22), using reproduced failures and passing controls rather than test count alone.
+1. Complete the supervised real-app pilot (Patch 20), then reassess operational confidence and grade.
 
 The implementation record remains the historical record of Patches 13–19. This report adds new findings beyond those original closures; it does not reopen a resolved probe without evidence.
 
-**Final status: 88/B; materially stronger enforcement, four confirmed remaining gaps, supervised real-app pilot still required.** This reporting refresh also synchronizes the Markdown/HTML improvement plan through the new reporting skill. Core readiness controls and baseline stage status remain unchanged.
+**Final status: 87/B; four confirmed readiness gaps and one contract-test regression remain open.** The supervised real-app pilot is pending. Only the health report and the Markdown/HTML improvement plan are updated during this check; existing implementation edits and baseline stage state are preserved.
